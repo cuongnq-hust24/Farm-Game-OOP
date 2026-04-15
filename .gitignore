@@ -1,16 +1,9 @@
-# Compiled class files
 target/
-bin/
 *.class
-
-# IDE files
+.classpath
+.project
+.settings/
 .idea/
-.vscode/
 *.iml
-
-# OS files
 .DS_Store
-Thumbs.db
-
-# Maven wrapper
-.mvn/
+*.log
