@@ -35,16 +35,18 @@ public class Screen {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
-		for (int y = 0; y < sprite.SIZE; y++) {
+		int w = sprite.getWidth();
+		int h = sprite.getHeight();
+		for (int y = 0; y < h; y++) {
 			int ya = y + yp;
-			for (int x = 0; x < sprite.SIZE; x++) {
+			for (int x = 0; x < w; x++) {
 				int xa = x + xp;
-				if (xa  < -sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < -w || xa >= width || ya < 0 || ya >= height) break;
 				if (xa < 0) xa = 0;
-				int col = sprite.pixels[x + y * sprite.SIZE];
+				int col = sprite.pixels[x + y * w];
 				if (col != 0xffff00ff) {
 					pixels[xa + ya * width] = col;
-				}	
+				}
 			}
 		}
 	}
@@ -55,14 +57,18 @@ public class Screen {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
-		for (int y = 0; y < sprite.SIZE; y++) {
+		int w = sprite.getWidth();
+		int h = sprite.getHeight();
+		for (int y = 0; y < h; y++) {
 			int ya = y + yp;
-			for (int x = 0; x < sprite.SIZE; x++) {
+			for (int x = 0; x < w; x++) {
 				int xa = x + xp;
-				if (xa < -sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < -w || xa >= width || ya < 0 || ya >= height) break;
 				if (xa < 0) xa = 0;
-				if (color == 0) tempCol = sprite.pixels[x + y * sprite.SIZE];
-				else tempCol = color;
+				if (color == 0)
+					tempCol = sprite.pixels[x + y * w];
+				else
+					tempCol = color;
 				if (tempCol != 0xffff00ff) {
 					pixels[xa + ya * width] = tempCol;
 				}
@@ -175,5 +181,69 @@ public class Screen {
             if (xp + w - 1 >= 0 && xp + w - 1 < width) pixels[(xp + w - 1) + y * width] = color;
         }
     }
+
+    /**
+     * Fills a rectangle with the given color.
+     */
+    public void fillRect(int xp, int yp, int w, int h, int color) {
+        for (int y = yp; y < yp + h; y++) {
+            if (y < 0 || y >= height) continue;
+            for (int x = xp; x < xp + w; x++) {
+                if (x < 0 || x >= width) continue;
+                pixels[x + y * width] = color;
+            }
+        }
+    }
+
+    /**
+     * Applies a rain overlay effect: renders rain sprites at fixed positions
+     * and adds a subtle blue color tint to the entire screen.
+     */
+    public void applyRainOverlay(int tick) {
+        // Select rain sprite frame based on tick for animation
+        Sprite rainSprite;
+        int frame = (tick / 10) % 3;
+        if (frame == 0) rainSprite = Sprite.rain1;
+        else if (frame == 1) rainSprite = Sprite.rain2;
+        else rainSprite = Sprite.rain3;
+
+        // Render rain sprites at several positions across the grid area
+        int spacing = 48;
+        int yShift = (tick * 2) % spacing; // Falling effect
+        for (int rx = 0; rx < width; rx += spacing) {
+            for (int ry = -16 + yShift; ry < height; ry += spacing) {
+                renderSprite(rx, ry, rainSprite, false);
+            }
+        }
+
+        // Apply a subtle blue tint to all pixels
+        for (int i = 0; i < pixels.length; i++) {
+            int col = pixels[i];
+            int r = (col >> 16) & 0xFF;
+            int g = (col >> 8) & 0xFF;
+            int b = col & 0xFF;
+            r = (int)(r * 0.92);
+            g = (int)(g * 0.95);
+            b = Math.min(255, (int)(b * 1.08));
+            pixels[i] = (r << 16) | (g << 8) | b;
+        }
+    }
+
+    /**
+     * Applies a heat wave overlay: shifts all pixel colors towards orange/red.
+     */
+    public void applyHeatOverlay() {
+        for (int i = 0; i < pixels.length; i++) {
+            int col = pixels[i];
+            int r = (col >> 16) & 0xFF;
+            int g = (col >> 8) & 0xFF;
+            int b = col & 0xFF;
+            r = Math.min(255, (int)(r * 1.1));
+            g = (int)(g * 0.85);
+            b = (int)(b * 0.6);
+            pixels[i] = (r << 16) | (g << 8) | b;
+        }
+    }
 	
 }
+

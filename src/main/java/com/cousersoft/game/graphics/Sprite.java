@@ -6,8 +6,8 @@ public class Sprite {
 	private final static int TSIZE = 16; //Size of tiles in the game
 	private int x; //x location of the sprite
 	private int y; //y location of the sprite
-	private int width, height;
 	public int[] pixels; //array to hold each pixel in the sprite
+	private int width, height;
 	protected SpriteSheet sheet; //What spritesheet hold the sprite
 	
 	//Declare sprites here
@@ -59,6 +59,52 @@ public class Sprite {
 	public static Sprite blTrunk = new Sprite(TSIZE, 1, 6, SpriteSheet.tiles);
 	public static Sprite Trunk = new Sprite(TSIZE, 2, 6, SpriteSheet.tiles);
 	public static Sprite brTrunk = new Sprite(TSIZE, 3, 6, SpriteSheet.tiles);
+
+	// NEW TEST TILES
+	// Row 0: Grass variants
+	public static Sprite nGrass1 = new Sprite(TSIZE, 0, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrass2 = new Sprite(TSIZE, 1, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrass3 = new Sprite(TSIZE, 2, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrass4 = new Sprite(TSIZE, 3, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrass5 = new Sprite(TSIZE, 4, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassDry1 = new Sprite(TSIZE, 5, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassDry2 = new Sprite(TSIZE, 6, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassDry3 = new Sprite(TSIZE, 7, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassWinter1 = new Sprite(TSIZE, 8, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassWinter2 = new Sprite(TSIZE, 9, 0, SpriteSheet.test_tiles);
+
+	// Row 1: Farmland Top
+	public static Sprite fTopLeft = new Sprite(TSIZE, 0, 1, SpriteSheet.test_tiles);
+	public static Sprite fTop = new Sprite(TSIZE, 1, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopRight = new Sprite(TSIZE, 2, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopLeftWet1 = new Sprite(TSIZE, 3, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopWet1 = new Sprite(TSIZE, 4, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopRightWet1 = new Sprite(TSIZE, 5, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopLeftWet2 = new Sprite(TSIZE, 6, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopWet2 = new Sprite(TSIZE, 7, 1, SpriteSheet.test_tiles);
+	public static Sprite fTopRightWet2 = new Sprite(TSIZE, 8, 1, SpriteSheet.test_tiles);
+
+	// Row 2: Farmland Middle
+	public static Sprite fLeft = new Sprite(TSIZE, 0, 2, SpriteSheet.test_tiles);
+	public static Sprite fCenter = new Sprite(TSIZE, 1, 2, SpriteSheet.test_tiles);
+	public static Sprite fRight = new Sprite(TSIZE, 2, 2, SpriteSheet.test_tiles);
+	public static Sprite fLeftWet1 = new Sprite(TSIZE, 3, 2, SpriteSheet.test_tiles);
+	public static Sprite fCenterWet1 = new Sprite(TSIZE, 4, 2, SpriteSheet.test_tiles);
+	public static Sprite fRightWet1 = new Sprite(TSIZE, 5, 2, SpriteSheet.test_tiles);
+	public static Sprite fLeftWet2 = new Sprite(TSIZE, 6, 2, SpriteSheet.test_tiles);
+	public static Sprite fCenterWet2 = new Sprite(TSIZE, 7, 2, SpriteSheet.test_tiles);
+	public static Sprite fRightWet2 = new Sprite(TSIZE, 8, 2, SpriteSheet.test_tiles);
+
+	// Row 3: Farmland Bottom
+	public static Sprite fBotLeft = new Sprite(TSIZE, 0, 3, SpriteSheet.test_tiles);
+	public static Sprite fBot = new Sprite(TSIZE, 1, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotRight = new Sprite(TSIZE, 2, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotLeftWet1 = new Sprite(TSIZE, 3, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotWet1 = new Sprite(TSIZE, 4, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotRightWet1 = new Sprite(TSIZE, 5, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotLeftWet2 = new Sprite(TSIZE, 6, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotWet2 = new Sprite(TSIZE, 7, 3, SpriteSheet.test_tiles);
+	public static Sprite fBotRightWet2 = new Sprite(TSIZE, 8, 3, SpriteSheet.test_tiles);
 	//VOID TILE/////////////////////////////////////////////////////////////
 	public static Sprite voidSprite = new Sprite(TSIZE, 0);
 	public static Sprite clearSprite = new Sprite(TSIZE, 0x21000000);
@@ -97,6 +143,7 @@ public class Sprite {
 		public static Sprite npc_right_2 = new Sprite(16, 2, 2, SpriteSheet.NPC);
 	
 	public static Sprite sword = new Sprite(16, 0, 0, SpriteSheet.sword);
+	public static Sprite ladybug = new Sprite(16, 0, 0, SpriteSheet.ladybug);
 	
 	////////////FONT SPRITES///////////////////////////////////////////////////////////////////////////////////////
 	public static Sprite capA = new Sprite(16, 0, 0, SpriteSheet.fontSheet);
@@ -242,27 +289,60 @@ public class Sprite {
 	//////////////TOOL SPRITES////////////////////////////////////////////////////////////////////////////////////////////
 	public static Sprite hoe = new Sprite(16, 0, 0, SpriteSheet.tools);
 	public static Sprite wateringCan = new Sprite(16, 1, 0, SpriteSheet.tools);
-	public static Sprite tomatoSeedBag = new Sprite(16, 0, 1, SpriteSheet.tools);
-	public static Sprite cornSeedBag = new Sprite(16, 1, 1, SpriteSheet.tools);
-	
-	public static Sprite tomatoSeed = new Sprite(16, 0, 0, SpriteSheet.testPlant);
-	public static Sprite tomatoSprout = new Sprite(16, 1, 0, SpriteSheet.testPlant);
-	public static Sprite tomato1 = new Sprite(16, 2, 0, SpriteSheet.testPlant);
-	public static Sprite tomato2 = new Sprite(16, 3, 0, SpriteSheet.testPlant);
-	public static Sprite tomato3 = new Sprite(16, 4, 0, SpriteSheet.testPlant);
-	public static Sprite tomatoFull = new Sprite(16, 5, 0, SpriteSheet.testPlant);
-	public static Sprite tomato1Dead = new Sprite(16, 0, 1, SpriteSheet.testPlant);
-	public static Sprite tomato2Dead = new Sprite(16, 1, 1, SpriteSheet.testPlant);
-	public static Sprite tomato3Dead = new Sprite(16, 2, 1, SpriteSheet.testPlant);
-	public static Sprite tomato = new Sprite(16, 0, 0, SpriteSheet.fruit);
-	
-	public static Sprite cornSeed = new Sprite(16, 0, 2, SpriteSheet.testPlant);
-	public static Sprite cornSprout = new Sprite(16, 1, 2, SpriteSheet.testPlant);
-	public static Sprite corn1 = new Sprite(16, 2, 2, SpriteSheet.testPlant);
-	public static Sprite corn2 = new Sprite(16, 3, 2, SpriteSheet.testPlant);
-	public static Sprite corn3 = new Sprite(16, 4, 2, SpriteSheet.testPlant);
-	public static Sprite cornFull = new Sprite(16, 5, 2, SpriteSheet.testPlant);
-	public static Sprite corn = new Sprite(16, 1, 0, SpriteSheet.fruit);
+	// 16x32 NEW PLANT SPRITES
+	// Row 0
+	public static Sprite sRice1 = new Sprite(16, 32, 0, 0, SpriteSheet.plant_test);
+	public static Sprite sRice2 = new Sprite(16, 32, 1, 0, SpriteSheet.plant_test);
+	public static Sprite sRice3 = new Sprite(16, 32, 2, 0, SpriteSheet.plant_test);
+	public static Sprite sRice4 = new Sprite(16, 32, 3, 0, SpriteSheet.plant_test);
+	public static Sprite sCabbage1 = new Sprite(16, 32, 4, 0, SpriteSheet.plant_test);
+	public static Sprite sCabbage2 = new Sprite(16, 32, 5, 0, SpriteSheet.plant_test);
+	public static Sprite sCabbage3 = new Sprite(16, 32, 6, 0, SpriteSheet.plant_test);
+	public static Sprite sCabbage4 = new Sprite(16, 32, 7, 0, SpriteSheet.plant_test);
+	public static Sprite sCorn1 = new Sprite(16, 32, 8, 0, SpriteSheet.plant_test);
+	public static Sprite sCorn2 = new Sprite(16, 32, 9, 0, SpriteSheet.plant_test);
+	public static Sprite sCorn3 = new Sprite(16, 32, 10, 0, SpriteSheet.plant_test);
+	public static Sprite sCorn4 = new Sprite(16, 32, 11, 0, SpriteSheet.plant_test);
+	public static Sprite sCarrot1 = new Sprite(16, 32, 12, 0, SpriteSheet.plant_test);
+	public static Sprite sCarrot2 = new Sprite(16, 32, 13, 0, SpriteSheet.plant_test);
+	public static Sprite sCarrot3 = new Sprite(16, 32, 14, 0, SpriteSheet.plant_test);
+	public static Sprite sCarrot4 = new Sprite(16, 32, 15, 0, SpriteSheet.plant_test);
+
+	// Row 1
+	public static Sprite sRadish1 = new Sprite(16, 32, 0, 1, SpriteSheet.plant_test);
+	public static Sprite sRadish2 = new Sprite(16, 32, 1, 1, SpriteSheet.plant_test);
+	public static Sprite sRadish3 = new Sprite(16, 32, 2, 1, SpriteSheet.plant_test);
+	public static Sprite sRadish4 = new Sprite(16, 32, 3, 1, SpriteSheet.plant_test);
+	public static Sprite sTomato1 = new Sprite(16, 32, 4, 1, SpriteSheet.plant_test);
+	public static Sprite sTomato2 = new Sprite(16, 32, 5, 1, SpriteSheet.plant_test);
+	public static Sprite sTomato3 = new Sprite(16, 32, 6, 1, SpriteSheet.plant_test);
+	public static Sprite sTomato4 = new Sprite(16, 32, 7, 1, SpriteSheet.plant_test);
+	public static Sprite sPumpkin1 = new Sprite(16, 32, 8, 1, SpriteSheet.plant_test);
+	public static Sprite sPumpkin2 = new Sprite(16, 32, 9, 1, SpriteSheet.plant_test);
+	public static Sprite sPumpkin3 = new Sprite(16, 32, 10, 1, SpriteSheet.plant_test);
+	public static Sprite sPumpkin4 = new Sprite(16, 32, 11, 1, SpriteSheet.plant_test);
+	public static Sprite sEggplant1 = new Sprite(16, 32, 12, 1, SpriteSheet.plant_test);
+	public static Sprite sEggplant2 = new Sprite(16, 32, 13, 1, SpriteSheet.plant_test);
+	public static Sprite sEggplant3 = new Sprite(16, 32, 14, 1, SpriteSheet.plant_test);
+	public static Sprite sEggplant4 = new Sprite(16, 32, 15, 1, SpriteSheet.plant_test);
+
+	// Row 2
+	public static Sprite sChili1 = new Sprite(16, 32, 0, 2, SpriteSheet.plant_test);
+	public static Sprite sChili2 = new Sprite(16, 32, 1, 2, SpriteSheet.plant_test);
+	public static Sprite sChili3 = new Sprite(16, 32, 2, 2, SpriteSheet.plant_test);
+	public static Sprite sChili4 = new Sprite(16, 32, 3, 2, SpriteSheet.plant_test);
+	public static Sprite sPepper1 = new Sprite(16, 32, 4, 2, SpriteSheet.plant_test);
+	public static Sprite sPepper2 = new Sprite(16, 32, 5, 2, SpriteSheet.plant_test);
+	public static Sprite sPepper3 = new Sprite(16, 32, 6, 2, SpriteSheet.plant_test);
+	public static Sprite sPepper4 = new Sprite(16, 32, 7, 2, SpriteSheet.plant_test);
+
+	// Row 3
+	public static Sprite sSeedGlobal = new Sprite(16, 32, 0, 3, SpriteSheet.plant_test);
+	public static Sprite sDead1 = new Sprite(16, 32, 1, 3, SpriteSheet.plant_test);
+	public static Sprite sDead2 = new Sprite(16, 32, 2, 3, SpriteSheet.plant_test);
+
+	public static Sprite tomatoFruit = new Sprite(16, 0, 0, SpriteSheet.fruit);
+	public static Sprite cornFruit = new Sprite(16, 1, 0, SpriteSheet.fruit);
 	
 	
 	//////////////////////////HOUSE TILE SPRITES///////////////////////////////////////////////////////////////////////
@@ -330,11 +410,24 @@ public class Sprite {
 	//Sprite declaration for more detailed sprites requires a size and x and y coords on sheet and requires a sheet to pull it from.
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size; //Sprite size is the same as int that is passed
+		this.width = size;
+		this.height = size;
 		pixels = new int[SIZE * SIZE]; //Create a pixel array the size of the sprite
 		this.x = x * size; //x * size to go from pixel precision to tile precision
 		//Ex. if x passed is 2 then the pixel needed is 32
 		this.y = y * size; //y * size to go from pixel to tile precision
 		this.sheet = sheet; //The spritesheet that our sprite is pulled from
+		load();
+	}
+
+	public Sprite(int width, int height, int x, int y, SpriteSheet sheet) {
+		SIZE = (width == height) ? width : -1;
+		this.width = width;
+		this.height = height;
+		pixels = new int[width * height];
+		this.x = x * width;
+		this.y = y * height;
+		this.sheet = sheet;
 		load();
 	}
 	//Sprite declaration for void sprite only requires a size and a color
@@ -355,11 +448,19 @@ public class Sprite {
 	//Method to load the sprite from the sheet
 	private void load() {
 		//Cycle through all pixels in the sprite
-		for (int y = 0; y < SIZE; y++) {
-			for (int x = 0; x < SIZE; x++) {
-				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE]; //Sets the sprite's pixel array equal to
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE]; //Sets the sprite's pixel array equal to
 				//the sheets array for in specific area (1 tiles worth)
 			}
 		}
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
 	}
 }

@@ -31,6 +31,9 @@ public class SpriteSheet {
 	public static SpriteSheet testPlant = new SpriteSheet("/textures/testPlant.png", 96);
 	public static SpriteSheet fruit = new SpriteSheet("/textures/fruit.png", 32);
 	public static SpriteSheet animHoe = new SpriteSheet("/textures/hoeAnim.png", 128);
+	public static SpriteSheet test_tiles = new SpriteSheet("/textures/test_tile01.png", 256);
+	public static SpriteSheet ladybug = new SpriteSheet("/textures/ladybug.png", 16);
+	public static SpriteSheet plant_test = new SpriteSheet("/textures/plant_test.png", 256);
 	
 	private Sprite[] sprites;
 	

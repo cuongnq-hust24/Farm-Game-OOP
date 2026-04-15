@@ -44,6 +44,8 @@ public class FarmCell {
     }
 
     public void setMoistureLevel(int moistureLevel) {
+        if (moistureLevel < 0) moistureLevel = 0;
+        if (moistureLevel > 100) moistureLevel = 100;
         this.moistureLevel = moistureLevel;
     }
 
