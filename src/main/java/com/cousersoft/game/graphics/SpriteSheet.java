@@ -27,6 +27,7 @@ public class SpriteSheet {
 	public static SpriteSheet taco = new SpriteSheet("/textures/taco.png", 16);
 	public static SpriteSheet particle = new SpriteSheet("/textures/particle.png", 4);
 	public static SpriteSheet rain = new SpriteSheet("/textures/rain.png", 48);
+	public static SpriteSheet snow = new SpriteSheet("/textures/snow.png", 48);
 	public static SpriteSheet tools = new SpriteSheet("/textures/tools.png", 32);
 	public static SpriteSheet testPlant = new SpriteSheet("/textures/testPlant.png", 96);
 	public static SpriteSheet fruit = new SpriteSheet("/textures/fruit.png", 32);

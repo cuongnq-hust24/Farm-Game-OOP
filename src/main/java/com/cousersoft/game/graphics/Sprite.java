@@ -72,6 +72,9 @@ public class Sprite {
 	public static Sprite nGrassDry3 = new Sprite(TSIZE, 7, 0, SpriteSheet.test_tiles);
 	public static Sprite nGrassWinter1 = new Sprite(TSIZE, 8, 0, SpriteSheet.test_tiles);
 	public static Sprite nGrassWinter2 = new Sprite(TSIZE, 9, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassWinter3 = new Sprite(TSIZE, 10, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassWinter4 = new Sprite(TSIZE, 11, 0, SpriteSheet.test_tiles);
+	public static Sprite nGrassWinter5 = new Sprite(TSIZE, 12, 0, SpriteSheet.test_tiles);
 
 	// Row 1: Farmland Top
 	public static Sprite fTopLeft = new Sprite(TSIZE, 0, 1, SpriteSheet.test_tiles);
@@ -105,6 +108,49 @@ public class Sprite {
 	public static Sprite fBotLeftWet2 = new Sprite(TSIZE, 6, 3, SpriteSheet.test_tiles);
 	public static Sprite fBotWet2 = new Sprite(TSIZE, 7, 3, SpriteSheet.test_tiles);
 	public static Sprite fBotRightWet2 = new Sprite(TSIZE, 8, 3, SpriteSheet.test_tiles);
+
+	// SNOW FARMLAND (Rows 1-3, Col 9-11)
+	public static Sprite fSnowTopLeft = new Sprite(TSIZE, 9, 1, SpriteSheet.test_tiles);
+	public static Sprite fSnowTop = new Sprite(TSIZE, 10, 1, SpriteSheet.test_tiles);
+	public static Sprite fSnowTopRight = new Sprite(TSIZE, 11, 1, SpriteSheet.test_tiles);
+	public static Sprite fSnowLeft = new Sprite(TSIZE, 9, 2, SpriteSheet.test_tiles);
+	public static Sprite fSnowCenter = new Sprite(TSIZE, 10, 2, SpriteSheet.test_tiles);
+	public static Sprite fSnowRight = new Sprite(TSIZE, 11, 2, SpriteSheet.test_tiles);
+	public static Sprite fSnowBotLeft = new Sprite(TSIZE, 9, 3, SpriteSheet.test_tiles);
+	public static Sprite fSnowBot = new Sprite(TSIZE, 10, 3, SpriteSheet.test_tiles);
+	public static Sprite fSnowBotRight = new Sprite(TSIZE, 11, 3, SpriteSheet.test_tiles);
+
+	// HEATWAVE DRY-FARMLAND (Rows 4-6, Col 0-8)
+	// Row 4: Top
+	public static Sprite fHeatTopLeft = new Sprite(TSIZE, 0, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTop = new Sprite(TSIZE, 1, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopRight = new Sprite(TSIZE, 2, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopLeftWet1 = new Sprite(TSIZE, 3, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopWet1 = new Sprite(TSIZE, 4, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopRightWet1 = new Sprite(TSIZE, 5, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopLeftWet2 = new Sprite(TSIZE, 6, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopWet2 = new Sprite(TSIZE, 7, 4, SpriteSheet.test_tiles);
+	public static Sprite fHeatTopRightWet2 = new Sprite(TSIZE, 8, 4, SpriteSheet.test_tiles);
+	// Row 5: Middle
+	public static Sprite fHeatLeft = new Sprite(TSIZE, 0, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatCenter = new Sprite(TSIZE, 1, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatRight = new Sprite(TSIZE, 2, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatLeftWet1 = new Sprite(TSIZE, 3, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatCenterWet1 = new Sprite(TSIZE, 4, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatRightWet1 = new Sprite(TSIZE, 5, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatLeftWet2 = new Sprite(TSIZE, 6, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatCenterWet2 = new Sprite(TSIZE, 7, 5, SpriteSheet.test_tiles);
+	public static Sprite fHeatRightWet2 = new Sprite(TSIZE, 8, 5, SpriteSheet.test_tiles);
+	// Row 6: Bottom
+	public static Sprite fHeatBotLeft = new Sprite(TSIZE, 0, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBot = new Sprite(TSIZE, 1, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotRight = new Sprite(TSIZE, 2, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotLeftWet1 = new Sprite(TSIZE, 3, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotWet1 = new Sprite(TSIZE, 4, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotRightWet1 = new Sprite(TSIZE, 5, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotLeftWet2 = new Sprite(TSIZE, 6, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotWet2 = new Sprite(TSIZE, 7, 6, SpriteSheet.test_tiles);
+	public static Sprite fHeatBotRightWet2 = new Sprite(TSIZE, 8, 6, SpriteSheet.test_tiles);
 	//VOID TILE/////////////////////////////////////////////////////////////
 	public static Sprite voidSprite = new Sprite(TSIZE, 0);
 	public static Sprite clearSprite = new Sprite(TSIZE, 0x21000000);
@@ -285,6 +331,10 @@ public class Sprite {
 	public static Sprite rain1 = new Sprite(16, 0, 0, SpriteSheet.rain);
 	public static Sprite rain2 = new Sprite(16, 1, 0, SpriteSheet.rain);
 	public static Sprite rain3 = new Sprite(16, 2, 0, SpriteSheet.rain);
+	
+	public static Sprite snow1 = new Sprite(16, 0, 0, SpriteSheet.snow);
+	public static Sprite snow2 = new Sprite(16, 1, 0, SpriteSheet.snow);
+	public static Sprite snow3 = new Sprite(16, 2, 0, SpriteSheet.snow);
 	
 	//////////////TOOL SPRITES////////////////////////////////////////////////////////////////////////////////////////////
 	public static Sprite hoe = new Sprite(16, 0, 0, SpriteSheet.tools);

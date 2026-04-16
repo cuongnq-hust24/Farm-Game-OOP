@@ -8,6 +8,6 @@ public class HeatWave implements Weather {
 
     @Override
     public String getName() {
-        return "Heat Wave";
+        return "HeatWave";
     }
 }

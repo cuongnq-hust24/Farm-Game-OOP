@@ -244,6 +244,42 @@ public class Screen {
             pixels[i] = (r << 16) | (g << 8) | b;
         }
     }
+
+    /**
+     * Applies a snow overlay: adds a slight white tint to the screen
+     * and a falling snow particle animation.
+     */
+    public void applySnowOverlay(int tick) {
+        // Falling snow particles (using actual snow.png sprites)
+        Sprite snowSprite;
+        int frame = (tick / 20) % 3; // Slower animation than rain
+        if (frame == 0) snowSprite = Sprite.snow1;
+        else if (frame == 1) snowSprite = Sprite.snow2;
+        else snowSprite = Sprite.snow3;
+
+        int spacing = 64; // Sparser than rain
+        int yShift = (tick / 2) % spacing; // Slower fall speed
+        for (int rx = 0; rx < width + spacing; rx += spacing) {
+            // Add a horizontal jitter for a "drifting" effect
+            int drift = (int) (Math.sin((tick + rx) * 0.05) * 8);
+            for (int ry = -16 + yShift; ry < height; ry += spacing) {
+                renderSprite(rx + drift, ry, snowSprite, false);
+            }
+        }
+
+        // Apply a subtle white tint to all pixels
+        for (int i = 0; i < pixels.length; i++) {
+            int col = pixels[i];
+            int r = (col >> 16) & 0xFF;
+            int g = (col >> 8) & 0xFF;
+            int b = col & 0xFF;
+            // Shift towards white
+            r = Math.min(255, (int)(r * 1.03 + 5));
+            g = Math.min(255, (int)(g * 1.03 + 5));
+            b = Math.min(255, (int)(b * 1.05 + 8));
+            pixels[i] = (r << 16) | (g << 8) | b;
+        }
+    }
 	
 }
 

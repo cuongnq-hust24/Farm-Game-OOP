@@ -10,13 +10,13 @@ public class Keyboard implements KeyListener {
     public boolean k1, k2, k3, k4, k5;
     public boolean bracketLeft, bracketRight;
     public boolean enter, escape, tab;
-    public boolean kR, kH, kY; // Weather triggers: Rain, Heat, sunnY
+    public boolean kR, kH, kY, kS; // Weather triggers: Rain, Heat, sunnY, Snow
 
     public void update() {
-        up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
-        down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
-        left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
-        right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
+        up = keys[KeyEvent.VK_UP];
+        down = keys[KeyEvent.VK_DOWN];
+        left = keys[KeyEvent.VK_LEFT];
+        right = keys[KeyEvent.VK_RIGHT];
         space = keys[KeyEvent.VK_SPACE];
         enter = keys[KeyEvent.VK_ENTER];
         escape = keys[KeyEvent.VK_ESCAPE];
@@ -29,8 +29,9 @@ public class Keyboard implements KeyListener {
         bracketLeft = keys[KeyEvent.VK_OPEN_BRACKET];
         bracketRight = keys[KeyEvent.VK_CLOSE_BRACKET];
         kR = keys[KeyEvent.VK_R];
-        kH = keys[KeyEvent.VK_H]; 
+        kH = keys[KeyEvent.VK_H];
         kY = keys[KeyEvent.VK_Y];
+        kS = keys[KeyEvent.VK_S];
     }
 
     @Override
@@ -39,11 +40,13 @@ public class Keyboard implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() < keys.length) keys[e.getKeyCode()] = true;
+        if (e.getKeyCode() < keys.length)
+            keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() < keys.length) keys[e.getKeyCode()] = false;
+        if (e.getKeyCode() < keys.length)
+            keys[e.getKeyCode()] = false;
     }
 }

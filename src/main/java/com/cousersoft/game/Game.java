@@ -364,8 +364,8 @@ public class Game extends Canvas implements Runnable {
 			enterTriggered = false;
 		}
 
-		// Handle Manual Weather Triggers (R=Rain, H=Heat, Y=Sunny)
-		if (keyboard.kR || keyboard.kH || keyboard.kY) {
+		// Handle Manual Weather Triggers (R=Rain, H=Heat, Y=Sunny, S=Snow)
+		if (keyboard.kR || keyboard.kH || keyboard.kY || keyboard.kS) {
 			if (!weatherKeyTriggered) {
 				if (keyboard.kR) {
 					grid.setWeather(new Rainy());
@@ -376,6 +376,9 @@ public class Game extends Canvas implements Runnable {
 				} else if (keyboard.kY) {
 					grid.setWeather(new Sunny());
 					message = "Forced SUNNY weather!";
+				} else if (keyboard.kS) {
+					grid.setWeather(new Snowy());
+					message = "Forced SNOWY weather!";
 				}
 				weatherKeyTriggered = true;
 			}
@@ -635,6 +638,8 @@ public class Game extends Canvas implements Runnable {
 		Weather w = grid.getCurrentWeather();
 		if (w instanceof Rainy) {
 			screen.applyRainOverlay(tickCounter);
+		} else if (w instanceof Snowy) {
+			screen.applySnowOverlay(tickCounter);
 		}
 	}
 
@@ -646,13 +651,13 @@ public class Game extends Canvas implements Runnable {
 				Sprite sprite;
 
 				if (type == 'S') {
-					sprite = getFarmlandSprite(x, y, cell.getMoistureLevel());
+					sprite = getFarmlandSprite(x, y, cell.getMoistureLevel(), grid.getCurrentWeather());
 				} else {
 					// Randomized grass variety based on coordinates and weather
 					int baseSeed = Math.abs(x * 7 + y * 13);
 					String weatherName = grid.getCurrentWeather().getName();
 
-					if (weatherName.equals("Heat Wave")) {
+					if (weatherName.equalsIgnoreCase("HeatWave") || weatherName.equalsIgnoreCase("Heat Wave")) {
 						// Heat Wave logic: use dry variants
 						int variant = baseSeed % 3;
 						sprite = switch (variant) {
@@ -669,9 +674,10 @@ public class Game extends Canvas implements Runnable {
 							int variant = baseSeed % 3;
 							sprite = (variant == 0) ? Sprite.nGrass1 : (variant == 1) ? Sprite.nGrass2 : Sprite.nGrass3;
 						}
-					} else if (weatherName.equals("Snowy")) {
-						// Placeholder for future Snow weather
-						sprite = (baseSeed % 2 == 0) ? Sprite.nGrassWinter1 : Sprite.nGrassWinter2;
+					} else if (weatherName.equalsIgnoreCase("Snowy")) {
+						// 100% chance of new variants (11, 12, 13) for testing
+						int variant = baseSeed % 3;
+						sprite = (variant == 0) ? Sprite.nGrassWinter3 : (variant == 1) ? Sprite.nGrassWinter4 : Sprite.nGrassWinter5;
 					} else {
 						// Sunny / Default logic: use vibrant green variants 1,2,3
 						int variant = baseSeed % 3;
@@ -696,7 +702,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-    private Sprite getFarmlandSprite(int x, int y, int moisture) {
+    private Sprite getFarmlandSprite(int x, int y, int moisture, Weather weather) {
         boolean u = grid.getTileType(x, y - 1) == 'S';
         boolean d = grid.getTileType(x, y + 1) == 'S';
         boolean l = grid.getTileType(x - 1, y) == 'S';
@@ -706,16 +712,43 @@ public class Game extends Canvas implements Runnable {
         if (moisture >= 80) variant = 2;
         else if (moisture >= 40) variant = 1;
 
+        String wName = (weather != null) ? weather.getName() : "Sunny";
+
+        if (wName.equalsIgnoreCase("Snowy")) {
+            // Snow Farmland (Col 9-11, Rows 1-3). Note: only 1 moisture variant shown for snow
+            if (!u && !l) return Sprite.fSnowTopLeft;
+            if (!u && !r) return Sprite.fSnowTopRight;
+            if (!d && !l) return Sprite.fSnowBotLeft;
+            if (!d && !r) return Sprite.fSnowBotRight;
+            if (!u) return Sprite.fSnowTop;
+            if (!d) return Sprite.fSnowBot;
+            if (!l) return Sprite.fSnowLeft;
+            if (!r) return Sprite.fSnowRight;
+            return Sprite.fSnowCenter;
+        }
+
+        if (wName.equalsIgnoreCase("HeatWave") || wName.equalsIgnoreCase("Heat Wave")) {
+            // HeatWave Farmland (Row 4-6)
+            if (!u && !l) return (variant == 0) ? Sprite.fHeatTopLeft : (variant == 1) ? Sprite.fHeatTopLeftWet1 : Sprite.fHeatTopLeftWet2;
+            if (!u && !r) return (variant == 0) ? Sprite.fHeatTopRight : (variant == 1) ? Sprite.fHeatTopRightWet1 : Sprite.fHeatTopRightWet2;
+            if (!d && !l) return (variant == 0) ? Sprite.fHeatBotLeft : (variant == 1) ? Sprite.fHeatBotLeftWet1 : Sprite.fHeatBotLeftWet2;
+            if (!d && !r) return (variant == 0) ? Sprite.fHeatBotRight : (variant == 1) ? Sprite.fHeatBotRightWet1 : Sprite.fHeatBotRightWet2;
+            if (!u) return (variant == 0) ? Sprite.fHeatTop : (variant == 1) ? Sprite.fHeatTopWet1 : Sprite.fHeatTopWet2;
+            if (!d) return (variant == 0) ? Sprite.fHeatBot : (variant == 1) ? Sprite.fHeatBotWet1 : Sprite.fHeatBotWet2;
+            if (!l) return (variant == 0) ? Sprite.fHeatLeft : (variant == 1) ? Sprite.fHeatLeftWet1 : Sprite.fHeatLeftWet2;
+            if (!r) return (variant == 0) ? Sprite.fHeatRight : (variant == 1) ? Sprite.fHeatRightWet1 : Sprite.fHeatRightWet2;
+            return (variant == 0) ? Sprite.fHeatCenter : (variant == 1) ? Sprite.fHeatCenterWet1 : Sprite.fHeatCenterWet2;
+        }
+
+        // Default Normal Farmland
         if (!u && !l) return (variant == 0) ? Sprite.fTopLeft : (variant == 1) ? Sprite.fTopLeftWet1 : Sprite.fTopLeftWet2;
         if (!u && !r) return (variant == 0) ? Sprite.fTopRight : (variant == 1) ? Sprite.fTopRightWet1 : Sprite.fTopRightWet2;
         if (!d && !l) return (variant == 0) ? Sprite.fBotLeft : (variant == 1) ? Sprite.fBotLeftWet1 : Sprite.fBotLeftWet2;
         if (!d && !r) return (variant == 0) ? Sprite.fBotRight : (variant == 1) ? Sprite.fBotRightWet1 : Sprite.fBotRightWet2;
-        
         if (!u) return (variant == 0) ? Sprite.fTop : (variant == 1) ? Sprite.fTopWet1 : Sprite.fTopWet2;
         if (!d) return (variant == 0) ? Sprite.fBot : (variant == 1) ? Sprite.fBotWet1 : Sprite.fBotWet2;
         if (!l) return (variant == 0) ? Sprite.fLeft : (variant == 1) ? Sprite.fLeftWet1 : Sprite.fLeftWet2;
         if (!r) return (variant == 0) ? Sprite.fRight : (variant == 1) ? Sprite.fRightWet1 : Sprite.fRightWet2;
-
         return (variant == 0) ? Sprite.fCenter : (variant == 1) ? Sprite.fCenterWet1 : Sprite.fCenterWet2;
     }
 
@@ -759,8 +792,8 @@ public class Game extends Canvas implements Runnable {
 
 		// Tool Icons
 		int iconXBase = 210;
-		// Slot 1: Dynamic Seed Icon (16x32 offset slightly to fit HUD)
-		renderToolIcon(iconXBase, 190, matureSprites[seedIndex], Tool.SEED_SHOP, "1", -16);
+		// Slot 1: Dynamic Seed Icon (Adjusted 6px lower for height balance)
+		renderToolIcon(iconXBase, 196, matureSprites[seedIndex], Tool.SEED_SHOP, "1", -16);
 		renderToolIcon(iconXBase + 20, 190, Sprite.hoe, Tool.HARVEST, "2", 0);
 		renderToolIcon(iconXBase + 40, 190, Sprite.wateringCan, Tool.WATERING_CAN, "3", 0);
 		renderToolIcon(iconXBase + 60, 190, Sprite.sword, Tool.SWORD, "4", 0);
