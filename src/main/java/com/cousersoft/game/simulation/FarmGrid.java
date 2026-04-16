@@ -1,12 +1,17 @@
 package com.cousersoft.game.simulation;
 
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class FarmGrid {
     private final int rows;
     private final int cols;
     private final FarmCell[][] cells;
 
     private Weather currentWeather = new Sunny();
-    private final java.util.Random random = new java.util.Random();
+    private final Random random = new java.util.Random();
     
     private int daysSinceLastPests = 0;
     private int pestSpawnThreshold = 2 + random.nextInt(2); // Randomly 2 or 3
@@ -89,9 +94,6 @@ public class FarmGrid {
             pestSpawnThreshold = 2 + random.nextInt(2);
         }
 
-        int pestsSpawned = 0;
-        int maxPests = 2 + random.nextInt(3); // 2 to 4
-
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 FarmCell cell = cells[i][j];
@@ -99,23 +101,36 @@ public class FarmGrid {
                 // Apply weather
                 currentWeather.apply(cell);
 
-                // Handle discrete pest spawning
-                if (spawnPests && pestsSpawned < maxPests) {
-                    // Check if cell is in farmable area (Soil tile)
-                    if (getTileType(i, j) == 'S') {
-                        if (!cell.hasPests() && random.nextDouble() < 0.1) { // 10% chance to pick this specific cell until max reached
-                            cell.setPests(true);
-                            pestsSpawned++;
-                        }
-                    }
-                }
-
+                // Discrete pest spawning logic is now handled after the loop
+                // to ensure fair distribution across the field.
+                
                 Crop crop = cell.getCurrentCrop();
                 if (crop != null) {
                     crop.consumeResources(cell, currentWeather);
                     if (!cell.hasPests()) {
                         crop.grow();
                     }
+                }
+            }
+        }
+
+        // Handle discrete pest spawning (Fixed: random distribution)
+        if (spawnPests) {
+            List<FarmCell> candidates = new ArrayList<>();
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    if (getTileType(i, j) == 'S' && !cells[i][j].hasPests()) {
+                        candidates.add(cells[i][j]);
+                    }
+                }
+            }
+
+            if (!candidates.isEmpty()) {
+                Collections.shuffle(candidates);
+                int maxPests = 2 + random.nextInt(3); // 2 to 4
+                int numToSpawn = Math.min(maxPests, candidates.size());
+                for (int i = 0; i < numToSpawn; i++) {
+                    candidates.get(i).setPests(true);
                 }
             }
         }

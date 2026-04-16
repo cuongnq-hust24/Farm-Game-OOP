@@ -141,6 +141,17 @@ public class Screen {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
+
+	public void renderPixel(int xp, int yp, int color, boolean fixed) {
+		if (fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		if (xp < 0 || xp >= width || yp < 0 || yp >= height)
+			return;
+		if (color != 0xffff00ff)
+			pixels[xp + yp * width] = color;
+	}
 	
 	public int getRGB(String hex) {
 		if (hex.length() > 1) {

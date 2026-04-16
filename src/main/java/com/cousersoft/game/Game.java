@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.*;
 
-import com.cousersoft.game.graphics.text.Font;
+import com.cousersoft.game.graphics.text.BitmapFont;
 import com.cousersoft.game.graphics.Screen;
 import com.cousersoft.game.graphics.Sprite;
 import com.cousersoft.game.input.Mouse;
@@ -40,7 +40,7 @@ public class Game extends Canvas implements Runnable {
 	public int numUpdates = 0;
 	public int numFrames = 0;
 
-	private Font guiFont;
+	private BitmapFont guiFont;
 	private FarmGrid grid;
 
 	private int day = 1;
@@ -56,11 +56,12 @@ public class Game extends Canvas implements Runnable {
 
 	// 10-Crop System State
 	private int seedIndex = 0;
-	private String[] seedNames = { "Rice", "Cabbage", "Corn", "Carrot", "Radish", "Tomato", "Pumpkin", "Eggplant", "Chili", "Pepper" };
+	private String[] seedNames = { "Rice", "Cabbage", "Corn", "Carrot", "Radish", "Tomato", "Pumpkin", "Eggplant",
+			"Chili", "Pepper" };
 	private int[] seedCosts = { 5, 8, 10, 6, 7, 12, 25, 15, 10, 12 };
 	private Sprite[] matureSprites = {
-		Sprite.sRice4, Sprite.sCabbage4, Sprite.sCorn4, Sprite.sCarrot4, Sprite.sRadish4,
-		Sprite.sTomato4, Sprite.sPumpkin4, Sprite.sEggplant4, Sprite.sChili4, Sprite.sPepper4
+			Sprite.sRice4, Sprite.sCabbage4, Sprite.sCorn4, Sprite.sCarrot4, Sprite.sRadish4,
+			Sprite.sTomato4, Sprite.sPumpkin4, Sprite.sEggplant4, Sprite.sChili4, Sprite.sPepper4
 	};
 	private boolean tabTriggered = false;
 
@@ -99,8 +100,7 @@ public class Game extends Canvas implements Runnable {
 
 		grid = new FarmGrid(25, 14);
 
-		guiFont = new Font();
-		guiFont.initChars("Small");
+		guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
 	}
 
 	private void resetGame() {
@@ -569,8 +569,8 @@ public class Game extends Canvas implements Runnable {
 		screen.fillRect(0, 0, width, height, 0x1a1a2e);
 
 		// Title
-		guiFont.render(screen, 8, "SMART FARM SIMULATOR", 110, 40, 0, false);
-		guiFont.render(screen, 8, "CROP GROWTH AND RESOURCE MANAGEMENT", 62, 55, 0, false);
+		guiFont.render(screen, "SMART FARM SIMULATOR", 140, 40, 0xffffffff, 1, true, false);
+		guiFont.render(screen, "CROP GROWTH AND RESOURCE MANAGEMENT", 100, 50, 0xffcccccc, 1, true, false);
 
 		// Buttons
 		renderMenuButton(MENU_BTN_X, MENU_START_Y, MENU_BTN_W, MENU_BTN_H, "START GAME", 0x2d6a4f);
@@ -578,23 +578,23 @@ public class Game extends Canvas implements Runnable {
 		renderMenuButton(MENU_BTN_X, MENU_QUIT_Y, MENU_BTN_W, MENU_BTN_H, "QUIT", 0x6b2737);
 
 		// Controls hint
-		guiFont.render(screen, 8, "PRESS ENTER TO START", 130, 170, 0, false);
+		guiFont.render(screen, "PRESS ENTER TO START", 140, 170, 0xffffffff, 1, true, false);
 
 		// Quit confirmation overlay
 		if (showQuitConfirm) {
 			screen.fillRect(100, 85, 200, 40, 0x000000);
 			screen.renderOutline(100, 85, 200, 40, 0xffffff);
-			guiFont.render(screen, 8, "REALLY QUIT?", 160, 95, 0, false);
-			guiFont.render(screen, 8, "Y = YES   ESC = NO", 140, 110, 0, false);
+			guiFont.render(screen, "REALLY QUIT?", 165, 95, 0xffffffff, 1, true, false);
+			guiFont.render(screen, "Y = YES   ESC = NO", 150, 110, 0xffaaaaaa, 1, true, false);
 		}
 	}
 
 	private void renderMenuButton(int x, int y, int w, int h, String text, int color) {
 		screen.fillRect(x, y, w, h, color);
 		screen.renderOutline(x, y, w, h, 0xffffff);
-		int textX = x + (w - text.length() * 6) / 2; // Rough centering
-		int textY = y + 3;
-		guiFont.render(screen, 8, text, textX, textY, 0, false);
+		int textX = x + (w - text.length() * 6) / 2; // Adjusted for 6px char width (5 * 1 + 1 padding)
+		int textY = y + 2;
+		guiFont.render(screen, text, textX, textY, 0xffffffff, 1, true, false);
 	}
 
 	// ==================== HELP RENDERING ====================
@@ -602,27 +602,27 @@ public class Game extends Canvas implements Runnable {
 	private void renderHelp() {
 		screen.fillRect(0, 0, width, height, 0x1a1a2e);
 
-		guiFont.render(screen, 8, "HOW TO PLAY", 155, 15, 0, false);
-		guiFont.render(screen, 8, "-----------------------------------", 80, 25, 0, false);
+		guiFont.render(screen, "HOW TO PLAY", 165, 15, 0xffffffff, 1, true, false);
+		guiFont.render(screen, "-----------------------------------", 100, 25, 0xffaaaaaa, 1, true, false);
 
 		int y = 40;
 		int x = 30;
-		guiFont.render(screen, 8, "CONTROLS:", x, y, 0, false);
-		guiFont.render(screen, 8, "ARROW KEYS: NAVIGATE CELLS", x + 10, y + 12, 0, false);
-		guiFont.render(screen, 8, "ENTER: APPLY SELECTED TOOL", x + 10, y + 22, 0, false);
-		guiFont.render(screen, 8, "1-5: SELECT TOOL", x + 10, y + 32, 0, false);
-		guiFont.render(screen, 8, "SPACE: ADVANCE DAY", x + 10, y + 42, 0, false);
-		guiFont.render(screen, 8, "R/H/Y: FORCE RAIN/HEAT/SUNNY", x + 10, y + 52, 0, false);
-		guiFont.render(screen, 8, "ESC: BACK TO MENU", x + 10, y + 62, 0, false);
+		guiFont.render(screen, "CONTROLS:", x, y, 0xffffffff, 1, true, false);
+		guiFont.render(screen, "ARROW KEYS: NAVIGATE CELLS", x + 10, y + 10, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "ENTER: APPLY SELECTED TOOL", x + 10, y + 20, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "1-5: SELECT TOOL", x + 10, y + 30, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "SPACE: ADVANCE DAY", x + 10, y + 40, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "R/H/Y/S: FORCE WEATHER", x + 10, y + 50, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "ESC: BACK TO MENU", x + 10, y + 60, 0xffdddddd, 1, true, false);
 
-		guiFont.render(screen, 8, "TOOLS:", x, y + 80, 0, false);
-		guiFont.render(screen, 8, "1 WHEAT SEED ($5)", x + 10, y + 92, 0, false);
-		guiFont.render(screen, 8, "2 TOMATO SEED ($10)", x + 10, y + 102, 0, false);
-		guiFont.render(screen, 8, "3 HARVEST (MATURE CROPS)", x + 10, y + 112, 0, false);
-		guiFont.render(screen, 8, "4 WATERING CAN (+50 WATER)", x + 10, y + 122, 0, false);
-		guiFont.render(screen, 8, "5 SWORD (CLEAR PESTS)", x + 10, y + 132, 0, false);
+		guiFont.render(screen, "TOOLS:", x, y + 75, 0xffffffff, 1, true, false);
+		guiFont.render(screen, "1 WHEAT SEED ($5)", x + 10, y + 85, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "2 TOMATO SEED ($10)", x + 10, y + 95, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "3 HARVEST (MATURE CROPS)", x + 10, y + 105, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "4 WATERING CAN (+50 WATER)", x + 10, y + 115, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "5 SWORD (CLEAR PESTS)", x + 10, y + 125, 0xffdddddd, 1, true, false);
 
-		guiFont.render(screen, 8, "AIM: DEMONSTRATE OOP PRINCIPLES", x, y + 150, 0, false);
+		guiFont.render(screen, "AIM: DEMONSTRATE OOP PRINCIPLES", 100, 210, 0xff888888, 1, true, false);
 
 		// Back button
 		renderMenuButton(MENU_BTN_X, 190, MENU_BTN_W, MENU_BTN_H, "BACK (ESC)", 0x6b2737);
@@ -677,7 +677,8 @@ public class Game extends Canvas implements Runnable {
 					} else if (weatherName.equalsIgnoreCase("Snowy")) {
 						// 100% chance of new variants (11, 12, 13) for testing
 						int variant = baseSeed % 3;
-						sprite = (variant == 0) ? Sprite.nGrassWinter3 : (variant == 1) ? Sprite.nGrassWinter4 : Sprite.nGrassWinter5;
+						sprite = (variant == 0) ? Sprite.nGrassWinter3
+								: (variant == 1) ? Sprite.nGrassWinter4 : Sprite.nGrassWinter5;
 					} else {
 						// Sunny / Default logic: use vibrant green variants 1,2,3
 						int variant = baseSeed % 3;
@@ -702,55 +703,88 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-    private Sprite getFarmlandSprite(int x, int y, int moisture, Weather weather) {
-        boolean u = grid.getTileType(x, y - 1) == 'S';
-        boolean d = grid.getTileType(x, y + 1) == 'S';
-        boolean l = grid.getTileType(x - 1, y) == 'S';
-        boolean r = grid.getTileType(x + 1, y) == 'S';
+	private Sprite getFarmlandSprite(int x, int y, int moisture, Weather weather) {
+		boolean u = grid.getTileType(x, y - 1) == 'S';
+		boolean d = grid.getTileType(x, y + 1) == 'S';
+		boolean l = grid.getTileType(x - 1, y) == 'S';
+		boolean r = grid.getTileType(x + 1, y) == 'S';
 
-        int variant = 0; // 0=Dry, 1=Wet1, 2=Wet2
-        if (moisture >= 80) variant = 2;
-        else if (moisture >= 40) variant = 1;
+		int variant = 0; // 0=Dry, 1=Wet1, 2=Wet2
+		if (moisture >= 80)
+			variant = 2;
+		else if (moisture >= 40)
+			variant = 1;
 
-        String wName = (weather != null) ? weather.getName() : "Sunny";
+		String wName = (weather != null) ? weather.getName() : "Sunny";
 
-        if (wName.equalsIgnoreCase("Snowy")) {
-            // Snow Farmland (Col 9-11, Rows 1-3). Note: only 1 moisture variant shown for snow
-            if (!u && !l) return Sprite.fSnowTopLeft;
-            if (!u && !r) return Sprite.fSnowTopRight;
-            if (!d && !l) return Sprite.fSnowBotLeft;
-            if (!d && !r) return Sprite.fSnowBotRight;
-            if (!u) return Sprite.fSnowTop;
-            if (!d) return Sprite.fSnowBot;
-            if (!l) return Sprite.fSnowLeft;
-            if (!r) return Sprite.fSnowRight;
-            return Sprite.fSnowCenter;
-        }
+		if (wName.equalsIgnoreCase("Snowy")) {
+			// Snow Farmland (Col 9-11, Rows 1-3). Note: only 1 moisture variant shown for
+			// snow
+			if (!u && !l)
+				return Sprite.fSnowTopLeft;
+			if (!u && !r)
+				return Sprite.fSnowTopRight;
+			if (!d && !l)
+				return Sprite.fSnowBotLeft;
+			if (!d && !r)
+				return Sprite.fSnowBotRight;
+			if (!u)
+				return Sprite.fSnowTop;
+			if (!d)
+				return Sprite.fSnowBot;
+			if (!l)
+				return Sprite.fSnowLeft;
+			if (!r)
+				return Sprite.fSnowRight;
+			return Sprite.fSnowCenter;
+		}
 
-        if (wName.equalsIgnoreCase("HeatWave") || wName.equalsIgnoreCase("Heat Wave")) {
-            // HeatWave Farmland (Row 4-6)
-            if (!u && !l) return (variant == 0) ? Sprite.fHeatTopLeft : (variant == 1) ? Sprite.fHeatTopLeftWet1 : Sprite.fHeatTopLeftWet2;
-            if (!u && !r) return (variant == 0) ? Sprite.fHeatTopRight : (variant == 1) ? Sprite.fHeatTopRightWet1 : Sprite.fHeatTopRightWet2;
-            if (!d && !l) return (variant == 0) ? Sprite.fHeatBotLeft : (variant == 1) ? Sprite.fHeatBotLeftWet1 : Sprite.fHeatBotLeftWet2;
-            if (!d && !r) return (variant == 0) ? Sprite.fHeatBotRight : (variant == 1) ? Sprite.fHeatBotRightWet1 : Sprite.fHeatBotRightWet2;
-            if (!u) return (variant == 0) ? Sprite.fHeatTop : (variant == 1) ? Sprite.fHeatTopWet1 : Sprite.fHeatTopWet2;
-            if (!d) return (variant == 0) ? Sprite.fHeatBot : (variant == 1) ? Sprite.fHeatBotWet1 : Sprite.fHeatBotWet2;
-            if (!l) return (variant == 0) ? Sprite.fHeatLeft : (variant == 1) ? Sprite.fHeatLeftWet1 : Sprite.fHeatLeftWet2;
-            if (!r) return (variant == 0) ? Sprite.fHeatRight : (variant == 1) ? Sprite.fHeatRightWet1 : Sprite.fHeatRightWet2;
-            return (variant == 0) ? Sprite.fHeatCenter : (variant == 1) ? Sprite.fHeatCenterWet1 : Sprite.fHeatCenterWet2;
-        }
+		if (wName.equalsIgnoreCase("HeatWave") || wName.equalsIgnoreCase("Heat Wave")) {
+			// HeatWave Farmland (Row 4-6)
+			if (!u && !l)
+				return (variant == 0) ? Sprite.fHeatTopLeft
+						: (variant == 1) ? Sprite.fHeatTopLeftWet1 : Sprite.fHeatTopLeftWet2;
+			if (!u && !r)
+				return (variant == 0) ? Sprite.fHeatTopRight
+						: (variant == 1) ? Sprite.fHeatTopRightWet1 : Sprite.fHeatTopRightWet2;
+			if (!d && !l)
+				return (variant == 0) ? Sprite.fHeatBotLeft
+						: (variant == 1) ? Sprite.fHeatBotLeftWet1 : Sprite.fHeatBotLeftWet2;
+			if (!d && !r)
+				return (variant == 0) ? Sprite.fHeatBotRight
+						: (variant == 1) ? Sprite.fHeatBotRightWet1 : Sprite.fHeatBotRightWet2;
+			if (!u)
+				return (variant == 0) ? Sprite.fHeatTop : (variant == 1) ? Sprite.fHeatTopWet1 : Sprite.fHeatTopWet2;
+			if (!d)
+				return (variant == 0) ? Sprite.fHeatBot : (variant == 1) ? Sprite.fHeatBotWet1 : Sprite.fHeatBotWet2;
+			if (!l)
+				return (variant == 0) ? Sprite.fHeatLeft : (variant == 1) ? Sprite.fHeatLeftWet1 : Sprite.fHeatLeftWet2;
+			if (!r)
+				return (variant == 0) ? Sprite.fHeatRight
+						: (variant == 1) ? Sprite.fHeatRightWet1 : Sprite.fHeatRightWet2;
+			return (variant == 0) ? Sprite.fHeatCenter
+					: (variant == 1) ? Sprite.fHeatCenterWet1 : Sprite.fHeatCenterWet2;
+		}
 
-        // Default Normal Farmland
-        if (!u && !l) return (variant == 0) ? Sprite.fTopLeft : (variant == 1) ? Sprite.fTopLeftWet1 : Sprite.fTopLeftWet2;
-        if (!u && !r) return (variant == 0) ? Sprite.fTopRight : (variant == 1) ? Sprite.fTopRightWet1 : Sprite.fTopRightWet2;
-        if (!d && !l) return (variant == 0) ? Sprite.fBotLeft : (variant == 1) ? Sprite.fBotLeftWet1 : Sprite.fBotLeftWet2;
-        if (!d && !r) return (variant == 0) ? Sprite.fBotRight : (variant == 1) ? Sprite.fBotRightWet1 : Sprite.fBotRightWet2;
-        if (!u) return (variant == 0) ? Sprite.fTop : (variant == 1) ? Sprite.fTopWet1 : Sprite.fTopWet2;
-        if (!d) return (variant == 0) ? Sprite.fBot : (variant == 1) ? Sprite.fBotWet1 : Sprite.fBotWet2;
-        if (!l) return (variant == 0) ? Sprite.fLeft : (variant == 1) ? Sprite.fLeftWet1 : Sprite.fLeftWet2;
-        if (!r) return (variant == 0) ? Sprite.fRight : (variant == 1) ? Sprite.fRightWet1 : Sprite.fRightWet2;
-        return (variant == 0) ? Sprite.fCenter : (variant == 1) ? Sprite.fCenterWet1 : Sprite.fCenterWet2;
-    }
+		// Default Normal Farmland
+		if (!u && !l)
+			return (variant == 0) ? Sprite.fTopLeft : (variant == 1) ? Sprite.fTopLeftWet1 : Sprite.fTopLeftWet2;
+		if (!u && !r)
+			return (variant == 0) ? Sprite.fTopRight : (variant == 1) ? Sprite.fTopRightWet1 : Sprite.fTopRightWet2;
+		if (!d && !l)
+			return (variant == 0) ? Sprite.fBotLeft : (variant == 1) ? Sprite.fBotLeftWet1 : Sprite.fBotLeftWet2;
+		if (!d && !r)
+			return (variant == 0) ? Sprite.fBotRight : (variant == 1) ? Sprite.fBotRightWet1 : Sprite.fBotRightWet2;
+		if (!u)
+			return (variant == 0) ? Sprite.fTop : (variant == 1) ? Sprite.fTopWet1 : Sprite.fTopWet2;
+		if (!d)
+			return (variant == 0) ? Sprite.fBot : (variant == 1) ? Sprite.fBotWet1 : Sprite.fBotWet2;
+		if (!l)
+			return (variant == 0) ? Sprite.fLeft : (variant == 1) ? Sprite.fLeftWet1 : Sprite.fLeftWet2;
+		if (!r)
+			return (variant == 0) ? Sprite.fRight : (variant == 1) ? Sprite.fRightWet1 : Sprite.fRightWet2;
+		return (variant == 0) ? Sprite.fCenter : (variant == 1) ? Sprite.fCenterWet1 : Sprite.fCenterWet2;
+	}
 
 	private void renderSelection() {
 		if (selectedX != -1) {
@@ -760,33 +794,35 @@ public class Game extends Canvas implements Runnable {
 
 	private void renderHUD() {
 		// Top Right Display: Balance and Day
-		guiFont.render(screen, 8, "BALANCE: $" + balance, width - 180, 10, 0, false);
-		guiFont.render(screen, 8, "DAY: " + day, width - 180, 20, 0, false);
+		guiFont.render(screen, "BALANCE: $" + balance, width - 120, 10, 0xffffffff, 1, true, false);
+		guiFont.render(screen, "DAY: " + day, width - 120, 22, 0xffffffff, 1, true, false);
 
 		// Status Messages (Top Left)
-		guiFont.render(screen, 8, message, 10, 10, 0, false);
+		guiFont.render(screen, message, 10, 10, 0xffffffff, 1, true, false);
 
 		// Back to menu hint (Top Right corner)
-		guiFont.render(screen, 8, "ESC:MENU", width - 50, 2, 0, false);
+		guiFont.render(screen, "ESC:MENU", width - 50, 2, 0xffffffff, 1, true, false);
 
 		// Bottom Left Info Area
 		int hudX = 10;
 		int hudYStart = 175;
-		guiFont.render(screen, 8, "WEATHER: " + grid.getCurrentWeather().getName().toUpperCase(), hudX, hudYStart, 0,
-				false);
-		guiFont.render(screen, 8, "TOOL: " + selectedTool.toString().replace("_", " "), hudX, hudYStart + 10, 0, false);
+		guiFont.render(screen, "WEATHER: " + grid.getCurrentWeather().getName().toUpperCase(), hudX, hudYStart - 12,
+				0xffffffff, 1,
+				true, false);
+		guiFont.render(screen, "TOOL: " + selectedTool.toString().replace("_", " "), hudX, hudYStart, 0xffffffff, 1,
+				true, false);
 
 		if (selectedX != -1) {
 			FarmCell cell = grid.getCell(selectedX, selectedY);
 			String cellMain = "CELL: " + selectedX + "," + selectedY + " WATER: " + cell.getMoistureLevel();
 			if (cell.hasPests())
 				cellMain += " [PEST!]";
-			guiFont.render(screen, 8, cellMain, hudX, hudYStart + 20, 0, false);
+			guiFont.render(screen, cellMain, hudX, hudYStart + 12, 0xffffffff, 1, true, false);
 
 			if (cell.getCurrentCrop() != null) {
 				String cropInfo = "CROP: " + cell.getCurrentCrop().getClass().getSimpleName() + " ["
 						+ cell.getCurrentCrop().getStage() + "]";
-				guiFont.render(screen, 8, cropInfo, hudX, hudYStart + 30, 0, false);
+				guiFont.render(screen, cropInfo, hudX, hudYStart + 24, 0xffffffff, 1, true, false);
 			}
 		}
 
@@ -801,12 +837,12 @@ public class Game extends Canvas implements Runnable {
 		// Advance Button
 		int advX = 315;
 		screen.renderSprite(advX, 190, Sprite.actionMenu, false);
-		guiFont.render(screen, 8, "ADV (ENT)", advX + 5, 195, 0, false);
+		guiFont.render(screen, "ADV (ENT)", advX + 15, 201, 0xffffffff, 1, true, false);
 	}
 
 	private void renderToolIcon(int x, int y, Sprite s, Tool t, String label, int yOffset) {
 		screen.renderSprite(x, y + yOffset, s, false);
-		guiFont.render(screen, 8, label, x + 5, y - 8, 0, false);
+		guiFont.render(screen, label, x + 5, y - 10, 0xffffffff, 1, true, false);
 		if (selectedTool == t)
 			screen.renderSprite(x, y, Sprite.select, false);
 	}
