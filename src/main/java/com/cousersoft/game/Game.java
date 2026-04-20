@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static int width = 400;
 	public static int height = width / 16 * 9;
-	private int scale = 4;
+	private int scale = 3;
 
 	private Thread thread;
 	private JFrame frame;
