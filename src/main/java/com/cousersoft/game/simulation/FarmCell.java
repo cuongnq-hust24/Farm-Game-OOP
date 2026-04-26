@@ -43,7 +43,19 @@ public class FarmCell {
         return moistureLevel;
     }
 
+    public int getNutrientLevel() {
+        return nutrientLevel;
+    }
+
+    public void setNutrientLevel(int nutrientLevel) {
+        if (nutrientLevel < 0) nutrientLevel = 0;
+        if (nutrientLevel > 100) nutrientLevel = 100;
+        this.nutrientLevel = nutrientLevel;
+    }
+
     public void setMoistureLevel(int moistureLevel) {
+        if (moistureLevel < 0) moistureLevel = 0;
+        if (moistureLevel > 100) moistureLevel = 100;
         this.moistureLevel = moistureLevel;
     }
 

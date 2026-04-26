@@ -1,5 +1,5 @@
 package com.cousersoft.game.simulation;
 
 public enum GrowthStage {
-    SEED, SEEDLING, MATURE, DEAD
+    SEED, STAGE1, STAGE2, STAGE3, MATURE, DEAD
 }

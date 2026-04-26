@@ -12,25 +12,25 @@ public class SpriteSheet {
 	public int[] pixels; //Array to hold each pixel in the spritesheet
 	
 	//Load in spritesheets here
-	public static SpriteSheet tiles = new SpriteSheet("/textures/Outdoor.png", 256);
-	public static SpriteSheet player = new SpriteSheet("/textures/player.png", 256);
-	public static SpriteSheet NPC = new SpriteSheet("/textures/npc.png", 256);
+	// Essential Farm Assets
 	public static SpriteSheet sword = new SpriteSheet("/textures/sword.png", 16);
-	public static SpriteSheet fontSheet = new SpriteSheet("/textures/fontSheet.png", 240);
-	public static SpriteSheet smallFontSheet = new SpriteSheet("/textures/smallFontSheet.png", 104);
-	public static SpriteSheet textBox = new SpriteSheet("/textures/textBox.png", 130);
-	public static SpriteSheet background = new SpriteSheet("/textures/inventoryScreen.png", 400);
-	public static SpriteSheet invSlot = new SpriteSheet("/textures/invSlot.png", 400);
+	public static SpriteSheet fertilizerSheet = new SpriteSheet("/textures/fertiilizer.png", 16);
 	public static SpriteSheet select = new SpriteSheet("/textures/select.png", 8);
-	public static SpriteSheet endSelect = new SpriteSheet("/textures/endSelect.png", 8);
-	public static SpriteSheet actionMenu = new SpriteSheet("/textures/actionMenu.png", 64);
-	public static SpriteSheet taco = new SpriteSheet("/textures/taco.png", 16);
-	public static SpriteSheet particle = new SpriteSheet("/textures/particle.png", 4);
 	public static SpriteSheet rain = new SpriteSheet("/textures/rain.png", 48);
+	public static SpriteSheet snow = new SpriteSheet("/textures/snow.png", 48);
 	public static SpriteSheet tools = new SpriteSheet("/textures/tools.png", 32);
-	public static SpriteSheet testPlant = new SpriteSheet("/textures/testPlant.png", 96);
-	public static SpriteSheet fruit = new SpriteSheet("/textures/fruit.png", 32);
 	public static SpriteSheet animHoe = new SpriteSheet("/textures/hoeAnim.png", 128);
+	public static SpriteSheet test_tiles = new SpriteSheet("/textures/test_tile01.png", 256);
+	public static SpriteSheet ladybug = new SpriteSheet("/textures/ladybug.png", 16);
+	public static SpriteSheet plant_test = new SpriteSheet("/textures/plant_test.png", 256);
+	
+	// Shop UI Sheets
+	public static SpriteSheet bgBlurSheet = new SpriteSheet("/textures/bg_blur.png", 400, 225);
+	public static SpriteSheet titleBoardSheet = new SpriteSheet("/textures/title_board.png", 90, 27);
+	public static SpriteSheet woodenBoardSheet = new SpriteSheet("/textures/wooden_board.png", 308, 48);
+	public static SpriteSheet prevPageSheet = new SpriteSheet("/textures/prev_page.png", 26, 28);
+	public static SpriteSheet nextPageSheet = new SpriteSheet("/textures/next_page.png", 26, 28);
+	public static SpriteSheet advDaySheet = new SpriteSheet("/textures/adv_day.png", 52, 28);
 	
 	private Sprite[] sprites;
 	
