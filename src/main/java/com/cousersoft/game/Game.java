@@ -82,6 +82,12 @@ public class Game extends Canvas implements Runnable {
 	// Quit confirmation state
 	private boolean showQuitConfirm = false;
 
+	//Shop state
+	private int shopPage = 0;
+	private boolean pKeyTriggered = false;
+	private CropData[] cropCatalog;
+	private static final int CROPS_PER_PAGE = 3;
+
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		this.setPreferredSize(size);
@@ -101,6 +107,7 @@ public class Game extends Canvas implements Runnable {
 		grid = new FarmGrid(25, 14);
 
 		guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
+		cropCatalog = CropData.getAllCrops();
 	}
 
 	private void resetGame() {
@@ -181,6 +188,8 @@ public class Game extends Canvas implements Runnable {
 			updateHelp();
 		} else if (state.equals("Game")) {
 			updateGame();
+		} else if (state.equals("Shop")) {
+			updateShop();
 		}
 	}
 
@@ -388,6 +397,17 @@ public class Game extends Canvas implements Runnable {
 			weatherKeyTriggered = false;
 		}
 
+		// Handle P key to open Shop
+		if (keyboard.kP) {
+			if (!pKeyTriggered) {
+				shopPage = 0;
+				handler.setState("Shop");
+				pKeyTriggered = true;
+			}
+		} else {
+			pKeyTriggered = false;
+		}
+
 		if (mouse.getButton() == 1) {
 			if (!mouseClicked) {
 				handleClicks(mx, my);
@@ -441,7 +461,7 @@ public class Game extends Canvas implements Runnable {
 
 		// Advance Day button
 		int advX = 315;
-		if (mx >= advX && mx <= advX + 64 && my >= 190 && my <= 210) {
+		if (mx >= advX && mx <= advX + 52 && my >= 190 && my <= 218) {
 			day++;
 			grid.advanceDay();
 			checkGameOver();
@@ -546,6 +566,80 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	// ==================== SHOP STATE ====================
+
+	private void updateShop() {
+		int mx = mouse.getX() / scale;
+		int my = mouse.getY() / scale;
+
+		// Close shop with P or Escape
+		if (keyboard.kP) {
+			if (!pKeyTriggered) {
+				handler.setState("Game");
+				pKeyTriggered = true;
+			}
+		} else {
+			pKeyTriggered = false;
+		}
+		if (keyboard.escape) {
+			if (!escapeTriggered) {
+				handler.setState("Game");
+				escapeTriggered = true;
+			}
+		} else {
+			escapeTriggered = false;
+		}
+
+		int totalPages = (cropCatalog.length + CROPS_PER_PAGE - 1) / CROPS_PER_PAGE;
+
+		// Keyboard pagination
+		if (keyboard.left) {
+			if (!arrowTriggered) {
+				shopPage = (shopPage - 1 + totalPages) % totalPages;
+				arrowTriggered = true;
+			}
+		} else if (keyboard.right) {
+			if (!arrowTriggered) {
+				shopPage = (shopPage + 1) % totalPages;
+				arrowTriggered = true;
+			}
+		} else {
+			arrowTriggered = false;
+		}
+
+		if (mouse.getButton() == 1) {
+			if (!mouseClicked) {
+				// Prev button: centered at x=155-26=129, y=200
+				if (mx >= 129 && mx < 155 && my >= 200 && my < 228) {
+					shopPage = (shopPage - 1 + totalPages) % totalPages;
+				}
+				// Next button: centered at x=245, y=200
+				else if (mx >= 245 && mx < 271 && my >= 200 && my < 228) {
+					shopPage = (shopPage + 1) % totalPages;
+				}
+				// Click on wooden boards to select crop
+				else {
+					int boardX = 46;
+					int[] boardYs = {45, 98, 151};
+					for (int i = 0; i < CROPS_PER_PAGE; i++) {
+						int cropIdx = shopPage * CROPS_PER_PAGE + i;
+						if (cropIdx >= cropCatalog.length) break;
+						if (mx >= boardX && mx < boardX + 308 && my >= boardYs[i] && my < boardYs[i] + 48) {
+							seedIndex = cropIdx;
+							selectedTool = Tool.SEED_SHOP;
+							message = "Equipped: " + cropCatalog[cropIdx].name;
+							handler.setState("Game");
+							break;
+						}
+					}
+				}
+				mouseClicked = true;
+			}
+		} else {
+			mouseClicked = false;
+		}
+	}
+
 	// ==================== RENDERING ====================
 
 	public void render() {
@@ -564,6 +658,8 @@ public class Game extends Canvas implements Runnable {
 			renderHelp();
 		} else if (state.equals("Game")) {
 			renderGameScreen();
+		} else if (state.equals("Shop")) {
+			renderShop();
 		}
 
 		for (int i = 0; i < pixels.length; i++) {
@@ -574,6 +670,66 @@ public class Game extends Canvas implements Runnable {
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.dispose();
 		bs.show();
+	}
+
+	// ==================== SHOP RENDERING ====================
+
+	private void renderShop() {
+		// Draw blurred background
+		screen.renderSprite(0, 0, Sprite.bgBlur, false);
+
+		// Title Board centered at top
+		screen.renderSprite(155, 10, Sprite.titleBoard, false);
+		// Title text centered on the board
+		guiFont.render(screen, "SEED SHOP", 171, 19, 0xff603931, 1, false, false);
+
+		int totalPages = (cropCatalog.length + CROPS_PER_PAGE - 1) / CROPS_PER_PAGE;
+
+		// Draw 3 wooden boards
+		int boardX = 46;
+		int[] boardYs = {45, 98, 151};
+
+		for (int i = 0; i < CROPS_PER_PAGE; i++) {
+			int cropIdx = shopPage * CROPS_PER_PAGE + i;
+			if (cropIdx >= cropCatalog.length) break;
+
+			CropData crop = cropCatalog[cropIdx];
+
+			// Render wooden board
+			screen.renderSprite(boardX, boardYs[i], Sprite.woodenBoard, false);
+
+			// Render crop sprite on the left side of the board (centered vertically)
+			int spriteX = boardX + 10;
+			int spriteY = boardYs[i] + 12; // visually center 16px sprite in 48px board
+			screen.renderSprite(spriteX, spriteY, crop.matureSprite, false);
+
+			// Render text info on the right side
+			int textX = boardX + 35;
+			int textBaseY = boardYs[i] + 5;
+
+			// Line 1: Name and cost
+			String line1 = crop.name.toUpperCase() + "  -  $" + crop.cost;
+			guiFont.render(screen, line1, textX, textBaseY, 0xff603931, 1, false, false);
+
+			// Line 2: Growth time
+			String line2 = "GROWS: " + crop.growthDays + " DAYS";
+			guiFont.render(screen, line2, textX, textBaseY + 12, 0xff603931, 1, false, false);
+
+			// Line 3: Water need and harvest value
+			String line3 = "WATER: " + crop.dailyWater + "/D  SELL: $" + crop.harvestValue;
+			guiFont.render(screen, line3, textX, textBaseY + 24, 0xff603931, 1, false, false);
+		}
+
+		// Navigation buttons
+		screen.renderSprite(129, 200, Sprite.prevPage, false);
+		screen.renderSprite(245, 200, Sprite.nextPage, false);
+
+		// Page indicator
+		String pageText = "PAGE " + (shopPage + 1) + "/" + totalPages;
+		guiFont.render(screen, pageText, 174, 208, 0xff603931, 1, false, false);
+
+		// Hint text
+		guiFont.render(screen, "CLICK TO EQUIP  |  P/ESC: CLOSE", 105, 222, 0xff603931, 1, false, false);
 	}
 
 	// ==================== MENU RENDERING ====================
@@ -844,8 +1000,8 @@ public class Game extends Canvas implements Runnable {
 
 		// Tool Icons
 		int iconXBase = 210;
-		// Slot 1: Dynamic Seed Icon (Adjusted 6px lower for height balance)
-		renderToolIcon(iconXBase, 196, matureSprites[seedIndex], Tool.SEED_SHOP, "1", -16);
+		// Slot 1: Dynamic Seed Icon
+		renderToolIcon(iconXBase, 190, matureSprites[seedIndex], Tool.SEED_SHOP, "1", -10);
 		renderToolIcon(iconXBase + 20, 190, Sprite.hoe, Tool.HARVEST, "2", 0);
 		renderToolIcon(iconXBase + 40, 190, Sprite.wateringCan, Tool.WATERING_CAN, "3", 0);
 		renderToolIcon(iconXBase + 60, 190, Sprite.sword, Tool.SWORD, "4", 0);
@@ -853,13 +1009,13 @@ public class Game extends Canvas implements Runnable {
 
 		// Advance Button
 		int advX = 315;
-		screen.renderSprite(advX, 190, Sprite.actionMenu, false);
-		guiFont.render(screen, "ADV (ENT)", advX + 15, 201, 0xffffffff, 1, true, false);
+		screen.renderSprite(advX, 190, Sprite.advDayBtn, false);
+		guiFont.render(screen, "ADV DAY", advX + 8, 200, 0xff603931, 1, false, false);
 	}
 
 	private void renderToolIcon(int x, int y, Sprite s, Tool t, String label, int yOffset) {
 		screen.renderSprite(x, y + yOffset, s, false);
-		guiFont.render(screen, label, x + 5, y - 10, 0xffffffff, 1, true, false);
+		guiFont.render(screen, label, x + 5, y + 18, 0xffffffff, 1, true, false);
 		if (selectedTool == t)
 			screen.renderSprite(x, y, Sprite.select, false);
 	}

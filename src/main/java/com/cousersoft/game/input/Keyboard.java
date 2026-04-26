@@ -11,6 +11,7 @@ public class Keyboard implements KeyListener {
     public boolean bracketLeft, bracketRight;
     public boolean enter, escape, tab;
     public boolean kR, kH, kY, kS; // Weather triggers: Rain, Heat, sunnY, Snow
+    public boolean kP; // Shop toggle
 
     public void update() {
         up = keys[KeyEvent.VK_UP];
@@ -32,6 +33,7 @@ public class Keyboard implements KeyListener {
         kH = keys[KeyEvent.VK_H];
         kY = keys[KeyEvent.VK_Y];
         kS = keys[KeyEvent.VK_S];
+        kP = keys[KeyEvent.VK_P];
     }
 
     @Override

@@ -34,8 +34,6 @@ public abstract class Crop {
         else if (progress >= 0.75) stage = GrowthStage.STAGE3;
         else if (progress >= 0.50) stage = GrowthStage.STAGE2;
         else if (progress >= 0.25) stage = GrowthStage.STAGE1;
-        
-        checkSurvival();
     }
 
     public boolean consumeResources(FarmCell cell, Weather weather) {
@@ -63,6 +61,8 @@ public abstract class Crop {
             skipNextGrowthCycle = !skipNextGrowthCycle;
         }
 
+        checkSurvival();
+        
         return waterMet;
     }
 

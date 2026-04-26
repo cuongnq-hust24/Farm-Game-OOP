@@ -51,84 +51,7 @@ public class Screen {
 		}
 	}
 	
-	public void renderParticle(int xp, int yp, Sprite sprite, int color, boolean fixed) {
-		int tempCol;
-		if (fixed) {
-			xp -= xOffset;
-			yp -= yOffset;
-		}
-		int w = sprite.getWidth();
-		int h = sprite.getHeight();
-		for (int y = 0; y < h; y++) {
-			int ya = y + yp;
-			for (int x = 0; x < w; x++) {
-				int xa = x + xp;
-				if (xa < -w || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				if (color == 0)
-					tempCol = sprite.pixels[x + y * w];
-				else
-					tempCol = color;
-				if (tempCol != 0xffff00ff) {
-					pixels[xa + ya * width] = tempCol;
-				}
-			}
-		}
-	}
 	
-	public void renderText(int xp, int yp, Sprite sprite, int textColor, boolean fixed) {
-		if (fixed) {
-			xp -= xOffset;
-			yp -= yOffset;
-		}
-		
-		for (int y = 0; y < 16; y++) {
-			int ya = y + yp;
-			for (int x = 0; x < 16; x++) {
-				int xa = x + xp;
-				if (xa < -16 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = sprite.pixels[x + y * 16];
-				if (col != 0xffff00ff) {
-					if (textColor == 0) {
-						pixels[xa + ya * width] = col;
-					} else {
-						pixels[xa + ya * width] = textColor;
-					}
-				}
-			}
-		}
-	}
-	public int getXOffset() {
-		return xOffset;
-	}
-	public int getYOffset() {
-		return yOffset;
-	}
-	public void renderSmallText(int xp, int yp, Sprite sprite, int textColor, boolean fixed) {
-		if (fixed) {
-			xp -= xOffset;
-			yp -= yOffset;
-		}
-		for (int y = 0; y < 8; y++) {
-			int ya = y + yp;
-			for (int x = 0; x < 8; x++) {
-				int xa = x + xp;
-				if (xa < -8 || xa >= width || ya < 0 || ya >= height) break;
-				if (xa < 0) xa = 0;
-				int col = sprite.pixels[x + y * 8];
-				if (col != 0xffff00ff) {
-					if (textColor == 0) {
-						pixels[xa + ya * width] = col;
-					} else {
-						pixels[xa + ya * width] = textColor;
-					}
-				}
-			}
-		}
-	}
-	
-			
 	//Method to clear the screen
 	public void clear() {
 		//Cycle through each pixel and set it to black
@@ -152,33 +75,6 @@ public class Screen {
 		if (color != 0xffff00ff)
 			pixels[xp + yp * width] = color;
 	}
-	
-	public int getRGB(String hex) {
-		if (hex.length() > 1) {
-			String temp;
-			int colVal;
-			temp = hex.substring(2, 4);
-			red = Integer.parseInt(temp, 16);
-			temp = hex.substring(4, 6);
-			green = Integer.parseInt(temp, 16);
-			temp = hex.substring(6, 8);
-			blue = Integer.parseInt(temp, 16);
-			colVal = darkenTile(red, green, blue);
-			return colVal;
-		} else {
-			return 0;
-		}
-	}
-	
-    public int darkenTile(int r, int g, int b) {
-        int col = 0;
-        if (r > 20) r -= 20; else r = 0;
-        if (g > 20) g -= 20; else g = 0;
-        if (b > 20) b -= 20; else b = 0;
-        
-        int colVal = (r << 16) | (g << 8) | b;
-        return colVal;
-    }
 
     public void renderOutline(int xp, int yp, int w, int h, int color) {
         for (int x = xp; x < xp + w; x++) {
