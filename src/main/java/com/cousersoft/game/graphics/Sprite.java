@@ -189,6 +189,7 @@ public class Sprite {
 		public static Sprite npc_right_2 = new Sprite(16, 2, 2, SpriteSheet.NPC);
 	
 	public static Sprite sword = new Sprite(16, 0, 0, SpriteSheet.sword);
+	public static Sprite fertilizer = new Sprite(16, 0, 0, SpriteSheet.fertilizerSheet);
 	public static Sprite ladybug = new Sprite(16, 0, 0, SpriteSheet.ladybug);
 	
 	////////////FONT SPRITES///////////////////////////////////////////////////////////////////////////////////////

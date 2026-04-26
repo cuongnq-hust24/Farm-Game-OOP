@@ -8,6 +8,7 @@ public abstract class Crop {
     protected int growthTime;
     protected int baseValue;
     protected int consecutiveDaysWithoutWater;
+    protected boolean skipNextGrowthCycle;
 
     public Crop(int growthTime, int baseValue) {
         this.stage = GrowthStage.SEED;
@@ -15,10 +16,16 @@ public abstract class Crop {
         this.growthTime = growthTime;
         this.baseValue = baseValue;
         this.consecutiveDaysWithoutWater = 0;
+        this.skipNextGrowthCycle = false;
     }
 
     public void grow() {
         if (stage == GrowthStage.DEAD || stage == GrowthStage.MATURE) return;
+        
+        if (skipNextGrowthCycle) {
+            skipNextGrowthCycle = false;
+            return; // Skip this day's growth (halving growth speed due to 0 nutrients)
+        }
         
         daysPlanted++;
         
@@ -38,14 +45,25 @@ public abstract class Crop {
         int waterReq = 10;
         if (weather instanceof HeatWave) waterReq = 20;
 
+        boolean waterMet = true;
         if (cell.getMoistureLevel() >= waterReq) {
             cell.setMoistureLevel(cell.getMoistureLevel() - waterReq);
             consecutiveDaysWithoutWater = 0;
-            return true;
         } else {
             consecutiveDaysWithoutWater++;
-            return false;
+            waterMet = false;
         }
+
+        // Nutrient consumption: 5 units per day
+        if (cell.getNutrientLevel() >= 5) {
+            cell.setNutrientLevel(cell.getNutrientLevel() - 5);
+            skipNextGrowthCycle = false; // Grow normally
+        } else {
+            // Un-fertilized soil slows down crop growth
+            skipNextGrowthCycle = !skipNextGrowthCycle;
+        }
+
+        return waterMet;
     }
 
     public int harvest() {

@@ -280,6 +280,8 @@ public class Game extends Canvas implements Runnable {
 			selectedTool = Tool.WATERING_CAN;
 		else if (keyboard.k4)
 			selectedTool = Tool.SWORD;
+		else if (keyboard.k5)
+			selectedTool = Tool.FERTILIZER;
 
 		// Handle Tab to cycle crops
 		if (keyboard.tab) {
@@ -431,6 +433,9 @@ public class Game extends Canvas implements Runnable {
 			} else if (mx >= iconXBase + 60 && mx < iconXBase + 76) {
 				selectedTool = Tool.SWORD;
 				return;
+			} else if (mx >= iconXBase + 80 && mx < iconXBase + 96) {
+				selectedTool = Tool.FERTILIZER;
+				return;
 			}
 		}
 
@@ -472,6 +477,15 @@ public class Game extends Canvas implements Runnable {
 			case SWORD -> {
 				cell.clearPests();
 				message = "Cleared pests at " + gx + "," + gy;
+			}
+			case FERTILIZER -> {
+				if (balance >= 15) {
+					balance -= 15;
+					cell.fertilizeCell();
+					message = "FERTILIZED SOIL! (-$15)";
+				} else {
+					message = "NOT ENOUGH MONEY ($15)";
+				}
 			}
 			case SEED_SHOP -> {
 				if (grid.getTileType(gx, gy) == 'S' && cell.getCurrentCrop() == null) {
@@ -616,11 +630,11 @@ public class Game extends Canvas implements Runnable {
 		guiFont.render(screen, "ESC: BACK TO MENU", x + 10, y + 60, 0xffdddddd, 1, true, false);
 
 		guiFont.render(screen, "TOOLS:", x, y + 75, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "1 WHEAT SEED ($5)", x + 10, y + 85, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "2 TOMATO SEED ($10)", x + 10, y + 95, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "3 HARVEST (MATURE CROPS)", x + 10, y + 105, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "4 WATERING CAN (+50 WATER)", x + 10, y + 115, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "5 SWORD (CLEAR PESTS)", x + 10, y + 125, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "1 SEEDS (TAB CYCLES) ($)", x + 10, y + 85, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "2 HARVEST (MATURE CROPS)", x + 10, y + 95, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "3 WATERING CAN (+50 WATER)", x + 10, y + 105, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "4 SWORD (CLEAR PESTS)", x + 10, y + 115, 0xffdddddd, 1, true, false);
+		guiFont.render(screen, "5 FERTILIZER ($15)", x + 10, y + 125, 0xffdddddd, 1, true, false);
 
 		guiFont.render(screen, "AIM: DEMONSTRATE OOP PRINCIPLES", 100, 210, 0xff888888, 1, true, false);
 
@@ -821,8 +835,10 @@ public class Game extends Canvas implements Runnable {
 
 			if (cell.getCurrentCrop() != null) {
 				String cropInfo = "CROP: " + cell.getCurrentCrop().getClass().getSimpleName() + " ["
-						+ cell.getCurrentCrop().getStage() + "]";
+						+ cell.getCurrentCrop().getStage().name() + "]";
 				guiFont.render(screen, cropInfo, hudX, hudYStart + 24, 0xffffffff, 1, true, false);
+			} else {
+				guiFont.render(screen, "NUTRIENTS: " + cell.getNutrientLevel(), hudX, hudYStart + 24, 0xffffffaa, 1, true, false);
 			}
 		}
 
@@ -833,6 +849,7 @@ public class Game extends Canvas implements Runnable {
 		renderToolIcon(iconXBase + 20, 190, Sprite.hoe, Tool.HARVEST, "2", 0);
 		renderToolIcon(iconXBase + 40, 190, Sprite.wateringCan, Tool.WATERING_CAN, "3", 0);
 		renderToolIcon(iconXBase + 60, 190, Sprite.sword, Tool.SWORD, "4", 0);
+		renderToolIcon(iconXBase + 80, 190, Sprite.fertilizer, Tool.FERTILIZER, "5", 0);
 
 		// Advance Button
 		int advX = 315;

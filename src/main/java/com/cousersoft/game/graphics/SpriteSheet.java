@@ -16,6 +16,7 @@ public class SpriteSheet {
 	public static SpriteSheet player = new SpriteSheet("/textures/player.png", 256);
 	public static SpriteSheet NPC = new SpriteSheet("/textures/npc.png", 256);
 	public static SpriteSheet sword = new SpriteSheet("/textures/sword.png", 16);
+	public static SpriteSheet fertilizerSheet = new SpriteSheet("/textures/fertiilizer.png", 16);
 	public static SpriteSheet fontSheet = new SpriteSheet("/textures/fontSheet.png", 240);
 	public static SpriteSheet smallFontSheet = new SpriteSheet("/textures/smallFontSheet.png", 104);
 	public static SpriteSheet textBox = new SpriteSheet("/textures/textBox.png", 130);
