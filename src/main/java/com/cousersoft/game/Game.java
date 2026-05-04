@@ -15,24 +15,20 @@ import com.cousersoft.game.input.Mouse;
 import com.cousersoft.game.input.Keyboard;
 import com.cousersoft.game.simulation.*;
 import com.cousersoft.game.input.Tool;
+import static com.cousersoft.game.GameConstants.*;
 
 import java.awt.Graphics;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
-	public static int width = 400;
-	public static int height = width / 16 * 9;
-	private int scale = 3;
-
+	public static int width = SCREEN_WIDTH;
+	public static int height = SCREEN_HEIGHT;
+	public GameContext ctx;
+	public com.cousersoft.game.input.InputManager inputManager;
 	private Thread thread;
 	private JFrame frame;
 	private boolean running = false;
-
-	private Screen screen;
-	public StateHandler handler;
-	private Mouse mouse;
-	private Keyboard keyboard;
 
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -40,22 +36,18 @@ public class Game extends Canvas implements Runnable {
 	public int numUpdates = 0;
 	public int numFrames = 0;
 
-	private BitmapFont guiFont;
-	private FarmGrid grid;
+	// Debounce flags
+	private boolean tabTriggered = false;
+	private boolean mouseClicked = false;
+	private boolean spaceTriggered = false;
+	private boolean scaleKeyTriggered = false;
+	private boolean arrowTriggered = false;
+	private boolean enterTriggered = false;
+	private boolean escapeTriggered = false;
+	private boolean weatherKeyTriggered = false;
+	private boolean pKeyTriggered = false;
 
-	private int day = 1;
-	private int balance = 100;
-	private int selectedX = -1;
-	private int selectedY = -1;
-
-	private Tool selectedTool = Tool.NONE;
-	private String message = "Welcome to Smart Farm!";
-
-	// Tick counter for weather animation
-	private int tickCounter = 0;
-
-	// 10-Crop System State
-	private int seedIndex = 0;
+	// Keep temporarily until Step 8
 	private String[] seedNames = { "Rice", "Cabbage", "Corn", "Carrot", "Radish", "Tomato", "Pumpkin", "Eggplant",
 			"Chili", "Pepper" };
 	private int[] seedCosts = { 5, 8, 10, 6, 7, 12, 25, 15, 10, 12 };
@@ -63,62 +55,40 @@ public class Game extends Canvas implements Runnable {
 			Sprite.sRice4, Sprite.sCabbage4, Sprite.sCorn4, Sprite.sCarrot4, Sprite.sRadish4,
 			Sprite.sTomato4, Sprite.sPumpkin4, Sprite.sEggplant4, Sprite.sChili4, Sprite.sPepper4
 	};
-	private boolean tabTriggered = false;
-
-	// UI Buttons
-	private final int BTN_W = 80, BTN_H = 20;
-	private final int ADV_X = 300, ADV_Y = 190;
-
-	// Costs
-	private final int WHEAT_COST = 5;
-	private final int TOMATO_COST = 10;
-
-	// Menu button areas (pixel coordinates in internal resolution)
-	private final int MENU_BTN_X = 150, MENU_BTN_W = 100, MENU_BTN_H = 14;
-	private final int MENU_START_Y = 100;
-	private final int MENU_HELP_Y = 120;
-	private final int MENU_QUIT_Y = 140;
-
-	// Quit confirmation state
-	private boolean showQuitConfirm = false;
-
-	//Shop state
-	private int shopPage = 0;
-	private boolean pKeyTriggered = false;
-	private CropData[] cropCatalog;
-	private static final int CROPS_PER_PAGE = 3;
-
 	public Game() {
-		Dimension size = new Dimension(width * scale, height * scale);
+		ctx = new GameContext();
+		inputManager = new com.cousersoft.game.input.InputManager();
+
+		Dimension size = new Dimension(width * ctx.scale, height * ctx.scale);
 		this.setPreferredSize(size);
 		frame = new JFrame();
-		screen = new Screen(width, height);
-		handler = new StateHandler();
-		handler.setState("Menu"); // Start at the menu
+		ctx.screen = new Screen(width, height);
+		ctx.handler = new StateHandler();
+		ctx.handler.setState(GameState.MENU);
 
-		mouse = new Mouse();
-		addMouseListener(mouse);
-		addMouseMotionListener(mouse);
+		ctx.mouse = new Mouse();
+		addMouseListener(ctx.mouse);
+		addMouseMotionListener(ctx.mouse);
 
-		keyboard = new Keyboard();
-		addKeyListener(keyboard);
+		ctx.keyboard = new Keyboard();
+		addKeyListener(ctx.keyboard);
 		setFocusTraversalKeysEnabled(false);
 
-		grid = new FarmGrid(25, 14);
+		ctx.grid = new FarmGrid(GRID_ROWS, GRID_COLS);
 
-		guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
-		cropCatalog = CropData.getAllCrops();
+		ctx.guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
+		ctx.cropCatalog = CropData.getAllCrops();
 	}
 
 	private void resetGame() {
-		day = 1;
-		balance = 100;
-		selectedX = -1;
-		selectedY = -1;
-		selectedTool = Tool.NONE;
-		message = "Welcome to Smart Farm!";
-		grid = new FarmGrid(25, 14);
-		showQuitConfirm = false;
+		ctx.day = STARTING_DAY;
+		ctx.balance = STARTING_BALANCE;
+		ctx.selectedX = -1;
+		ctx.selectedY = -1;
+		ctx.selectedTool = Tool.NONE;
+		ctx.message = "Welcome to Smart Farm!";
+		ctx.grid = new FarmGrid(GRID_ROWS, GRID_COLS);
+		ctx.showQuitConfirm = false;
 	}
 
 	public synchronized void start() {
@@ -168,475 +138,37 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	private boolean mouseClicked = false;
-	private boolean spaceTriggered = false;
-	private boolean scaleKeyTriggered = false;
-	private boolean arrowTriggered = false;
-	private boolean enterTriggered = false;
-	private boolean escapeTriggered = false;
-	private boolean weatherKeyTriggered = false;
+
+	private com.cousersoft.game.state.StateUpdater menuUpdater = new com.cousersoft.game.state.MenuUpdater();
+	private com.cousersoft.game.state.StateUpdater helpUpdater = new com.cousersoft.game.state.HelpUpdater();
+	private com.cousersoft.game.state.StateUpdater gameUpdater = new com.cousersoft.game.state.GameUpdater();
+	private com.cousersoft.game.state.StateUpdater shopUpdater = new com.cousersoft.game.state.ShopUpdater();
+	private com.cousersoft.game.render.StateRenderer menuRenderer = new com.cousersoft.game.render.MenuRenderer();
+	private com.cousersoft.game.render.StateRenderer helpRenderer = new com.cousersoft.game.render.HelpRenderer();
+	private com.cousersoft.game.render.StateRenderer gameRenderer = new com.cousersoft.game.render.GameRenderer();
+	private com.cousersoft.game.render.StateRenderer shopRenderer = new com.cousersoft.game.render.ShopRenderer();
 
 	public void update() {
-		keyboard.update();
-		tickCounter++;
+		ctx.keyboard.update();
+		ctx.tickCounter++;
 
-		String state = handler.getState();
+		GameState state = ctx.handler.getState();
 
-		if (state.equals("Menu")) {
-			updateMenu();
-		} else if (state.equals("Help")) {
-			updateHelp();
-		} else if (state.equals("Game")) {
-			updateGame();
-		} else if (state.equals("Shop")) {
-			updateShop();
-		}
-	}
-
-	// ==================== MENU STATE ====================
-
-	private void updateMenu() {
-		int mx = mouse.getX() / scale;
-		int my = mouse.getY() / scale;
-
-		if (showQuitConfirm) {
-			// Y to confirm quit, N/Escape to cancel
-			if (keyboard.kY) {
-				System.exit(0);
-			}
-			if (keyboard.escape) {
-				if (!escapeTriggered) {
-					showQuitConfirm = false;
-					escapeTriggered = true;
-				}
-			} else {
-				escapeTriggered = false;
-			}
-			return;
+		switch (state) {
+			case MENU -> menuUpdater.update(ctx, inputManager);
+			case HELP -> helpUpdater.update(ctx, inputManager);
+			case GAME -> gameUpdater.update(ctx, inputManager);
+			case SHOP -> shopUpdater.update(ctx, inputManager);
 		}
 
-		if (mouse.getButton() == 1) {
-			if (!mouseClicked) {
-				if (mx >= MENU_BTN_X && mx <= MENU_BTN_X + MENU_BTN_W) {
-					if (my >= MENU_START_Y && my <= MENU_START_Y + MENU_BTN_H) {
-						resetGame();
-						handler.setState("Game");
-					} else if (my >= MENU_HELP_Y && my <= MENU_HELP_Y + MENU_BTN_H) {
-						handler.setState("Help");
-					} else if (my >= MENU_QUIT_Y && my <= MENU_QUIT_Y + MENU_BTN_H) {
-						showQuitConfirm = true;
-					}
-				}
-				mouseClicked = true;
-			}
-		} else {
-			mouseClicked = false;
-		}
-
-		// Keyboard shortcuts for menu
-		if (keyboard.enter) {
-			if (!enterTriggered) {
-				resetGame();
-				handler.setState("Game");
-				enterTriggered = true;
-			}
-		} else {
-			enterTriggered = false;
-		}
-	}
-
-	// ==================== HELP STATE ====================
-
-	private void updateHelp() {
-		int mx = mouse.getX() / scale;
-		int my = mouse.getY() / scale;
-
-		// Back button click
-		if (mouse.getButton() == 1) {
-			if (!mouseClicked) {
-				if (mx >= MENU_BTN_X && mx <= MENU_BTN_X + MENU_BTN_W && my >= 190 && my <= 204) {
-					handler.setState("Menu");
-				}
-				mouseClicked = true;
-			}
-		} else {
-			mouseClicked = false;
-		}
-
-		// Escape to go back
-		if (keyboard.escape) {
-			if (!escapeTriggered) {
-				handler.setState("Menu");
-				escapeTriggered = true;
-			}
-		} else {
-			escapeTriggered = false;
-		}
-	}
-
-	// ==================== GAME STATE ====================
-
-	private void updateGame() {
-		int mx = mouse.getX() / scale;
-		int my = mouse.getY() / scale;
-
-		// Handle Tool Selection Shortcuts
-		if (keyboard.k1)
-			selectedTool = Tool.SEED_SHOP;
-		else if (keyboard.k2)
-			selectedTool = Tool.HARVEST;
-		else if (keyboard.k3)
-			selectedTool = Tool.WATERING_CAN;
-		else if (keyboard.k4)
-			selectedTool = Tool.SWORD;
-		else if (keyboard.k5)
-			selectedTool = Tool.FERTILIZER;
-
-		// Handle Tab to cycle crops
-		if (keyboard.tab) {
-			if (!tabTriggered) {
-				if (selectedTool == Tool.SEED_SHOP) {
-					seedIndex = (seedIndex + 1) % 10;
-					message = "Selected: " + seedNames[seedIndex];
-				}
-				tabTriggered = true;
-			}
-		} else {
-			tabTriggered = false;
-		}
-
-		// Handle Scale Changes
-		if (keyboard.bracketLeft || keyboard.bracketRight) {
-			if (!scaleKeyTriggered) {
-				if (keyboard.bracketLeft)
-					changeScale(-1);
-				if (keyboard.bracketRight)
-					changeScale(1);
-				scaleKeyTriggered = true;
-			}
-		} else {
-			scaleKeyTriggered = false;
-		}
-
-		// Handle Arrow Keys for cell navigation (Excel-style)
-		if (keyboard.up || keyboard.down || keyboard.left || keyboard.right) {
-			if (!arrowTriggered) {
-				if (selectedX == -1) {
-					// No cell selected yet, start at center
-					selectedX = grid.getRows() / 2;
-					selectedY = grid.getCols() / 2;
-				} else {
-					if (keyboard.up && selectedY > 0)
-						selectedY--;
-					if (keyboard.down && selectedY < grid.getCols() - 1)
-						selectedY++;
-					if (keyboard.left && selectedX > 0)
-						selectedX--;
-					if (keyboard.right && selectedX < grid.getRows() - 1)
-						selectedX++;
-				}
-				arrowTriggered = true;
-			}
-		} else {
-			arrowTriggered = false;
-		}
-
-		// Handle Space to apply tool on selected cell
-		if (keyboard.space) {
-			if (!spaceTriggered) {
-				if (selectedX != -1 && selectedY != -1) {
-					applyTool(selectedX, selectedY);
-				}
-				spaceTriggered = true;
-			}
-		} else {
-			spaceTriggered = false;
-		}
-
-		// Handle Escape to go back to menu
-		if (keyboard.escape) {
-			if (!escapeTriggered) {
-				handler.setState("Menu");
-				escapeTriggered = true;
-			}
-		} else {
-			escapeTriggered = false;
-		}
-
-		// Handle Enter for Advance Day
-		if (keyboard.enter) {
-			if (!enterTriggered) {
-				day++;
-				grid.advanceDay();
-				checkGameOver();
-				enterTriggered = true;
-			}
-		} else {
-			enterTriggered = false;
-		}
-
-		// Handle Manual Weather Triggers (R=Rain, H=Heat, Y=Sunny, S=Snow)
-		if (keyboard.kR || keyboard.kH || keyboard.kY || keyboard.kS) {
-			if (!weatherKeyTriggered) {
-				if (keyboard.kR) {
-					grid.setWeather(new Rainy());
-					message = "Forced RAINY weather!";
-				} else if (keyboard.kH) {
-					grid.setWeather(new HeatWave());
-					message = "Forced HEAT WAVE!";
-				} else if (keyboard.kY) {
-					grid.setWeather(new Sunny());
-					message = "Forced SUNNY weather!";
-				} else if (keyboard.kS) {
-					grid.setWeather(new Snowy());
-					message = "Forced SNOWY weather!";
-				}
-				weatherKeyTriggered = true;
-			}
-		} else {
-			weatherKeyTriggered = false;
-		}
-
-		// Handle P key to open Shop
-		if (keyboard.kP) {
-			if (!pKeyTriggered) {
-				shopPage = 0;
-				handler.setState("Shop");
-				pKeyTriggered = true;
-			}
-		} else {
-			pKeyTriggered = false;
-		}
-
-		if (mouse.getButton() == 1) {
-			if (!mouseClicked) {
-				handleClicks(mx, my);
-				mouseClicked = true;
-			}
-		} else {
-			mouseClicked = false;
-		}
-	}
-
-	private void changeScale(int amount) {
-		int newScale = scale + amount;
-		if (newScale < 1)
-			newScale = 1;
-		if (newScale > 6)
-			newScale = 6;
-
-		if (newScale != scale) {
-			scale = newScale;
-			Dimension size = new Dimension(width * scale, height * scale);
+		if (ctx.scaleChanged) {
+			ctx.scaleChanged = false;
+			Dimension size = new Dimension(width * ctx.scale, height * ctx.scale);
 			this.setPreferredSize(size);
 			this.setMinimumSize(size);
 			this.setMaximumSize(size);
 			frame.pack();
 			frame.setLocationRelativeTo(null);
-			message = "Resolution: " + (width * scale) + "x" + (height * scale);
-		}
-	}
-
-	private void handleClicks(int mx, int my) {
-		// Tool icon area (bottom HUD)
-		int iconXBase = 210;
-		if (my >= 182 && my <= 210) {
-			if (mx >= iconXBase && mx < iconXBase + 16) {
-				selectedTool = Tool.SEED_SHOP;
-				return;
-			} else if (mx >= iconXBase + 20 && mx < iconXBase + 36) {
-				selectedTool = Tool.HARVEST;
-				return;
-			} else if (mx >= iconXBase + 40 && mx < iconXBase + 56) {
-				selectedTool = Tool.WATERING_CAN;
-				return;
-			} else if (mx >= iconXBase + 60 && mx < iconXBase + 76) {
-				selectedTool = Tool.SWORD;
-				return;
-			} else if (mx >= iconXBase + 80 && mx < iconXBase + 96) {
-				selectedTool = Tool.FERTILIZER;
-				return;
-			}
-		}
-
-		// Advance Day button
-		int advX = 315;
-		if (mx >= advX && mx <= advX + 52 && my >= 190 && my <= 218) {
-			day++;
-			grid.advanceDay();
-			checkGameOver();
-			return;
-		}
-
-		// Back to Menu button (top-right corner)
-		if (mx >= width - 40 && mx <= width && my >= 0 && my <= 12) {
-			handler.setState("Menu");
-			return;
-		}
-
-		// Grid interaction
-		int gx = mx / 16;
-		int gy = my / 16;
-		if (gx >= 0 && gx < grid.getRows() && gy >= 0 && gy < grid.getCols()) {
-			selectedX = gx;
-			selectedY = gy;
-			applyTool(gx, gy);
-		}
-	}
-
-	private void applyTool(int gx, int gy) {
-		FarmCell cell = grid.getCell(gx, gy);
-		if (cell == null)
-			return;
-
-		switch (selectedTool) {
-			case WATERING_CAN -> {
-				cell.waterCell();
-				message = "Watered cell " + gx + "," + gy;
-			}
-			case SWORD -> {
-				cell.clearPests();
-				message = "Cleared pests at " + gx + "," + gy;
-			}
-			case FERTILIZER -> {
-				if (balance >= 15) {
-					balance -= 15;
-					cell.fertilizeCell();
-					message = "FERTILIZED SOIL! (-$15)";
-				} else {
-					message = "NOT ENOUGH MONEY ($15)";
-				}
-			}
-			case SEED_SHOP -> {
-				if (grid.getTileType(gx, gy) == 'S' && cell.getCurrentCrop() == null) {
-					int cost = seedCosts[seedIndex];
-					if (balance >= cost) {
-						Crop newCrop = switch (seedIndex) {
-							case 0 -> new Rice();
-							case 1 -> new Cabbage();
-							case 2 -> new Corn();
-							case 3 -> new Carrot();
-							case 4 -> new WhiteRadish();
-							case 5 -> new Tomato();
-							case 6 -> new Pumpkin();
-							case 7 -> new Eggplant();
-							case 8 -> new Chili();
-							case 9 -> new Pepper();
-							default -> new Rice();
-						};
-						cell.plantCrop(newCrop);
-						balance -= cost;
-						message = "Planted " + seedNames[seedIndex] + "! -$" + cost;
-					} else {
-						message = "Not enough money!";
-					}
-				}
-			}
-			case HARVEST -> {
-				Crop crop = cell.getCurrentCrop();
-				if (crop != null && crop.getStage() == GrowthStage.MATURE) {
-					int val = crop.harvest();
-					balance += val;
-					cell.removeCrop();
-					message = "Harvested! +$" + val;
-				} else if (crop != null && crop.getStage() == GrowthStage.DEAD) {
-					cell.removeCrop();
-					message = "Cleared dead crop.";
-				}
-			}
-			default -> {
-			}
-		}
-	}
-
-	private void checkGameOver() {
-		if (balance < WHEAT_COST) {
-			boolean hasActiveCrops = false;
-			for (int y = 0; y < grid.getCols(); y++) {
-				for (int x = 0; x < grid.getRows(); x++) {
-					if (grid.getCell(x, y).getCurrentCrop() != null
-							&& grid.getCell(x, y).getCurrentCrop().getStage() != GrowthStage.DEAD) {
-						hasActiveCrops = true;
-						break;
-					}
-				}
-			}
-			if (!hasActiveCrops)
-				message = "GAME OVER: Out of funds!";
-		}
-	}
-
-	// ==================== SHOP STATE ====================
-
-	private void updateShop() {
-		int mx = mouse.getX() / scale;
-		int my = mouse.getY() / scale;
-
-		// Close shop with P or Escape
-		if (keyboard.kP) {
-			if (!pKeyTriggered) {
-				handler.setState("Game");
-				pKeyTriggered = true;
-			}
-		} else {
-			pKeyTriggered = false;
-		}
-		if (keyboard.escape) {
-			if (!escapeTriggered) {
-				handler.setState("Game");
-				escapeTriggered = true;
-			}
-		} else {
-			escapeTriggered = false;
-		}
-
-		int totalPages = (cropCatalog.length + CROPS_PER_PAGE - 1) / CROPS_PER_PAGE;
-
-		// Keyboard pagination
-		if (keyboard.left) {
-			if (!arrowTriggered) {
-				shopPage = (shopPage - 1 + totalPages) % totalPages;
-				arrowTriggered = true;
-			}
-		} else if (keyboard.right) {
-			if (!arrowTriggered) {
-				shopPage = (shopPage + 1) % totalPages;
-				arrowTriggered = true;
-			}
-		} else {
-			arrowTriggered = false;
-		}
-
-		if (mouse.getButton() == 1) {
-			if (!mouseClicked) {
-				// Prev button: centered at x=155-26=129, y=200
-				if (mx >= 129 && mx < 155 && my >= 200 && my < 228) {
-					shopPage = (shopPage - 1 + totalPages) % totalPages;
-				}
-				// Next button: centered at x=245, y=200
-				else if (mx >= 245 && mx < 271 && my >= 200 && my < 228) {
-					shopPage = (shopPage + 1) % totalPages;
-				}
-				// Click on wooden boards to select crop
-				else {
-					int boardX = 46;
-					int[] boardYs = {45, 98, 151};
-					for (int i = 0; i < CROPS_PER_PAGE; i++) {
-						int cropIdx = shopPage * CROPS_PER_PAGE + i;
-						if (cropIdx >= cropCatalog.length) break;
-						if (mx >= boardX && mx < boardX + 308 && my >= boardYs[i] && my < boardYs[i] + 48) {
-							seedIndex = cropIdx;
-							selectedTool = Tool.SEED_SHOP;
-							message = "Equipped: " + cropCatalog[cropIdx].name;
-							handler.setState("Game");
-							break;
-						}
-					}
-				}
-				mouseClicked = true;
-			}
-		} else {
-			mouseClicked = false;
 		}
 	}
 
@@ -649,21 +181,18 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 
-		screen.clear();
+		ctx.screen.clear();
 
-		String state = handler.getState();
-		if (state.equals("Menu")) {
-			renderMenu();
-		} else if (state.equals("Help")) {
-			renderHelp();
-		} else if (state.equals("Game")) {
-			renderGameScreen();
-		} else if (state.equals("Shop")) {
-			renderShop();
+		GameState state = ctx.handler.getState();
+		switch (state) {
+			case MENU -> menuRenderer.render(ctx);
+			case HELP -> helpRenderer.render(ctx);
+			case GAME -> gameRenderer.render(ctx);
+			case SHOP -> shopRenderer.render(ctx);
 		}
 
 		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = screen.pixels[i];
+			pixels[i] = ctx.screen.pixels[i];
 		}
 
 		Graphics g = bs.getDrawGraphics();
@@ -672,353 +201,11 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	// ==================== SHOP RENDERING ====================
+	// renderShop extracted
 
-	private void renderShop() {
-		// Draw blurred background
-		screen.renderSprite(0, 0, Sprite.bgBlur, false);
+	// renderMenu and renderHelp extracted
 
-		// Title Board centered at top
-		screen.renderSprite(155, 10, Sprite.titleBoard, false);
-		// Title text centered on the board
-		guiFont.render(screen, "SEED SHOP", 171, 19, 0xff603931, 1, false, false);
-
-		int totalPages = (cropCatalog.length + CROPS_PER_PAGE - 1) / CROPS_PER_PAGE;
-
-		// Draw 3 wooden boards
-		int boardX = 46;
-		int[] boardYs = {45, 98, 151};
-
-		for (int i = 0; i < CROPS_PER_PAGE; i++) {
-			int cropIdx = shopPage * CROPS_PER_PAGE + i;
-			if (cropIdx >= cropCatalog.length) break;
-
-			CropData crop = cropCatalog[cropIdx];
-
-			// Render wooden board
-			screen.renderSprite(boardX, boardYs[i], Sprite.woodenBoard, false);
-
-			// Render crop sprite on the left side of the board (centered vertically)
-			int spriteX = boardX + 10;
-			int spriteY = boardYs[i] + 12; // visually center 16px sprite in 48px board
-			screen.renderSprite(spriteX, spriteY, crop.matureSprite, false);
-
-			// Render text info on the right side
-			int textX = boardX + 35;
-			int textBaseY = boardYs[i] + 5;
-
-			// Line 1: Name and cost
-			String line1 = crop.name.toUpperCase() + "  -  $" + crop.cost;
-			guiFont.render(screen, line1, textX, textBaseY, 0xff603931, 1, false, false);
-
-			// Line 2: Growth time
-			String line2 = "GROWS: " + crop.growthDays + " DAYS";
-			guiFont.render(screen, line2, textX, textBaseY + 12, 0xff603931, 1, false, false);
-
-			// Line 3: Water need and harvest value
-			String line3 = "WATER: " + crop.dailyWater + "/D  SELL: $" + crop.harvestValue;
-			guiFont.render(screen, line3, textX, textBaseY + 24, 0xff603931, 1, false, false);
-		}
-
-		// Navigation buttons
-		screen.renderSprite(129, 200, Sprite.prevPage, false);
-		screen.renderSprite(245, 200, Sprite.nextPage, false);
-
-		// Page indicator
-		String pageText = "PAGE " + (shopPage + 1) + "/" + totalPages;
-		guiFont.render(screen, pageText, 174, 208, 0xff603931, 1, false, false);
-
-		// Hint text
-		guiFont.render(screen, "CLICK TO EQUIP  |  P/ESC: CLOSE", 105, 222, 0xff603931, 1, false, false);
-	}
-
-	// ==================== MENU RENDERING ====================
-
-	private void renderMenu() {
-		// Dark background
-		screen.fillRect(0, 0, width, height, 0x1a1a2e);
-
-		// Title
-		guiFont.render(screen, "SMART FARM SIMULATOR", 140, 40, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "CROP GROWTH AND RESOURCE MANAGEMENT", 100, 50, 0xffcccccc, 1, true, false);
-
-		// Buttons
-		renderMenuButton(MENU_BTN_X, MENU_START_Y, MENU_BTN_W, MENU_BTN_H, "START GAME", 0x2d6a4f);
-		renderMenuButton(MENU_BTN_X, MENU_HELP_Y, MENU_BTN_W, MENU_BTN_H, "HELP", 0x1d3557);
-		renderMenuButton(MENU_BTN_X, MENU_QUIT_Y, MENU_BTN_W, MENU_BTN_H, "QUIT", 0x6b2737);
-
-		// Controls hint
-		guiFont.render(screen, "PRESS ENTER TO START", 140, 170, 0xffffffff, 1, true, false);
-
-		// Quit confirmation overlay
-		if (showQuitConfirm) {
-			screen.fillRect(100, 85, 200, 40, 0x000000);
-			screen.renderOutline(100, 85, 200, 40, 0xffffff);
-			guiFont.render(screen, "REALLY QUIT?", 165, 95, 0xffffffff, 1, true, false);
-			guiFont.render(screen, "Y = YES   ESC = NO", 150, 110, 0xffaaaaaa, 1, true, false);
-		}
-	}
-
-	private void renderMenuButton(int x, int y, int w, int h, String text, int color) {
-		screen.fillRect(x, y, w, h, color);
-		screen.renderOutline(x, y, w, h, 0xffffff);
-		int textX = x + (w - text.length() * 6) / 2; // Adjusted for 6px char width (5 * 1 + 1 padding)
-		int textY = y + 2;
-		guiFont.render(screen, text, textX, textY, 0xffffffff, 1, true, false);
-	}
-
-	// ==================== HELP RENDERING ====================
-
-	private void renderHelp() {
-		screen.fillRect(0, 0, width, height, 0x1a1a2e);
-
-		guiFont.render(screen, "HOW TO PLAY", 165, 15, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "-----------------------------------", 100, 25, 0xffaaaaaa, 1, true, false);
-
-		int y = 40;
-		int x = 30;
-		guiFont.render(screen, "CONTROLS:", x, y, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "ARROW KEYS: NAVIGATE CELLS", x + 10, y + 10, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "ENTER: APPLY SELECTED TOOL", x + 10, y + 20, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "1-5: SELECT TOOL", x + 10, y + 30, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "SPACE: ADVANCE DAY", x + 10, y + 40, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "R/H/Y/S: FORCE WEATHER", x + 10, y + 50, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "ESC: BACK TO MENU", x + 10, y + 60, 0xffdddddd, 1, true, false);
-
-		guiFont.render(screen, "TOOLS:", x, y + 75, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "1 SEEDS (TAB CYCLES) ($)", x + 10, y + 85, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "2 HARVEST (MATURE CROPS)", x + 10, y + 95, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "3 WATERING CAN (+50 WATER)", x + 10, y + 105, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "4 SWORD (CLEAR PESTS)", x + 10, y + 115, 0xffdddddd, 1, true, false);
-		guiFont.render(screen, "5 FERTILIZER ($15)", x + 10, y + 125, 0xffdddddd, 1, true, false);
-
-		guiFont.render(screen, "AIM: DEMONSTRATE OOP PRINCIPLES", 100, 210, 0xff888888, 1, true, false);
-
-		// Back button
-		renderMenuButton(MENU_BTN_X, 190, MENU_BTN_W, MENU_BTN_H, "BACK (ESC)", 0x6b2737);
-	}
-
-	// ==================== GAME RENDERING ====================
-
-	private void renderGameScreen() {
-		renderGrid();
-		renderSelection();
-		renderHUD();
-
-		Weather w = grid.getCurrentWeather();
-		if (w instanceof Rainy) {
-			screen.applyRainOverlay(tickCounter);
-		} else if (w instanceof Snowy) {
-			screen.applySnowOverlay(tickCounter);
-		}
-	}
-
-	private void renderGrid() {
-		for (int y = 0; y < grid.getCols(); y++) {
-			for (int x = 0; x < grid.getRows(); x++) {
-				FarmCell cell = grid.getCell(x, y);
-				char type = grid.getTileType(x, y);
-				Sprite sprite;
-
-				if (type == 'S') {
-					sprite = getFarmlandSprite(x, y, cell.getMoistureLevel(), grid.getCurrentWeather());
-				} else {
-					// Randomized grass variety based on coordinates and weather
-					int baseSeed = Math.abs(x * 7 + y * 13);
-					String weatherName = grid.getCurrentWeather().getName();
-
-					if (weatherName.equalsIgnoreCase("HeatWave") || weatherName.equalsIgnoreCase("Heat Wave")) {
-						// Heat Wave logic: use dry variants
-						int variant = baseSeed % 3;
-						sprite = switch (variant) {
-							case 0 -> Sprite.nGrassDry1;
-							case 1 -> Sprite.nGrassDry2;
-							default -> Sprite.nGrassDry3;
-						};
-					} else if (weatherName.equals("Rainy")) {
-						// Rainy logic: 70% chance of variants 4&5, 30% chance of variants 1,2,3
-						int chance = baseSeed % 10;
-						if (chance < 7) {
-							sprite = (baseSeed % 2 == 0) ? Sprite.nGrass4 : Sprite.nGrass5;
-						} else {
-							int variant = baseSeed % 3;
-							sprite = (variant == 0) ? Sprite.nGrass1 : (variant == 1) ? Sprite.nGrass2 : Sprite.nGrass3;
-						}
-					} else if (weatherName.equalsIgnoreCase("Snowy")) {
-						// 100% chance of new variants (11, 12, 13) for testing
-						int variant = baseSeed % 3;
-						sprite = (variant == 0) ? Sprite.nGrassWinter3
-								: (variant == 1) ? Sprite.nGrassWinter4 : Sprite.nGrassWinter5;
-					} else {
-						// Sunny / Default logic: use vibrant green variants 1,2,3
-						int variant = baseSeed % 3;
-						sprite = (variant == 0) ? Sprite.nGrass1 : (variant == 1) ? Sprite.nGrass2 : Sprite.nGrass3;
-					}
-				}
-
-				screen.renderSprite(x * 16, y * 16, sprite, false);
-
-				Crop crop = cell.getCurrentCrop();
-				if (crop != null) {
-					Sprite cropSprite = crop.getSprite();
-					if (cropSprite != null) {
-						// Offset by -16px vertically for 32px sprites to "stand" on the cell
-						int yOffset = (cropSprite.getHeight() > 16) ? -16 : 0;
-						screen.renderSprite(x * 16, y * 16 + yOffset, cropSprite, false);
-					}
-				}
-				if (cell.hasPests())
-					screen.renderSprite(x * 16, y * 16, Sprite.ladybug, false);
-			}
-		}
-	}
-
-	private Sprite getFarmlandSprite(int x, int y, int moisture, Weather weather) {
-		boolean u = grid.getTileType(x, y - 1) == 'S';
-		boolean d = grid.getTileType(x, y + 1) == 'S';
-		boolean l = grid.getTileType(x - 1, y) == 'S';
-		boolean r = grid.getTileType(x + 1, y) == 'S';
-
-		int variant = 0; // 0=Dry, 1=Wet1, 2=Wet2
-		if (moisture >= 80)
-			variant = 2;
-		else if (moisture >= 40)
-			variant = 1;
-
-		String wName = (weather != null) ? weather.getName() : "Sunny";
-
-		if (wName.equalsIgnoreCase("Snowy")) {
-			// Snow Farmland (Col 9-11, Rows 1-3). Note: only 1 moisture variant shown for
-			// snow
-			if (!u && !l)
-				return Sprite.fSnowTopLeft;
-			if (!u && !r)
-				return Sprite.fSnowTopRight;
-			if (!d && !l)
-				return Sprite.fSnowBotLeft;
-			if (!d && !r)
-				return Sprite.fSnowBotRight;
-			if (!u)
-				return Sprite.fSnowTop;
-			if (!d)
-				return Sprite.fSnowBot;
-			if (!l)
-				return Sprite.fSnowLeft;
-			if (!r)
-				return Sprite.fSnowRight;
-			return Sprite.fSnowCenter;
-		}
-
-		if (wName.equalsIgnoreCase("HeatWave") || wName.equalsIgnoreCase("Heat Wave")) {
-			// HeatWave Farmland (Row 4-6)
-			if (!u && !l)
-				return (variant == 0) ? Sprite.fHeatTopLeft
-						: (variant == 1) ? Sprite.fHeatTopLeftWet1 : Sprite.fHeatTopLeftWet2;
-			if (!u && !r)
-				return (variant == 0) ? Sprite.fHeatTopRight
-						: (variant == 1) ? Sprite.fHeatTopRightWet1 : Sprite.fHeatTopRightWet2;
-			if (!d && !l)
-				return (variant == 0) ? Sprite.fHeatBotLeft
-						: (variant == 1) ? Sprite.fHeatBotLeftWet1 : Sprite.fHeatBotLeftWet2;
-			if (!d && !r)
-				return (variant == 0) ? Sprite.fHeatBotRight
-						: (variant == 1) ? Sprite.fHeatBotRightWet1 : Sprite.fHeatBotRightWet2;
-			if (!u)
-				return (variant == 0) ? Sprite.fHeatTop : (variant == 1) ? Sprite.fHeatTopWet1 : Sprite.fHeatTopWet2;
-			if (!d)
-				return (variant == 0) ? Sprite.fHeatBot : (variant == 1) ? Sprite.fHeatBotWet1 : Sprite.fHeatBotWet2;
-			if (!l)
-				return (variant == 0) ? Sprite.fHeatLeft : (variant == 1) ? Sprite.fHeatLeftWet1 : Sprite.fHeatLeftWet2;
-			if (!r)
-				return (variant == 0) ? Sprite.fHeatRight
-						: (variant == 1) ? Sprite.fHeatRightWet1 : Sprite.fHeatRightWet2;
-			return (variant == 0) ? Sprite.fHeatCenter
-					: (variant == 1) ? Sprite.fHeatCenterWet1 : Sprite.fHeatCenterWet2;
-		}
-
-		// Default Normal Farmland
-		if (!u && !l)
-			return (variant == 0) ? Sprite.fTopLeft : (variant == 1) ? Sprite.fTopLeftWet1 : Sprite.fTopLeftWet2;
-		if (!u && !r)
-			return (variant == 0) ? Sprite.fTopRight : (variant == 1) ? Sprite.fTopRightWet1 : Sprite.fTopRightWet2;
-		if (!d && !l)
-			return (variant == 0) ? Sprite.fBotLeft : (variant == 1) ? Sprite.fBotLeftWet1 : Sprite.fBotLeftWet2;
-		if (!d && !r)
-			return (variant == 0) ? Sprite.fBotRight : (variant == 1) ? Sprite.fBotRightWet1 : Sprite.fBotRightWet2;
-		if (!u)
-			return (variant == 0) ? Sprite.fTop : (variant == 1) ? Sprite.fTopWet1 : Sprite.fTopWet2;
-		if (!d)
-			return (variant == 0) ? Sprite.fBot : (variant == 1) ? Sprite.fBotWet1 : Sprite.fBotWet2;
-		if (!l)
-			return (variant == 0) ? Sprite.fLeft : (variant == 1) ? Sprite.fLeftWet1 : Sprite.fLeftWet2;
-		if (!r)
-			return (variant == 0) ? Sprite.fRight : (variant == 1) ? Sprite.fRightWet1 : Sprite.fRightWet2;
-		return (variant == 0) ? Sprite.fCenter : (variant == 1) ? Sprite.fCenterWet1 : Sprite.fCenterWet2;
-	}
-
-	private void renderSelection() {
-		if (selectedX != -1) {
-			screen.renderOutline(selectedX * 16, selectedY * 16, 16, 16, 0xffffffff);
-		}
-	}
-
-	private void renderHUD() {
-		// Top Right Display: Balance and Day
-		guiFont.render(screen, "BALANCE: $" + balance, width - 120, 10, 0xffffffff, 1, true, false);
-		guiFont.render(screen, "DAY: " + day, width - 120, 22, 0xffffffff, 1, true, false);
-
-		// Status Messages (Top Left)
-		guiFont.render(screen, message, 10, 10, 0xffffffff, 1, true, false);
-
-		// Back to menu hint (Top Right corner)
-		guiFont.render(screen, "ESC:MENU", width - 50, 2, 0xffffffff, 1, true, false);
-
-		// Bottom Left Info Area
-		int hudX = 10;
-		int hudYStart = 175;
-		guiFont.render(screen, "WEATHER: " + grid.getCurrentWeather().getName().toUpperCase(), hudX, hudYStart - 12,
-				0xffffffff, 1,
-				true, false);
-		guiFont.render(screen, "TOOL: " + selectedTool.toString().replace("_", " "), hudX, hudYStart, 0xffffffff, 1,
-				true, false);
-
-		if (selectedX != -1) {
-			FarmCell cell = grid.getCell(selectedX, selectedY);
-			String cellMain = "CELL: " + selectedX + "," + selectedY + " WATER: " + cell.getMoistureLevel();
-			if (cell.hasPests())
-				cellMain += " [PEST!]";
-			guiFont.render(screen, cellMain, hudX, hudYStart + 12, 0xffffffff, 1, true, false);
-
-			if (cell.getCurrentCrop() != null) {
-				String cropInfo = "CROP: " + cell.getCurrentCrop().getClass().getSimpleName() + " ["
-						+ cell.getCurrentCrop().getStage().name() + "]";
-				guiFont.render(screen, cropInfo, hudX, hudYStart + 24, 0xffffffff, 1, true, false);
-			} else {
-				guiFont.render(screen, "NUTRIENTS: " + cell.getNutrientLevel(), hudX, hudYStart + 24, 0xffffffaa, 1, true, false);
-			}
-		}
-
-		// Tool Icons
-		int iconXBase = 210;
-		// Slot 1: Dynamic Seed Icon
-		renderToolIcon(iconXBase, 190, matureSprites[seedIndex], Tool.SEED_SHOP, "1", -10);
-		renderToolIcon(iconXBase + 20, 190, Sprite.hoe, Tool.HARVEST, "2", 0);
-		renderToolIcon(iconXBase + 40, 190, Sprite.wateringCan, Tool.WATERING_CAN, "3", 0);
-		renderToolIcon(iconXBase + 60, 190, Sprite.sword, Tool.SWORD, "4", 0);
-		renderToolIcon(iconXBase + 80, 190, Sprite.fertilizer, Tool.FERTILIZER, "5", 0);
-
-		// Advance Button
-		int advX = 315;
-		screen.renderSprite(advX, 190, Sprite.advDayBtn, false);
-		guiFont.render(screen, "ADV DAY", advX + 8, 200, 0xff603931, 1, false, false);
-	}
-
-	private void renderToolIcon(int x, int y, Sprite s, Tool t, String label, int yOffset) {
-		screen.renderSprite(x, y + yOffset, s, false);
-		guiFont.render(screen, label, x + 5, y + 18, 0xffffffff, 1, true, false);
-		if (selectedTool == t)
-			screen.renderSprite(x, y, Sprite.select, false);
-	}
+	// renderGameScreen and rendering helpers extracted
 
 	public static void main(String args[]) {
 		Game game = new Game();
@@ -1033,3 +220,5 @@ public class Game extends Canvas implements Runnable {
 		game.start();
 	}
 }
+
+
