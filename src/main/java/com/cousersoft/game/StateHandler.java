@@ -2,21 +2,21 @@ package com.cousersoft.game;
 
 public class StateHandler {
 	
-	private String currentState = "Menu";
-	private String lastState;
+	private GameState currentState = GameState.MENU;
+	private GameState lastState;
 	
 	
-	private void enterState(String state) {
+	private void enterState(GameState state) {
 	}
 	
-	private void exitState(String lastState) {
+	private void exitState(GameState lastState) {
 	}
 	
-	public String getState() {
+	public GameState getState() {
 		return currentState;
 	}
 	
-	public void setState(String state) {
+	public void setState(GameState state) {
 		lastState = currentState;
 		currentState = state;
 	}
