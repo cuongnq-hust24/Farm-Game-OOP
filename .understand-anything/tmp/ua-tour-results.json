@@ -1,0 +1,491 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 7,
+      "name": "README.md",
+      "summary": "Basic project overview."
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/Game.java",
+      "score": 7,
+      "name": "Game.java",
+      "summary": "The main game engine class."
+    },
+    {
+      "id": "document:game_breakdown.md",
+      "score": 2,
+      "name": "game_breakdown.md",
+      "summary": "Architectural breakdown of the Smart Farm Simulator."
+    },
+    {
+      "id": "document:rendering_guide.md",
+      "score": 2,
+      "name": "rendering_guide.md",
+      "summary": "Technical guide explaining the asset pipeline."
+    },
+    {
+      "id": "file:map1.tmx",
+      "score": 0,
+      "name": "map1.tmx",
+      "summary": "Tiled Map Editor XML file defining the layout."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Crop.java",
+      "fanIn": 3,
+      "name": "Crop.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Weather.java",
+      "fanIn": 3,
+      "name": "Weather.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/Game.java",
+      "fanIn": 2,
+      "name": "Game.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/Screen.java",
+      "fanIn": 2,
+      "name": "Screen.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+      "fanIn": 2,
+      "name": "FarmGrid.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/SpriteSheet.java",
+      "fanIn": 1,
+      "name": "SpriteSheet.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java",
+      "fanIn": 1,
+      "name": "FarmCell.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/StateHandler.java",
+      "fanIn": 1,
+      "name": "StateHandler.java"
+    },
+    {
+      "id": "document:game_breakdown.md",
+      "fanIn": 0,
+      "name": "game_breakdown.md"
+    },
+    {
+      "id": "file:map1.tmx",
+      "fanIn": 0,
+      "name": "map1.tmx"
+    },
+    {
+      "id": "config:pom.xml",
+      "fanIn": 0,
+      "name": "pom.xml"
+    },
+    {
+      "id": "document:README.md",
+      "fanIn": 0,
+      "name": "README.md"
+    },
+    {
+      "id": "document:rendering_guide.md",
+      "fanIn": 0,
+      "name": "rendering_guide.md"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/Sprite.java",
+      "fanIn": 0,
+      "name": "Sprite.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/text/Font.java",
+      "fanIn": 0,
+      "name": "Font.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/Images/TileSets/Outdoor.pdn",
+      "fanIn": 0,
+      "name": "Outdoor.pdn"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/input/Keyboard.java",
+      "fanIn": 0,
+      "name": "Keyboard.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/input/Mouse.java",
+      "fanIn": 0,
+      "name": "Mouse.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/input/Tool.java",
+      "fanIn": 0,
+      "name": "Tool.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/GrowthStage.java",
+      "fanIn": 0,
+      "name": "GrowthStage.java"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:src/main/java/com/cousersoft/game/Game.java",
+      "fanOut": 3,
+      "name": "Game.java"
+    },
+    {
+      "id": "document:game_breakdown.md",
+      "fanOut": 1,
+      "name": "game_breakdown.md"
+    },
+    {
+      "id": "config:pom.xml",
+      "fanOut": 1,
+      "name": "pom.xml"
+    },
+    {
+      "id": "document:README.md",
+      "fanOut": 1,
+      "name": "README.md"
+    },
+    {
+      "id": "document:rendering_guide.md",
+      "fanOut": 1,
+      "name": "rendering_guide.md"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/Sprite.java",
+      "fanOut": 1,
+      "name": "Sprite.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java",
+      "fanOut": 1,
+      "name": "FarmCell.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+      "fanOut": 1,
+      "name": "FarmGrid.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/HeatWave.java",
+      "fanOut": 1,
+      "name": "HeatWave.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Rainy.java",
+      "fanOut": 1,
+      "name": "Rainy.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Sunny.java",
+      "fanOut": 1,
+      "name": "Sunny.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Tomato.java",
+      "fanOut": 1,
+      "name": "Tomato.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/simulation/Wheat.java",
+      "fanOut": 1,
+      "name": "Wheat.java"
+    },
+    {
+      "id": "file:map1.tmx",
+      "fanOut": 0,
+      "name": "map1.tmx"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/Screen.java",
+      "fanOut": 0,
+      "name": "Screen.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/SpriteSheet.java",
+      "fanOut": 0,
+      "name": "SpriteSheet.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/graphics/text/Font.java",
+      "fanOut": 0,
+      "name": "Font.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/Images/TileSets/Outdoor.pdn",
+      "fanOut": 0,
+      "name": "Outdoor.pdn"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/input/Keyboard.java",
+      "fanOut": 0,
+      "name": "Keyboard.java"
+    },
+    {
+      "id": "file:src/main/java/com/cousersoft/game/input/Mouse.java",
+      "fanOut": 0,
+      "name": "Mouse.java"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:src/main/java/com/cousersoft/game/Game.java",
+    "order": [
+      "file:src/main/java/com/cousersoft/game/Game.java",
+      "file:src/main/java/com/cousersoft/game/graphics/Screen.java",
+      "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+      "file:src/main/java/com/cousersoft/game/StateHandler.java",
+      "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Crop.java"
+    ],
+    "depthMap": {
+      "file:src/main/java/com/cousersoft/game/Game.java": 0,
+      "file:src/main/java/com/cousersoft/game/graphics/Screen.java": 1,
+      "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java": 1,
+      "file:src/main/java/com/cousersoft/game/StateHandler.java": 1,
+      "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java": 2,
+      "file:src/main/java/com/cousersoft/game/simulation/Crop.java": 3
+    },
+    "byDepth": {
+      "0": [
+        "file:src/main/java/com/cousersoft/game/Game.java"
+      ],
+      "1": [
+        "file:src/main/java/com/cousersoft/game/graphics/Screen.java",
+        "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+        "file:src/main/java/com/cousersoft/game/StateHandler.java"
+      ],
+      "2": [
+        "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java"
+      ],
+      "3": [
+        "file:src/main/java/com/cousersoft/game/simulation/Crop.java"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:game_breakdown.md",
+        "type": "document",
+        "name": "game_breakdown.md",
+        "summary": "Architectural breakdown of the Smart Farm Simulator."
+      },
+      {
+        "id": "document:README.md",
+        "type": "document",
+        "name": "README.md",
+        "summary": "Basic project overview."
+      },
+      {
+        "id": "document:rendering_guide.md",
+        "type": "document",
+        "name": "rendering_guide.md",
+        "summary": "Technical guide explaining the asset pipeline."
+      }
+    ],
+    "infrastructure": [],
+    "data": [
+      {
+        "id": "file:map1.tmx",
+        "type": "file",
+        "name": "map1.tmx",
+        "summary": "Tiled Map Editor XML file defining the layout."
+      }
+    ],
+    "config": [
+      {
+        "id": "config:pom.xml",
+        "type": "config",
+        "name": "pom.xml",
+        "summary": "Maven Project Object Model file."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 7,
+    "list": [
+      {
+        "id": "layer:core",
+        "name": "Core Engine"
+      },
+      {
+        "id": "layer:simulation",
+        "name": "Simulation Layer"
+      },
+      {
+        "id": "layer:graphics",
+        "name": "Graphics & Rendering"
+      },
+      {
+        "id": "layer:input",
+        "name": "Input Handling"
+      },
+      {
+        "id": "layer:data",
+        "name": "Game Data & Maps"
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Documentation"
+      },
+      {
+        "id": "layer:config",
+        "name": "Configuration"
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "document:game_breakdown.md": {
+      "name": "game_breakdown.md",
+      "type": "document",
+      "summary": "Architectural breakdown of the Smart Farm Simulator."
+    },
+    "file:map1.tmx": {
+      "name": "map1.tmx",
+      "type": "file",
+      "summary": "Tiled Map Editor XML file defining the layout."
+    },
+    "config:pom.xml": {
+      "name": "pom.xml",
+      "type": "config",
+      "summary": "Maven Project Object Model file."
+    },
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Basic project overview."
+    },
+    "document:rendering_guide.md": {
+      "name": "rendering_guide.md",
+      "type": "document",
+      "summary": "Technical guide explaining the asset pipeline."
+    },
+    "file:src/main/java/com/cousersoft/game/Game.java": {
+      "name": "Game.java",
+      "type": "file",
+      "summary": "The main game engine class."
+    },
+    "file:src/main/java/com/cousersoft/game/graphics/Screen.java": {
+      "name": "Screen.java",
+      "type": "file",
+      "summary": "Handles low-level pixel manipulation."
+    },
+    "file:src/main/java/com/cousersoft/game/graphics/Sprite.java": {
+      "name": "Sprite.java",
+      "type": "file",
+      "summary": "Defines individual sprites."
+    },
+    "file:src/main/java/com/cousersoft/game/graphics/SpriteSheet.java": {
+      "name": "SpriteSheet.java",
+      "type": "file",
+      "summary": "Loads and manages texture atlases."
+    },
+    "file:src/main/java/com/cousersoft/game/graphics/text/Font.java": {
+      "name": "Font.java",
+      "type": "file",
+      "summary": "Implements custom bitmap fonts."
+    },
+    "file:src/main/java/com/cousersoft/game/Images/TileSets/Outdoor.pdn": {
+      "name": "Outdoor.pdn",
+      "type": "file",
+      "summary": "Source asset file."
+    },
+    "file:src/main/java/com/cousersoft/game/input/Keyboard.java": {
+      "name": "Keyboard.java",
+      "type": "file",
+      "summary": "Manages keyboard input."
+    },
+    "file:src/main/java/com/cousersoft/game/input/Mouse.java": {
+      "name": "Mouse.java",
+      "type": "file",
+      "summary": "Manages mouse movement."
+    },
+    "file:src/main/java/com/cousersoft/game/input/Tool.java": {
+      "name": "Tool.java",
+      "type": "file",
+      "summary": "Defines player tools."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Crop.java": {
+      "name": "Crop.java",
+      "type": "file",
+      "summary": "Abstract base class for plants."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java": {
+      "name": "FarmCell.java",
+      "type": "file",
+      "summary": "Represents a single grid cell."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java": {
+      "name": "FarmGrid.java",
+      "type": "file",
+      "summary": "Manages the farm simulation grid."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/GrowthStage.java": {
+      "name": "GrowthStage.java",
+      "type": "file",
+      "summary": "Enum for crop lifecycle stages."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/HeatWave.java": {
+      "name": "HeatWave.java",
+      "type": "file",
+      "summary": "Heat wave weather effect."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Rainy.java": {
+      "name": "Rainy.java",
+      "type": "file",
+      "summary": "Rainy weather effect."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Sunny.java": {
+      "name": "Sunny.java",
+      "type": "file",
+      "summary": "Sunny weather effect."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/TestSimulation.java": {
+      "name": "TestSimulation.java",
+      "type": "file",
+      "summary": "CLI simulation test."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Tomato.java": {
+      "name": "Tomato.java",
+      "type": "file",
+      "summary": "Tomato crop implementation."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Weather.java": {
+      "name": "Weather.java",
+      "type": "file",
+      "summary": "Weather interface."
+    },
+    "file:src/main/java/com/cousersoft/game/simulation/Wheat.java": {
+      "name": "Wheat.java",
+      "type": "file",
+      "summary": "Wheat crop implementation."
+    },
+    "file:src/main/java/com/cousersoft/game/StateHandler.java": {
+      "name": "StateHandler.java",
+      "type": "file",
+      "summary": "Game state manager."
+    },
+    "file:tileset.tsx": {
+      "name": "tileset.tsx",
+      "type": "file",
+      "summary": "Tiled tileset definition."
+    },
+    "file:untitled.tsx": {
+      "name": "untitled.tsx",
+      "type": "file",
+      "summary": "Temporary tileset."
+    }
+  },
+  "totalNodes": 28,
+  "totalEdges": 15
+}

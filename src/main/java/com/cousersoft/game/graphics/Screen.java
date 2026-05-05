@@ -1,20 +1,12 @@
 package com.cousersoft.game.graphics;
 
-import java.util.Random;
 
 public class Screen {
 	public int width;
 	public int height;
 	public int[] pixels; //Array to hold every pixel on the screen
-	public final int MAP_SIZE = 64; //Map size in tiles ( * 16 to get total number of pixels)
-	public final int MAP_SIZE_MASK = MAP_SIZE -1;
 	public int xOffset;
 	public int yOffset;
-	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // the array size should be map size by map size. 64 tiles along x axis and y axis
-	private Random random = new Random();
-	public int red;
-	public int blue;
-	public int green;
 	
 	//Initializer for screen object
 	public Screen(int width, int height) { //All screens require a width and a height

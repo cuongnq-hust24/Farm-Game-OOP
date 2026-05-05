@@ -47,14 +47,6 @@ public class Game extends Canvas implements Runnable {
 	private boolean weatherKeyTriggered = false;
 	private boolean pKeyTriggered = false;
 
-	// Keep temporarily until Step 8
-	private String[] seedNames = { "Rice", "Cabbage", "Corn", "Carrot", "Radish", "Tomato", "Pumpkin", "Eggplant",
-			"Chili", "Pepper" };
-	private int[] seedCosts = { 5, 8, 10, 6, 7, 12, 25, 15, 10, 12 };
-	private Sprite[] matureSprites = {
-			Sprite.sRice4, Sprite.sCabbage4, Sprite.sCorn4, Sprite.sCarrot4, Sprite.sRadish4,
-			Sprite.sTomato4, Sprite.sPumpkin4, Sprite.sEggplant4, Sprite.sChili4, Sprite.sPepper4
-	};
 	public Game() {
 		ctx = new GameContext();
 		inputManager = new com.cousersoft.game.input.InputManager();

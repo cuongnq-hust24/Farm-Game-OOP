@@ -181,7 +181,7 @@ public class GameRenderer implements StateRenderer {
         // Tool Icons
         int iconXBase = HUD_TOOL_ICON_X;
         // Slot 1: Dynamic Seed Icon
-        renderToolIcon(ctx, iconXBase, HUD_TOOL_ICON_Y, ctx.matureSprites[ctx.seedIndex], Tool.SEED_SHOP, "1", -10);
+        renderToolIcon(ctx, iconXBase, HUD_TOOL_ICON_Y, ctx.cropCatalog[ctx.seedIndex].matureSprite, Tool.SEED_SHOP, "1", -10);
         renderToolIcon(ctx, iconXBase + HUD_TOOL_SPACING, HUD_TOOL_ICON_Y, Sprite.hoe, Tool.HARVEST, "2", 0);
         renderToolIcon(ctx, iconXBase + HUD_TOOL_SPACING * 2, HUD_TOOL_ICON_Y, Sprite.wateringCan, Tool.WATERING_CAN, "3", 0);
         renderToolIcon(ctx, iconXBase + HUD_TOOL_SPACING * 3, HUD_TOOL_ICON_Y, Sprite.sword, Tool.SWORD, "4", 0);

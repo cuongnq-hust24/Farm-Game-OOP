@@ -1,0 +1,79 @@
+[
+  {
+    "id": "layer:core",
+    "name": "Core Engine",
+    "description": "Main game loop, state orchestration, and high-level management logic.",
+    "nodeIds": [
+      "file:src/main/java/com/cousersoft/game/Game.java",
+      "file:src/main/java/com/cousersoft/game/StateHandler.java"
+    ]
+  },
+  {
+    "id": "layer:simulation",
+    "name": "Simulation Layer",
+    "description": "Farming mechanics, crop lifecycles, weather patterns, and grid-based world logic.",
+    "nodeIds": [
+      "file:src/main/java/com/cousersoft/game/simulation/Crop.java",
+      "file:src/main/java/com/cousersoft/game/simulation/FarmCell.java",
+      "file:src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+      "file:src/main/java/com/cousersoft/game/simulation/GrowthStage.java",
+      "file:src/main/java/com/cousersoft/game/simulation/HeatWave.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Rainy.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Sunny.java",
+      "file:src/main/java/com/cousersoft/game/simulation/TestSimulation.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Tomato.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Weather.java",
+      "file:src/main/java/com/cousersoft/game/simulation/Wheat.java"
+    ]
+  },
+  {
+    "id": "layer:graphics",
+    "name": "Graphics & Rendering",
+    "description": "Sprite management, low-level pixel rendering, and font systems for the UI.",
+    "nodeIds": [
+      "file:src/main/java/com/cousersoft/game/graphics/Screen.java",
+      "file:src/main/java/com/cousersoft/game/graphics/Sprite.java",
+      "file:src/main/java/com/cousersoft/game/graphics/SpriteSheet.java",
+      "file:src/main/java/com/cousersoft/game/graphics/text/Font.java",
+      "file:src/main/java/com/cousersoft/game/Images/TileSets/Outdoor.pdn"
+    ]
+  },
+  {
+    "id": "layer:input",
+    "name": "Input Handling",
+    "description": "Event listeners and state management for keyboard and mouse interactions.",
+    "nodeIds": [
+      "file:src/main/java/com/cousersoft/game/input/Keyboard.java",
+      "file:src/main/java/com/cousersoft/game/input/Mouse.java",
+      "file:src/main/java/com/cousersoft/game/input/Tool.java"
+    ]
+  },
+  {
+    "id": "layer:data",
+    "name": "Game Data & Maps",
+    "description": "Tiled map definitions and tileset assets defining the world structure.",
+    "nodeIds": [
+      "file:map1.tmx",
+      "file:tileset.tsx",
+      "file:untitled.tsx"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "Architectural breakdowns, rendering guides, and project overviews.",
+    "nodeIds": [
+      "document:game_breakdown.md",
+      "document:README.md",
+      "document:rendering_guide.md"
+    ]
+  },
+  {
+    "id": "layer:config",
+    "name": "Configuration",
+    "description": "Build configuration and project metadata managed by Maven.",
+    "nodeIds": [
+      "config:pom.xml"
+    ]
+  }
+]

@@ -46,15 +46,7 @@ public class GameContext {
     // UI state
     public boolean showQuitConfirm = false;
 
-    // Temporary arrays until Step 8
-    public String[] seedNames = { "Rice", "Cabbage", "Corn", "Carrot", "Radish", "Tomato", "Pumpkin", "Eggplant", "Chili", "Pepper" };
-    public int[] seedCosts = { 5, 8, 10, 6, 7, 12, 25, 15, 10, 12 };
-    public com.cousersoft.game.graphics.Sprite[] matureSprites = {
-            com.cousersoft.game.graphics.Sprite.sRice4, com.cousersoft.game.graphics.Sprite.sCabbage4, com.cousersoft.game.graphics.Sprite.sCorn4, 
-            com.cousersoft.game.graphics.Sprite.sCarrot4, com.cousersoft.game.graphics.Sprite.sRadish4, com.cousersoft.game.graphics.Sprite.sTomato4, 
-            com.cousersoft.game.graphics.Sprite.sPumpkin4, com.cousersoft.game.graphics.Sprite.sEggplant4, com.cousersoft.game.graphics.Sprite.sChili4, 
-            com.cousersoft.game.graphics.Sprite.sPepper4
-    };
+
 
     public void reset() {
         day = STARTING_DAY;

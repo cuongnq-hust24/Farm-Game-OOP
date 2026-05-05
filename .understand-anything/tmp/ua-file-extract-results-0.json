@@ -1,0 +1,5986 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 28,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "game_breakdown.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 66,
+      "nonEmptyLines": 45,
+      "sections": [
+        {
+          "heading": "Smart Farm Simulator: Architectural Breakdown",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. System Overview",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "2. The Simulation Brain (Backend)",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "`FarmGrid.java`",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "`FarmCell.java`",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "3. Core OOP Concepts in Action",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Polymorphism (Crops & Weather)",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "Encapsulation (State Management)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Interface (Weather)",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "4. The Interaction Loop",
+          "level": 2,
+          "line": 51
+        },
+        {
+          "heading": "5. Summary of Mechanics",
+          "level": 2,
+          "line": 61
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "map1.tmx",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 37,
+      "metrics": {}
+    },
+    {
+      "path": "pom.xml",
+      "language": "xml",
+      "fileCategory": "config",
+      "totalLines": 55,
+      "nonEmptyLines": 51,
+      "metrics": {}
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "sections": [
+        {
+          "heading": "FarmGame",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "rendering_guide.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 58,
+      "nonEmptyLines": 38,
+      "sections": [
+        {
+          "heading": "Graphics & Tile Rendering Guide",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. The Asset Pipeline",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Step A: Loading the SpriteSheet",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "Step B: Extracting Sprites",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "2. Drawing to the Screen",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Rendering Logic",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "3. The Final Display",
+          "level": 2,
+          "line": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/Game.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 418,
+      "nonEmptyLines": 359,
+      "functions": [
+        {
+          "name": "Game",
+          "startLine": 74,
+          "endLine": 99,
+          "params": []
+        },
+        {
+          "name": "start",
+          "startLine": 101,
+          "endLine": 105,
+          "params": []
+        },
+        {
+          "name": "stop",
+          "startLine": 107,
+          "endLine": 114,
+          "params": []
+        },
+        {
+          "name": "run",
+          "startLine": 116,
+          "endLine": 146,
+          "params": []
+        },
+        {
+          "name": "update",
+          "startLine": 152,
+          "endLine": 195,
+          "params": []
+        },
+        {
+          "name": "changeScale",
+          "startLine": 197,
+          "endLine": 212,
+          "params": [
+            "amount"
+          ]
+        },
+        {
+          "name": "handleClicks",
+          "startLine": 214,
+          "endLine": 243,
+          "params": [
+            "mx",
+            "my"
+          ]
+        },
+        {
+          "name": "applyTool",
+          "startLine": 245,
+          "endLine": 284,
+          "params": [
+            "gx",
+            "gy"
+          ]
+        },
+        {
+          "name": "checkGameOver",
+          "startLine": 286,
+          "endLine": 299,
+          "params": []
+        },
+        {
+          "name": "render",
+          "startLine": 301,
+          "endLine": 321,
+          "params": []
+        },
+        {
+          "name": "renderGrid",
+          "startLine": 323,
+          "endLine": 351,
+          "params": []
+        },
+        {
+          "name": "renderSelection",
+          "startLine": 353,
+          "endLine": 357,
+          "params": []
+        },
+        {
+          "name": "renderHUD",
+          "startLine": 359,
+          "endLine": 397,
+          "params": []
+        },
+        {
+          "name": "renderToolIcon",
+          "startLine": 399,
+          "endLine": 403,
+          "params": [
+            "x",
+            "y",
+            "s",
+            "t",
+            "label"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 405,
+          "endLine": 416,
+          "params": [
+            "args"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Game",
+          "startLine": 21,
+          "endLine": 417,
+          "methods": [
+            "Game",
+            "start",
+            "stop",
+            "run",
+            "update",
+            "changeScale",
+            "handleClicks",
+            "applyTool",
+            "checkGameOver",
+            "render",
+            "renderGrid",
+            "renderSelection",
+            "renderHUD",
+            "renderToolIcon",
+            "main"
+          ],
+          "properties": [
+            "serialVersionUID",
+            "width",
+            "height",
+            "scale",
+            "thread",
+            "frame",
+            "running",
+            "screen",
+            "handler",
+            "mouse",
+            "keyboard",
+            "image",
+            "pixels",
+            "numUpdates",
+            "numFrames",
+            "guiFont",
+            "grid",
+            "day",
+            "balance",
+            "selectedX",
+            "selectedY",
+            "selectedTool",
+            "message",
+            "FARM_X_START",
+            "FARM_Y_START",
+            "FARM_X_END",
+            "FARM_Y_END",
+            "BTN_W",
+            "BTN_H",
+            "ADV_X",
+            "ADV_Y",
+            "WHEAT_X",
+            "WHEAT_Y",
+            "TOMATO_X",
+            "TOMATO_Y",
+            "HARVEST_X",
+            "HARVEST_Y",
+            "WATER_X",
+            "WATER_Y",
+            "SWORD_X",
+            "SWORD_Y",
+            "WHEAT_COST",
+            "TOMATO_COST",
+            "mouseClicked",
+            "keyTriggered",
+            "scaleKeyTriggered"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "width",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "height",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "handler",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "numUpdates",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "numFrames",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "Game",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "start",
+          "line": 101,
+          "isDefault": false
+        },
+        {
+          "name": "stop",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "run",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "update",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "render",
+          "line": 301,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 405,
+          "isDefault": false
+        },
+        {
+          "name": "Game",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Game",
+          "callee": "new Dimension",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Game",
+          "callee": "this.setPreferredSize",
+          "lineNumber": 76
+        },
+        {
+          "caller": "Game",
+          "callee": "new JFrame",
+          "lineNumber": 77
+        },
+        {
+          "caller": "Game",
+          "callee": "new Screen",
+          "lineNumber": 78
+        },
+        {
+          "caller": "Game",
+          "callee": "new StateHandler",
+          "lineNumber": 79
+        },
+        {
+          "caller": "Game",
+          "callee": "handler.setState",
+          "lineNumber": 80
+        },
+        {
+          "caller": "Game",
+          "callee": "new Mouse",
+          "lineNumber": 82
+        },
+        {
+          "caller": "Game",
+          "callee": "addMouseListener",
+          "lineNumber": 83
+        },
+        {
+          "caller": "Game",
+          "callee": "addMouseMotionListener",
+          "lineNumber": 84
+        },
+        {
+          "caller": "Game",
+          "callee": "new Keyboard",
+          "lineNumber": 86
+        },
+        {
+          "caller": "Game",
+          "callee": "addKeyListener",
+          "lineNumber": 87
+        },
+        {
+          "caller": "Game",
+          "callee": "new FarmGrid",
+          "lineNumber": 89
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell(5, 5).plantCrop",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Game",
+          "callee": "new Wheat",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell(6, 5).plantCrop",
+          "lineNumber": 93
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell",
+          "lineNumber": 93
+        },
+        {
+          "caller": "Game",
+          "callee": "new Tomato",
+          "lineNumber": 93
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell(5, 5).setMoistureLevel",
+          "lineNumber": 94
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell",
+          "lineNumber": 94
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell(6, 5).setMoistureLevel",
+          "lineNumber": 95
+        },
+        {
+          "caller": "Game",
+          "callee": "grid.getCell",
+          "lineNumber": 95
+        },
+        {
+          "caller": "Game",
+          "callee": "new Font",
+          "lineNumber": 97
+        },
+        {
+          "caller": "Game",
+          "callee": "guiFont.initChars",
+          "lineNumber": 98
+        },
+        {
+          "caller": "start",
+          "callee": "new Thread",
+          "lineNumber": 103
+        },
+        {
+          "caller": "start",
+          "callee": "thread.start",
+          "lineNumber": 104
+        },
+        {
+          "caller": "stop",
+          "callee": "thread.join",
+          "lineNumber": 110
+        },
+        {
+          "caller": "stop",
+          "callee": "e.printStackTrace",
+          "lineNumber": 112
+        },
+        {
+          "caller": "run",
+          "callee": "System.nanoTime",
+          "lineNumber": 117
+        },
+        {
+          "caller": "run",
+          "callee": "System.currentTimeMillis",
+          "lineNumber": 118
+        },
+        {
+          "caller": "run",
+          "callee": "requestFocus",
+          "lineNumber": 123
+        },
+        {
+          "caller": "run",
+          "callee": "System.nanoTime",
+          "lineNumber": 126
+        },
+        {
+          "caller": "run",
+          "callee": "update",
+          "lineNumber": 130
+        },
+        {
+          "caller": "run",
+          "callee": "render",
+          "lineNumber": 135
+        },
+        {
+          "caller": "run",
+          "callee": "System.currentTimeMillis",
+          "lineNumber": 138
+        },
+        {
+          "caller": "update",
+          "callee": "keyboard.update",
+          "lineNumber": 153
+        },
+        {
+          "caller": "update",
+          "callee": "mouse.getX",
+          "lineNumber": 154
+        },
+        {
+          "caller": "update",
+          "callee": "mouse.getY",
+          "lineNumber": 155
+        },
+        {
+          "caller": "update",
+          "callee": "changeScale",
+          "lineNumber": 167
+        },
+        {
+          "caller": "update",
+          "callee": "changeScale",
+          "lineNumber": 168
+        },
+        {
+          "caller": "update",
+          "callee": "grid.advanceDay",
+          "lineNumber": 179
+        },
+        {
+          "caller": "update",
+          "callee": "checkGameOver",
+          "lineNumber": 180
+        },
+        {
+          "caller": "update",
+          "callee": "mouse.getButton",
+          "lineNumber": 187
+        },
+        {
+          "caller": "update",
+          "callee": "handleClicks",
+          "lineNumber": 189
+        },
+        {
+          "caller": "changeScale",
+          "callee": "new Dimension",
+          "lineNumber": 204
+        },
+        {
+          "caller": "changeScale",
+          "callee": "this.setPreferredSize",
+          "lineNumber": 205
+        },
+        {
+          "caller": "changeScale",
+          "callee": "this.setMinimumSize",
+          "lineNumber": 206
+        },
+        {
+          "caller": "changeScale",
+          "callee": "this.setMaximumSize",
+          "lineNumber": 207
+        },
+        {
+          "caller": "changeScale",
+          "callee": "frame.pack",
+          "lineNumber": 208
+        },
+        {
+          "caller": "changeScale",
+          "callee": "frame.setLocationRelativeTo",
+          "lineNumber": 209
+        },
+        {
+          "caller": "handleClicks",
+          "callee": "grid.advanceDay",
+          "lineNumber": 230
+        },
+        {
+          "caller": "handleClicks",
+          "callee": "checkGameOver",
+          "lineNumber": 231
+        },
+        {
+          "caller": "handleClicks",
+          "callee": "applyTool",
+          "lineNumber": 240
+        },
+        {
+          "caller": "applyTool",
+          "callee": "grid.getCell",
+          "lineNumber": 246
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.waterCell",
+          "lineNumber": 250
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.clearPests",
+          "lineNumber": 251
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.isAvailable",
+          "lineNumber": 253
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.plantCrop",
+          "lineNumber": 255
+        },
+        {
+          "caller": "applyTool",
+          "callee": "new Wheat",
+          "lineNumber": 255
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.isAvailable",
+          "lineNumber": 262
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.plantCrop",
+          "lineNumber": 264
+        },
+        {
+          "caller": "applyTool",
+          "callee": "new Tomato",
+          "lineNumber": 264
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 271
+        },
+        {
+          "caller": "applyTool",
+          "callee": "crop.getStage",
+          "lineNumber": 272
+        },
+        {
+          "caller": "applyTool",
+          "callee": "crop.harvest",
+          "lineNumber": 273
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.removeCrop",
+          "lineNumber": 275
+        },
+        {
+          "caller": "applyTool",
+          "callee": "crop.getStage",
+          "lineNumber": 277
+        },
+        {
+          "caller": "applyTool",
+          "callee": "cell.removeCrop",
+          "lineNumber": 278
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCols",
+          "lineNumber": 289
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getRows",
+          "lineNumber": 290
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCell(x,y).getCurrentCrop",
+          "lineNumber": 291
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCell",
+          "lineNumber": 291
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCell(x,y).getCurrentCrop().getStage",
+          "lineNumber": 291
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCell(x,y).getCurrentCrop",
+          "lineNumber": 291
+        },
+        {
+          "caller": "checkGameOver",
+          "callee": "grid.getCell",
+          "lineNumber": 291
+        },
+        {
+          "caller": "render",
+          "callee": "getBufferStrategy",
+          "lineNumber": 302
+        },
+        {
+          "caller": "render",
+          "callee": "createBufferStrategy",
+          "lineNumber": 304
+        },
+        {
+          "caller": "render",
+          "callee": "screen.clear",
+          "lineNumber": 308
+        },
+        {
+          "caller": "render",
+          "callee": "renderGrid",
+          "lineNumber": 309
+        },
+        {
+          "caller": "render",
+          "callee": "renderSelection",
+          "lineNumber": 310
+        },
+        {
+          "caller": "render",
+          "callee": "renderHUD",
+          "lineNumber": 311
+        },
+        {
+          "caller": "render",
+          "callee": "bs.getDrawGraphics",
+          "lineNumber": 317
+        },
+        {
+          "caller": "render",
+          "callee": "g.drawImage",
+          "lineNumber": 318
+        },
+        {
+          "caller": "render",
+          "callee": "getWidth",
+          "lineNumber": 318
+        },
+        {
+          "caller": "render",
+          "callee": "getHeight",
+          "lineNumber": 318
+        },
+        {
+          "caller": "render",
+          "callee": "g.dispose",
+          "lineNumber": 319
+        },
+        {
+          "caller": "render",
+          "callee": "bs.show",
+          "lineNumber": 320
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "grid.getCols",
+          "lineNumber": 324
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "grid.getRows",
+          "lineNumber": 325
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "grid.getCell",
+          "lineNumber": 326
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "screen.renderSprite",
+          "lineNumber": 330
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 332
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 336
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 337
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 338
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 339
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 341
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 342
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 343
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "crop.getStage",
+          "lineNumber": 344
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "screen.renderSprite",
+          "lineNumber": 346
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "cell.hasPests",
+          "lineNumber": 348
+        },
+        {
+          "caller": "renderGrid",
+          "callee": "screen.renderSprite",
+          "lineNumber": 348
+        },
+        {
+          "caller": "renderSelection",
+          "callee": "screen.renderOutline",
+          "lineNumber": 355
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 361
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 362
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 365
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 370
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "grid.getCurrentWeather().getName().toUpperCase",
+          "lineNumber": 370
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "grid.getCurrentWeather().getName",
+          "lineNumber": 370
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "grid.getCurrentWeather",
+          "lineNumber": 370
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 371
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "selectedTool.toString().replace",
+          "lineNumber": 371
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "selectedTool.toString",
+          "lineNumber": 371
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "grid.getCell",
+          "lineNumber": 374
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 375
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.hasPests",
+          "lineNumber": 376
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 377
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 379
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop().getClass().getSimpleName",
+          "lineNumber": 380
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop().getClass",
+          "lineNumber": 380
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 380
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop().getStage",
+          "lineNumber": 380
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 380
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 381
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "renderToolIcon",
+          "lineNumber": 387
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "renderToolIcon",
+          "lineNumber": 388
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "renderToolIcon",
+          "lineNumber": 389
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "renderToolIcon",
+          "lineNumber": 390
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "renderToolIcon",
+          "lineNumber": 391
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "screen.renderSprite",
+          "lineNumber": 395
+        },
+        {
+          "caller": "renderHUD",
+          "callee": "guiFont.render",
+          "lineNumber": 396
+        },
+        {
+          "caller": "renderToolIcon",
+          "callee": "screen.renderSprite",
+          "lineNumber": 400
+        },
+        {
+          "caller": "renderToolIcon",
+          "callee": "guiFont.render",
+          "lineNumber": 401
+        },
+        {
+          "caller": "renderToolIcon",
+          "callee": "screen.renderSprite",
+          "lineNumber": 402
+        },
+        {
+          "caller": "main",
+          "callee": "new Game",
+          "lineNumber": 406
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.setResizable",
+          "lineNumber": 407
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.add",
+          "lineNumber": 408
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.setTitle",
+          "lineNumber": 409
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.pack",
+          "lineNumber": 410
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.setDefaultCloseOperation",
+          "lineNumber": 411
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.setLocationRelativeTo",
+          "lineNumber": 412
+        },
+        {
+          "caller": "main",
+          "callee": "game.frame.setVisible",
+          "lineNumber": 413
+        },
+        {
+          "caller": "main",
+          "callee": "game.start",
+          "lineNumber": 415
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 15,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/graphics/Screen.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 180,
+      "nonEmptyLines": 163,
+      "functions": [
+        {
+          "name": "Screen",
+          "startLine": 20,
+          "endLine": 30,
+          "params": [
+            "width",
+            "height"
+          ]
+        },
+        {
+          "name": "renderSprite",
+          "startLine": 33,
+          "endLine": 50,
+          "params": [
+            "xp",
+            "yp",
+            "sprite",
+            "fixed"
+          ]
+        },
+        {
+          "name": "renderParticle",
+          "startLine": 52,
+          "endLine": 71,
+          "params": [
+            "xp",
+            "yp",
+            "sprite",
+            "color",
+            "fixed"
+          ]
+        },
+        {
+          "name": "renderText",
+          "startLine": 73,
+          "endLine": 95,
+          "params": [
+            "xp",
+            "yp",
+            "sprite",
+            "textColor",
+            "fixed"
+          ]
+        },
+        {
+          "name": "getXOffset",
+          "startLine": 96,
+          "endLine": 98,
+          "params": []
+        },
+        {
+          "name": "getYOffset",
+          "startLine": 99,
+          "endLine": 101,
+          "params": []
+        },
+        {
+          "name": "renderSmallText",
+          "startLine": 102,
+          "endLine": 123,
+          "params": [
+            "xp",
+            "yp",
+            "sprite",
+            "textColor",
+            "fixed"
+          ]
+        },
+        {
+          "name": "clear",
+          "startLine": 127,
+          "endLine": 132,
+          "params": []
+        },
+        {
+          "name": "setOffset",
+          "startLine": 134,
+          "endLine": 137,
+          "params": [
+            "xOffset",
+            "yOffset"
+          ]
+        },
+        {
+          "name": "getRGB",
+          "startLine": 139,
+          "endLine": 154,
+          "params": [
+            "hex"
+          ]
+        },
+        {
+          "name": "darkenTile",
+          "startLine": 156,
+          "endLine": 164,
+          "params": [
+            "r",
+            "g",
+            "b"
+          ]
+        },
+        {
+          "name": "renderOutline",
+          "startLine": 166,
+          "endLine": 177,
+          "params": [
+            "xp",
+            "yp",
+            "w",
+            "h",
+            "color"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Screen",
+          "startLine": 5,
+          "endLine": 179,
+          "methods": [
+            "Screen",
+            "renderSprite",
+            "renderParticle",
+            "renderText",
+            "getXOffset",
+            "getYOffset",
+            "renderSmallText",
+            "clear",
+            "setOffset",
+            "getRGB",
+            "darkenTile",
+            "renderOutline"
+          ],
+          "properties": [
+            "width",
+            "height",
+            "pixels",
+            "MAP_SIZE",
+            "MAP_SIZE_MASK",
+            "xOffset",
+            "yOffset",
+            "tiles",
+            "random",
+            "red",
+            "blue",
+            "green"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "width",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "height",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "pixels",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "MAP_SIZE",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "MAP_SIZE_MASK",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "xOffset",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "yOffset",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "tiles",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "red",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "blue",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "green",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "Screen",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "renderSprite",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "renderParticle",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "renderText",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "getXOffset",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "getYOffset",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "renderSmallText",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "clear",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "setOffset",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "getRGB",
+          "line": 139,
+          "isDefault": false
+        },
+        {
+          "name": "darkenTile",
+          "line": 156,
+          "isDefault": false
+        },
+        {
+          "name": "renderOutline",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "Screen",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getRGB",
+          "callee": "hex.length",
+          "lineNumber": 140
+        },
+        {
+          "caller": "getRGB",
+          "callee": "hex.substring",
+          "lineNumber": 143
+        },
+        {
+          "caller": "getRGB",
+          "callee": "Integer.parseInt",
+          "lineNumber": 144
+        },
+        {
+          "caller": "getRGB",
+          "callee": "hex.substring",
+          "lineNumber": 145
+        },
+        {
+          "caller": "getRGB",
+          "callee": "Integer.parseInt",
+          "lineNumber": 146
+        },
+        {
+          "caller": "getRGB",
+          "callee": "hex.substring",
+          "lineNumber": 147
+        },
+        {
+          "caller": "getRGB",
+          "callee": "Integer.parseInt",
+          "lineNumber": 148
+        },
+        {
+          "caller": "getRGB",
+          "callee": "darkenTile",
+          "lineNumber": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 24,
+        "functionCount": 12,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/graphics/Sprite.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 366,
+      "nonEmptyLines": 343,
+      "functions": [
+        {
+          "name": "Sprite",
+          "startLine": 314,
+          "endLine": 320,
+          "params": [
+            "pixels",
+            "width",
+            "height"
+          ]
+        },
+        {
+          "name": "Sprite",
+          "startLine": 323,
+          "endLine": 329,
+          "params": [
+            "sprite",
+            "width",
+            "height"
+          ]
+        },
+        {
+          "name": "Sprite",
+          "startLine": 331,
+          "endLine": 339,
+          "params": [
+            "size",
+            "x",
+            "y",
+            "sheet"
+          ]
+        },
+        {
+          "name": "Sprite",
+          "startLine": 341,
+          "endLine": 345,
+          "params": [
+            "size",
+            "color"
+          ]
+        },
+        {
+          "name": "setColor",
+          "startLine": 349,
+          "endLine": 353,
+          "params": [
+            "color"
+          ]
+        },
+        {
+          "name": "load",
+          "startLine": 356,
+          "endLine": 364,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Sprite",
+          "startLine": 3,
+          "endLine": 365,
+          "methods": [
+            "Sprite",
+            "Sprite",
+            "Sprite",
+            "Sprite",
+            "setColor",
+            "load"
+          ],
+          "properties": [
+            "SIZE",
+            "TSIZE",
+            "x",
+            "y",
+            "width",
+            "height",
+            "pixels",
+            "sheet",
+            "grass",
+            "grass1",
+            "grass2",
+            "grass3",
+            "yellowFlower",
+            "bigFlower",
+            "purpleFlower",
+            "rock",
+            "dirt",
+            "dirtUp1",
+            "dirtUp2",
+            "dirtDown1",
+            "dirtDown2",
+            "dirtRight",
+            "dirtBottom",
+            "dirtLeft",
+            "dirtTop",
+            "dirtTLCorner",
+            "dirtTRCorner",
+            "dirtBLCorner",
+            "dirtBRCorner",
+            "soil",
+            "soilTilled",
+            "soilWatered",
+            "tlLeave",
+            "tmLeave",
+            "trLeave",
+            "mlLeave",
+            "mmlLeave",
+            "mmLeave",
+            "mmrLeave",
+            "mrLeave",
+            "blLeave",
+            "blmLeave",
+            "bmLeave",
+            "brmLeave",
+            "brLeave",
+            "mlTrunk",
+            "mmlTrunk",
+            "mmTrunk",
+            "mmrTrunk",
+            "mrTrunk",
+            "blTrunk",
+            "Trunk",
+            "brTrunk",
+            "voidSprite",
+            "clearSprite",
+            "player_down",
+            "player_down_1",
+            "player_down_2",
+            "player_up",
+            "player_up_1",
+            "player_up_2",
+            "player_left",
+            "player_left_1",
+            "player_left_2",
+            "player_right",
+            "player_right_1",
+            "player_right_2",
+            "playerRight1",
+            "playerRight2",
+            "playerLeft1",
+            "playerLeft2",
+            "playerDown1",
+            "playerDown2",
+            "npc_down",
+            "npc_down_1",
+            "npc_down_2",
+            "npc_up",
+            "npc_up_1",
+            "npc_up_2",
+            "npc_left",
+            "npc_left_1",
+            "npc_left_2",
+            "npc_right",
+            "npc_right_1",
+            "npc_right_2",
+            "sword",
+            "capA",
+            "capB",
+            "capC",
+            "capD",
+            "capE",
+            "capF",
+            "capG",
+            "capH",
+            "capI",
+            "capJ",
+            "capK",
+            "capL",
+            "capM",
+            "capN",
+            "capO",
+            "capP",
+            "capQ",
+            "capR",
+            "capS",
+            "capT",
+            "capU",
+            "capV",
+            "capW",
+            "capX",
+            "capY",
+            "capZ",
+            "lowA",
+            "lowB",
+            "lowC",
+            "lowD",
+            "lowE",
+            "lowF",
+            "lowG",
+            "lowH",
+            "lowI",
+            "lowJ",
+            "lowK",
+            "lowL",
+            "lowM",
+            "lowN",
+            "lowO",
+            "lowP",
+            "lowQ",
+            "lowR",
+            "lowS",
+            "lowT",
+            "lowU",
+            "lowV",
+            "lowW",
+            "lowX",
+            "lowY",
+            "lowZ",
+            "period",
+            "comma",
+            "expPt",
+            "question",
+            "smcapA",
+            "smcapB",
+            "smcapC",
+            "smcapD",
+            "smcapE",
+            "smcapF",
+            "smcapG",
+            "smcapH",
+            "smcapI",
+            "smcapJ",
+            "smcapK",
+            "smcapL",
+            "smcapM",
+            "smcapN",
+            "smcapO",
+            "smcapP",
+            "smcapQ",
+            "smcapR",
+            "smcapS",
+            "smcapT",
+            "smcapU",
+            "smcapV",
+            "smcapW",
+            "smcapX",
+            "smcapY",
+            "smcapZ",
+            "smlowA",
+            "smlowB",
+            "smlowC",
+            "smlowD",
+            "smlowE",
+            "smlowF",
+            "smlowG",
+            "smlowH",
+            "smlowI",
+            "smlowJ",
+            "smlowK",
+            "smlowL",
+            "smlowM",
+            "smlowN",
+            "smlowO",
+            "smlowP",
+            "smlowQ",
+            "smlowR",
+            "smlowS",
+            "smlowT",
+            "smlowU",
+            "smlowV",
+            "smlowW",
+            "smlowX",
+            "smlowY",
+            "smlowZ",
+            "smPeriod",
+            "smComma",
+            "smExplPt",
+            "smQuestion",
+            "smColon",
+            "sm1",
+            "sm2",
+            "sm3",
+            "sm4",
+            "sm5",
+            "sm6",
+            "sm7",
+            "sm8",
+            "sm9",
+            "sm0",
+            "textBox",
+            "background",
+            "invSlot",
+            "select",
+            "endSelect",
+            "actionMenu",
+            "taco",
+            "particle",
+            "rain1",
+            "rain2",
+            "rain3",
+            "hoe",
+            "wateringCan",
+            "tomatoSeedBag",
+            "cornSeedBag",
+            "tomatoSeed",
+            "tomatoSprout",
+            "tomato1",
+            "tomato2",
+            "tomato3",
+            "tomatoFull",
+            "tomato1Dead",
+            "tomato2Dead",
+            "tomato3Dead",
+            "tomato",
+            "cornSeed",
+            "cornSprout",
+            "corn1",
+            "corn2",
+            "corn3",
+            "cornFull",
+            "corn",
+            "houseRoof1",
+            "houseRoof2",
+            "houseRoof3",
+            "houseRoof4",
+            "houseRoof5",
+            "houseRoof6",
+            "houseRoof7",
+            "houseBotRoof1",
+            "houseBotRoof2",
+            "houseBotRoof3",
+            "houseBotRoof4",
+            "houseBotRoof5",
+            "houseBotRoof6",
+            "houseBotRoof7",
+            "houseTop1",
+            "houseTop2",
+            "houseTop3",
+            "houseTop4",
+            "houseTop5",
+            "houseTop6",
+            "houseTop7",
+            "houseMid1",
+            "houseMid2",
+            "houseMid3",
+            "houseMid4",
+            "houseMid5",
+            "houseMid6",
+            "houseMid7",
+            "houseBot1",
+            "houseBot2",
+            "houseBot3",
+            "houseBot4",
+            "houseBot5",
+            "houseBot6",
+            "houseBot7",
+            "hoeAnimRight1",
+            "hoeAnimRight2",
+            "hoeAnimLeft1",
+            "hoeAnimLeft2",
+            "hoeAnimDown1",
+            "hoeAnimDown2"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SIZE",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "pixels",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "grass",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "grass1",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "grass2",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "grass3",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "yellowFlower",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "bigFlower",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "purpleFlower",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "rock",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "dirt",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "dirtUp1",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "dirtUp2",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "dirtDown1",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "dirtDown2",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "dirtRight",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "dirtBottom",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "dirtLeft",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "dirtTop",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "dirtTLCorner",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "dirtTRCorner",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "dirtBLCorner",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "dirtBRCorner",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "soil",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "soilTilled",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "soilWatered",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "tlLeave",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "tmLeave",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "trLeave",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "mlLeave",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "mmlLeave",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "mmLeave",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "mmrLeave",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "mrLeave",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "blLeave",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "blmLeave",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "bmLeave",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "brmLeave",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "brLeave",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "mlTrunk",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "mmlTrunk",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "mmTrunk",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "mmrTrunk",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "mrTrunk",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "blTrunk",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "Trunk",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "brTrunk",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "voidSprite",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "clearSprite",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "player_down",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "player_down_1",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "player_down_2",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "player_up",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "player_up_1",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "player_up_2",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "player_left",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "player_left_1",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "player_left_2",
+          "line": 75,
+          "isDefault": false
+        },
+        {
+          "name": "player_right",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "player_right_1",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "player_right_2",
+          "line": 78,
+          "isDefault": false
+        },
+        {
+          "name": "playerRight1",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "playerRight2",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "playerLeft1",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "playerLeft2",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "playerDown1",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "playerDown2",
+          "line": 84,
+          "isDefault": false
+        },
+        {
+          "name": "npc_down",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "npc_down_1",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "npc_down_2",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "npc_up",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "npc_up_1",
+          "line": 90,
+          "isDefault": false
+        },
+        {
+          "name": "npc_up_2",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "npc_left",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "npc_left_1",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "npc_left_2",
+          "line": 94,
+          "isDefault": false
+        },
+        {
+          "name": "npc_right",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "npc_right_1",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "npc_right_2",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "sword",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "capA",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "capB",
+          "line": 103,
+          "isDefault": false
+        },
+        {
+          "name": "capC",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "capD",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "capE",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "capF",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "capG",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "capH",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "capI",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "capJ",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "capK",
+          "line": 112,
+          "isDefault": false
+        },
+        {
+          "name": "capL",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "capM",
+          "line": 114,
+          "isDefault": false
+        },
+        {
+          "name": "capN",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "capO",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "capP",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "capQ",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "capR",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "capS",
+          "line": 120,
+          "isDefault": false
+        },
+        {
+          "name": "capT",
+          "line": 121,
+          "isDefault": false
+        },
+        {
+          "name": "capU",
+          "line": 122,
+          "isDefault": false
+        },
+        {
+          "name": "capV",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "capW",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "capX",
+          "line": 125,
+          "isDefault": false
+        },
+        {
+          "name": "capY",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "capZ",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "lowA",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "lowB",
+          "line": 130,
+          "isDefault": false
+        },
+        {
+          "name": "lowC",
+          "line": 131,
+          "isDefault": false
+        },
+        {
+          "name": "lowD",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "lowE",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "lowF",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "lowG",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "lowH",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "lowI",
+          "line": 137,
+          "isDefault": false
+        },
+        {
+          "name": "lowJ",
+          "line": 138,
+          "isDefault": false
+        },
+        {
+          "name": "lowK",
+          "line": 139,
+          "isDefault": false
+        },
+        {
+          "name": "lowL",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "lowM",
+          "line": 141,
+          "isDefault": false
+        },
+        {
+          "name": "lowN",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "lowO",
+          "line": 143,
+          "isDefault": false
+        },
+        {
+          "name": "lowP",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "lowQ",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "lowR",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "lowS",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "lowT",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "lowU",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "lowV",
+          "line": 150,
+          "isDefault": false
+        },
+        {
+          "name": "lowW",
+          "line": 151,
+          "isDefault": false
+        },
+        {
+          "name": "lowX",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "lowY",
+          "line": 153,
+          "isDefault": false
+        },
+        {
+          "name": "lowZ",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "period",
+          "line": 155,
+          "isDefault": false
+        },
+        {
+          "name": "comma",
+          "line": 156,
+          "isDefault": false
+        },
+        {
+          "name": "expPt",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "question",
+          "line": 158,
+          "isDefault": false
+        },
+        {
+          "name": "smcapA",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "smcapB",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "smcapC",
+          "line": 162,
+          "isDefault": false
+        },
+        {
+          "name": "smcapD",
+          "line": 163,
+          "isDefault": false
+        },
+        {
+          "name": "smcapE",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "smcapF",
+          "line": 165,
+          "isDefault": false
+        },
+        {
+          "name": "smcapG",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "smcapH",
+          "line": 167,
+          "isDefault": false
+        },
+        {
+          "name": "smcapI",
+          "line": 168,
+          "isDefault": false
+        },
+        {
+          "name": "smcapJ",
+          "line": 169,
+          "isDefault": false
+        },
+        {
+          "name": "smcapK",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "smcapL",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "smcapM",
+          "line": 172,
+          "isDefault": false
+        },
+        {
+          "name": "smcapN",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "smcapO",
+          "line": 174,
+          "isDefault": false
+        },
+        {
+          "name": "smcapP",
+          "line": 175,
+          "isDefault": false
+        },
+        {
+          "name": "smcapQ",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "smcapR",
+          "line": 177,
+          "isDefault": false
+        },
+        {
+          "name": "smcapS",
+          "line": 178,
+          "isDefault": false
+        },
+        {
+          "name": "smcapT",
+          "line": 179,
+          "isDefault": false
+        },
+        {
+          "name": "smcapU",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "smcapV",
+          "line": 181,
+          "isDefault": false
+        },
+        {
+          "name": "smcapW",
+          "line": 182,
+          "isDefault": false
+        },
+        {
+          "name": "smcapX",
+          "line": 183,
+          "isDefault": false
+        },
+        {
+          "name": "smcapY",
+          "line": 184,
+          "isDefault": false
+        },
+        {
+          "name": "smcapZ",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "smlowA",
+          "line": 187,
+          "isDefault": false
+        },
+        {
+          "name": "smlowB",
+          "line": 188,
+          "isDefault": false
+        },
+        {
+          "name": "smlowC",
+          "line": 189,
+          "isDefault": false
+        },
+        {
+          "name": "smlowD",
+          "line": 190,
+          "isDefault": false
+        },
+        {
+          "name": "smlowE",
+          "line": 191,
+          "isDefault": false
+        },
+        {
+          "name": "smlowF",
+          "line": 192,
+          "isDefault": false
+        },
+        {
+          "name": "smlowG",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "smlowH",
+          "line": 194,
+          "isDefault": false
+        },
+        {
+          "name": "smlowI",
+          "line": 195,
+          "isDefault": false
+        },
+        {
+          "name": "smlowJ",
+          "line": 196,
+          "isDefault": false
+        },
+        {
+          "name": "smlowK",
+          "line": 197,
+          "isDefault": false
+        },
+        {
+          "name": "smlowL",
+          "line": 198,
+          "isDefault": false
+        },
+        {
+          "name": "smlowM",
+          "line": 199,
+          "isDefault": false
+        },
+        {
+          "name": "smlowN",
+          "line": 200,
+          "isDefault": false
+        },
+        {
+          "name": "smlowO",
+          "line": 201,
+          "isDefault": false
+        },
+        {
+          "name": "smlowP",
+          "line": 202,
+          "isDefault": false
+        },
+        {
+          "name": "smlowQ",
+          "line": 203,
+          "isDefault": false
+        },
+        {
+          "name": "smlowR",
+          "line": 204,
+          "isDefault": false
+        },
+        {
+          "name": "smlowS",
+          "line": 205,
+          "isDefault": false
+        },
+        {
+          "name": "smlowT",
+          "line": 206,
+          "isDefault": false
+        },
+        {
+          "name": "smlowU",
+          "line": 207,
+          "isDefault": false
+        },
+        {
+          "name": "smlowV",
+          "line": 208,
+          "isDefault": false
+        },
+        {
+          "name": "smlowW",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "smlowX",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "smlowY",
+          "line": 211,
+          "isDefault": false
+        },
+        {
+          "name": "smlowZ",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "smPeriod",
+          "line": 213,
+          "isDefault": false
+        },
+        {
+          "name": "smComma",
+          "line": 214,
+          "isDefault": false
+        },
+        {
+          "name": "smExplPt",
+          "line": 215,
+          "isDefault": false
+        },
+        {
+          "name": "smQuestion",
+          "line": 216,
+          "isDefault": false
+        },
+        {
+          "name": "smColon",
+          "line": 217,
+          "isDefault": false
+        },
+        {
+          "name": "sm1",
+          "line": 218,
+          "isDefault": false
+        },
+        {
+          "name": "sm2",
+          "line": 219,
+          "isDefault": false
+        },
+        {
+          "name": "sm3",
+          "line": 220,
+          "isDefault": false
+        },
+        {
+          "name": "sm4",
+          "line": 221,
+          "isDefault": false
+        },
+        {
+          "name": "sm5",
+          "line": 222,
+          "isDefault": false
+        },
+        {
+          "name": "sm6",
+          "line": 223,
+          "isDefault": false
+        },
+        {
+          "name": "sm7",
+          "line": 224,
+          "isDefault": false
+        },
+        {
+          "name": "sm8",
+          "line": 225,
+          "isDefault": false
+        },
+        {
+          "name": "sm9",
+          "line": 226,
+          "isDefault": false
+        },
+        {
+          "name": "sm0",
+          "line": 227,
+          "isDefault": false
+        },
+        {
+          "name": "textBox",
+          "line": 229,
+          "isDefault": false
+        },
+        {
+          "name": "background",
+          "line": 230,
+          "isDefault": false
+        },
+        {
+          "name": "invSlot",
+          "line": 231,
+          "isDefault": false
+        },
+        {
+          "name": "select",
+          "line": 232,
+          "isDefault": false
+        },
+        {
+          "name": "endSelect",
+          "line": 233,
+          "isDefault": false
+        },
+        {
+          "name": "actionMenu",
+          "line": 234,
+          "isDefault": false
+        },
+        {
+          "name": "taco",
+          "line": 235,
+          "isDefault": false
+        },
+        {
+          "name": "particle",
+          "line": 237,
+          "isDefault": false
+        },
+        {
+          "name": "rain1",
+          "line": 238,
+          "isDefault": false
+        },
+        {
+          "name": "rain2",
+          "line": 239,
+          "isDefault": false
+        },
+        {
+          "name": "rain3",
+          "line": 240,
+          "isDefault": false
+        },
+        {
+          "name": "hoe",
+          "line": 243,
+          "isDefault": false
+        },
+        {
+          "name": "wateringCan",
+          "line": 244,
+          "isDefault": false
+        },
+        {
+          "name": "tomatoSeedBag",
+          "line": 245,
+          "isDefault": false
+        },
+        {
+          "name": "cornSeedBag",
+          "line": 246,
+          "isDefault": false
+        },
+        {
+          "name": "tomatoSeed",
+          "line": 248,
+          "isDefault": false
+        },
+        {
+          "name": "tomatoSprout",
+          "line": 249,
+          "isDefault": false
+        },
+        {
+          "name": "tomato1",
+          "line": 250,
+          "isDefault": false
+        },
+        {
+          "name": "tomato2",
+          "line": 251,
+          "isDefault": false
+        },
+        {
+          "name": "tomato3",
+          "line": 252,
+          "isDefault": false
+        },
+        {
+          "name": "tomatoFull",
+          "line": 253,
+          "isDefault": false
+        },
+        {
+          "name": "tomato1Dead",
+          "line": 254,
+          "isDefault": false
+        },
+        {
+          "name": "tomato2Dead",
+          "line": 255,
+          "isDefault": false
+        },
+        {
+          "name": "tomato3Dead",
+          "line": 256,
+          "isDefault": false
+        },
+        {
+          "name": "tomato",
+          "line": 257,
+          "isDefault": false
+        },
+        {
+          "name": "cornSeed",
+          "line": 259,
+          "isDefault": false
+        },
+        {
+          "name": "cornSprout",
+          "line": 260,
+          "isDefault": false
+        },
+        {
+          "name": "corn1",
+          "line": 261,
+          "isDefault": false
+        },
+        {
+          "name": "corn2",
+          "line": 262,
+          "isDefault": false
+        },
+        {
+          "name": "corn3",
+          "line": 263,
+          "isDefault": false
+        },
+        {
+          "name": "cornFull",
+          "line": 264,
+          "isDefault": false
+        },
+        {
+          "name": "corn",
+          "line": 265,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof1",
+          "line": 269,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof2",
+          "line": 270,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof3",
+          "line": 271,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof4",
+          "line": 272,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof5",
+          "line": 273,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof6",
+          "line": 274,
+          "isDefault": false
+        },
+        {
+          "name": "houseRoof7",
+          "line": 275,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof1",
+          "line": 276,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof2",
+          "line": 277,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof3",
+          "line": 278,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof4",
+          "line": 279,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof5",
+          "line": 280,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof6",
+          "line": 281,
+          "isDefault": false
+        },
+        {
+          "name": "houseBotRoof7",
+          "line": 282,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop1",
+          "line": 283,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop2",
+          "line": 284,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop3",
+          "line": 285,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop4",
+          "line": 286,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop5",
+          "line": 287,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop6",
+          "line": 288,
+          "isDefault": false
+        },
+        {
+          "name": "houseTop7",
+          "line": 289,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid1",
+          "line": 290,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid2",
+          "line": 291,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid3",
+          "line": 292,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid4",
+          "line": 293,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid5",
+          "line": 294,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid6",
+          "line": 295,
+          "isDefault": false
+        },
+        {
+          "name": "houseMid7",
+          "line": 296,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot1",
+          "line": 297,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot2",
+          "line": 298,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot3",
+          "line": 299,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot4",
+          "line": 300,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot5",
+          "line": 301,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot6",
+          "line": 302,
+          "isDefault": false
+        },
+        {
+          "name": "houseBot7",
+          "line": 303,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimRight1",
+          "line": 305,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimRight2",
+          "line": 306,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimLeft1",
+          "line": 307,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimLeft2",
+          "line": 308,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimDown1",
+          "line": 309,
+          "isDefault": false
+        },
+        {
+          "name": "hoeAnimDown2",
+          "line": 310,
+          "isDefault": false
+        },
+        {
+          "name": "Sprite",
+          "line": 314,
+          "isDefault": false
+        },
+        {
+          "name": "Sprite",
+          "line": 331,
+          "isDefault": false
+        },
+        {
+          "name": "Sprite",
+          "line": 341,
+          "isDefault": false
+        },
+        {
+          "name": "Sprite",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Sprite",
+          "callee": "load",
+          "lineNumber": 338
+        },
+        {
+          "caller": "Sprite",
+          "callee": "setColor",
+          "lineNumber": 344
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 280,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/graphics/SpriteSheet.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 93,
+      "functions": [
+        {
+          "name": "SpriteSheet",
+          "startLine": 37,
+          "endLine": 69,
+          "params": [
+            "sheet",
+            "x",
+            "y",
+            "width",
+            "height",
+            "spriteSize"
+          ]
+        },
+        {
+          "name": "SpriteSheet",
+          "startLine": 72,
+          "endLine": 79,
+          "params": [
+            "path",
+            "size"
+          ]
+        },
+        {
+          "name": "SpriteSheet",
+          "startLine": 81,
+          "endLine": 88,
+          "params": [
+            "path",
+            "width",
+            "height"
+          ]
+        },
+        {
+          "name": "getSprites",
+          "startLine": 90,
+          "endLine": 92,
+          "params": []
+        },
+        {
+          "name": "load",
+          "startLine": 94,
+          "endLine": 103,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "SpriteSheet",
+          "startLine": 8,
+          "endLine": 105,
+          "methods": [
+            "SpriteSheet",
+            "SpriteSheet",
+            "SpriteSheet",
+            "getSprites",
+            "load"
+          ],
+          "properties": [
+            "path",
+            "SIZE",
+            "WIDTH",
+            "HEIGHT",
+            "pixels",
+            "tiles",
+            "player",
+            "NPC",
+            "sword",
+            "fontSheet",
+            "smallFontSheet",
+            "textBox",
+            "background",
+            "invSlot",
+            "select",
+            "endSelect",
+            "actionMenu",
+            "taco",
+            "particle",
+            "rain",
+            "tools",
+            "testPlant",
+            "fruit",
+            "animHoe",
+            "sprites"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SIZE",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "WIDTH",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "HEIGHT",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "pixels",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "tiles",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "player",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "NPC",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "sword",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "fontSheet",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "smallFontSheet",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "textBox",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "background",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "invSlot",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "select",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "endSelect",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "actionMenu",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "taco",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "particle",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "rain",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "tools",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "testPlant",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "fruit",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "animHoe",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "SpriteSheet",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "SpriteSheet",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "SpriteSheet",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "getSprites",
+          "line": 90,
+          "isDefault": false
+        },
+        {
+          "name": "SpriteSheet",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SpriteSheet",
+          "callee": "new Sprite",
+          "lineNumber": 65
+        },
+        {
+          "caller": "SpriteSheet",
+          "callee": "load",
+          "lineNumber": 78
+        },
+        {
+          "caller": "SpriteSheet",
+          "callee": "load",
+          "lineNumber": 87
+        },
+        {
+          "caller": "load",
+          "callee": "ImageIO.read",
+          "lineNumber": 96
+        },
+        {
+          "caller": "load",
+          "callee": "SpriteSheet.class.getResource",
+          "lineNumber": 96
+        },
+        {
+          "caller": "load",
+          "callee": "image.getWidth",
+          "lineNumber": 97
+        },
+        {
+          "caller": "load",
+          "callee": "image.getHeight",
+          "lineNumber": 98
+        },
+        {
+          "caller": "load",
+          "callee": "image.getRGB",
+          "lineNumber": 99
+        },
+        {
+          "caller": "load",
+          "callee": "e.printStackTrace",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 28,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/graphics/text/Font.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 185,
+      "nonEmptyLines": 172,
+      "functions": [
+        {
+          "name": "initChars",
+          "startLine": 16,
+          "endLine": 144,
+          "params": [
+            "size"
+          ]
+        },
+        {
+          "name": "render",
+          "startLine": 147,
+          "endLine": 183,
+          "params": [
+            "screen",
+            "size",
+            "text",
+            "xp",
+            "yp",
+            "textColor",
+            "fixed"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Font",
+          "startLine": 9,
+          "endLine": 184,
+          "methods": [
+            "initChars",
+            "render"
+          ],
+          "properties": [
+            "characters",
+            "charIndex"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "initChars",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "render",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "Font",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 18
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 19
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 20
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 21
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 22
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 23
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 24
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 25
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 26
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 27
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 28
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 29
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 30
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 31
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 32
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 33
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 34
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 35
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 36
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 37
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 38
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 39
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 40
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 41
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 42
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 43
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 44
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 45
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 46
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 47
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 48
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 49
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 50
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 51
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 52
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 53
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 54
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 55
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 56
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 57
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 58
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 59
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 60
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 61
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 62
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 63
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 64
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 65
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 66
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 67
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 68
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 69
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 70
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 71
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 72
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 73
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 74
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 75
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 76
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 77
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 78
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 79
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 80
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 81
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 82
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 83
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 84
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 87
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 88
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 89
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 90
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 91
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 92
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 93
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 94
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 95
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 96
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 97
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 98
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 99
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 100
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 101
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 102
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 103
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 104
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 105
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 106
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 107
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 108
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 109
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 110
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 111
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 112
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 113
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 114
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 115
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 116
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 117
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 118
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 119
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 120
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 121
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 122
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 123
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 124
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 125
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 126
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 127
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 128
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 129
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 130
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 131
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 132
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 133
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 134
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 135
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 136
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 137
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 138
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 139
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 140
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 141
+        },
+        {
+          "caller": "initChars",
+          "callee": "characters.add",
+          "lineNumber": 142
+        },
+        {
+          "caller": "render",
+          "callee": "text.length",
+          "lineNumber": 153
+        },
+        {
+          "caller": "render",
+          "callee": "text.charAt",
+          "lineNumber": 156
+        },
+        {
+          "caller": "render",
+          "callee": "charIndex.indexOf",
+          "lineNumber": 157
+        },
+        {
+          "caller": "render",
+          "callee": "screen.renderSmallText",
+          "lineNumber": 178
+        },
+        {
+          "caller": "render",
+          "callee": "characters.get",
+          "lineNumber": 178
+        },
+        {
+          "caller": "render",
+          "callee": "screen.renderText",
+          "lineNumber": 180
+        },
+        {
+          "caller": "render",
+          "callee": "characters.get",
+          "lineNumber": 180
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/Images/TileSets/Outdoor.pdn",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "metrics": {}
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/input/Keyboard.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "update",
+          "startLine": 11,
+          "endLine": 24,
+          "params": []
+        },
+        {
+          "name": "keyTyped",
+          "startLine": 26,
+          "endLine": 28,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "keyPressed",
+          "startLine": 30,
+          "endLine": 33,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "keyReleased",
+          "startLine": 35,
+          "endLine": 38,
+          "params": [
+            "e"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Keyboard",
+          "startLine": 6,
+          "endLine": 39,
+          "methods": [
+            "update",
+            "keyTyped",
+            "keyPressed",
+            "keyReleased"
+          ],
+          "properties": [
+            "keys",
+            "up",
+            "down",
+            "left",
+            "right",
+            "space",
+            "k1",
+            "k2",
+            "k3",
+            "k4",
+            "k5",
+            "bracketLeft",
+            "bracketRight"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "up",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "down",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "left",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "right",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "space",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "k1",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "k2",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "k3",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "k4",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "k5",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "bracketLeft",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "bracketRight",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "update",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "keyTyped",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "keyPressed",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "keyReleased",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "Keyboard",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "keyPressed",
+          "callee": "e.getKeyCode",
+          "lineNumber": 32
+        },
+        {
+          "caller": "keyPressed",
+          "callee": "e.getKeyCode",
+          "lineNumber": 32
+        },
+        {
+          "caller": "keyReleased",
+          "callee": "e.getKeyCode",
+          "lineNumber": 37
+        },
+        {
+          "caller": "keyReleased",
+          "callee": "e.getKeyCode",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 17,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/input/Mouse.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 45,
+      "functions": [
+        {
+          "name": "getX",
+          "startLine": 13,
+          "endLine": 15,
+          "params": []
+        },
+        {
+          "name": "getY",
+          "startLine": 17,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "getButton",
+          "startLine": 21,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "mouseDragged",
+          "startLine": 25,
+          "endLine": 29,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mouseMoved",
+          "startLine": 31,
+          "endLine": 35,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mouseClicked",
+          "startLine": 37,
+          "endLine": 39,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mousePressed",
+          "startLine": 41,
+          "endLine": 44,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mouseReleased",
+          "startLine": 46,
+          "endLine": 49,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mouseEntered",
+          "startLine": 51,
+          "endLine": 53,
+          "params": [
+            "e"
+          ]
+        },
+        {
+          "name": "mouseExited",
+          "startLine": 55,
+          "endLine": 57,
+          "params": [
+            "e"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Mouse",
+          "startLine": 7,
+          "endLine": 58,
+          "methods": [
+            "getX",
+            "getY",
+            "getButton",
+            "mouseDragged",
+            "mouseMoved",
+            "mouseClicked",
+            "mousePressed",
+            "mouseReleased",
+            "mouseEntered",
+            "mouseExited"
+          ],
+          "properties": [
+            "mouseX",
+            "mouseY",
+            "mouseB"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getX",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "getY",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "getButton",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "mouseDragged",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "mouseMoved",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "mouseClicked",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "mousePressed",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "mouseReleased",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "mouseEntered",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "mouseExited",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "Mouse",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mouseDragged",
+          "callee": "e.getX",
+          "lineNumber": 27
+        },
+        {
+          "caller": "mouseDragged",
+          "callee": "e.getY",
+          "lineNumber": 28
+        },
+        {
+          "caller": "mouseMoved",
+          "callee": "e.getX",
+          "lineNumber": 33
+        },
+        {
+          "caller": "mouseMoved",
+          "callee": "e.getY",
+          "lineNumber": 34
+        },
+        {
+          "caller": "mousePressed",
+          "callee": "e.getButton",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 10,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/input/Tool.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Crop.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "Crop",
+          "startLine": 10,
+          "endLine": 16,
+          "params": [
+            "waterRequired",
+            "baseValue"
+          ]
+        },
+        {
+          "name": "grow",
+          "startLine": 18,
+          "endLine": 18,
+          "params": []
+        },
+        {
+          "name": "consumeResources",
+          "startLine": 26,
+          "endLine": 26,
+          "params": [
+            "cell",
+            "weather"
+          ]
+        },
+        {
+          "name": "harvest",
+          "startLine": 28,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "getStage",
+          "startLine": 35,
+          "endLine": 37,
+          "params": []
+        },
+        {
+          "name": "checkSurvival",
+          "startLine": 39,
+          "endLine": 43,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Crop",
+          "startLine": 3,
+          "endLine": 44,
+          "methods": [
+            "Crop",
+            "grow",
+            "consumeResources",
+            "harvest",
+            "getStage",
+            "checkSurvival"
+          ],
+          "properties": [
+            "stage",
+            "daysPlanted",
+            "waterRequired",
+            "baseValue",
+            "consecutiveDaysWithoutWater"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Crop",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "grow",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "consumeResources",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "harvest",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "getStage",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "Crop",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/FarmCell.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 50,
+      "functions": [
+        {
+          "name": "FarmCell",
+          "startLine": 9,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "waterCell",
+          "startLine": 16,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "fertilizeCell",
+          "startLine": 21,
+          "endLine": 24,
+          "params": []
+        },
+        {
+          "name": "clearPests",
+          "startLine": 26,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "hasPests",
+          "startLine": 30,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "setPests",
+          "startLine": 34,
+          "endLine": 36,
+          "params": [
+            "hasPests"
+          ]
+        },
+        {
+          "name": "isAvailable",
+          "startLine": 38,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "getMoistureLevel",
+          "startLine": 42,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "setMoistureLevel",
+          "startLine": 46,
+          "endLine": 48,
+          "params": [
+            "moistureLevel"
+          ]
+        },
+        {
+          "name": "getCurrentCrop",
+          "startLine": 50,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "plantCrop",
+          "startLine": 54,
+          "endLine": 58,
+          "params": [
+            "crop"
+          ]
+        },
+        {
+          "name": "removeCrop",
+          "startLine": 60,
+          "endLine": 62,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "FarmCell",
+          "startLine": 3,
+          "endLine": 63,
+          "methods": [
+            "FarmCell",
+            "waterCell",
+            "fertilizeCell",
+            "clearPests",
+            "hasPests",
+            "setPests",
+            "isAvailable",
+            "getMoistureLevel",
+            "setMoistureLevel",
+            "getCurrentCrop",
+            "plantCrop",
+            "removeCrop"
+          ],
+          "properties": [
+            "moistureLevel",
+            "nutrientLevel",
+            "hasPests",
+            "currentCrop"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FarmCell",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "waterCell",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "fertilizeCell",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "clearPests",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "hasPests",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "setPests",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "isAvailable",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "getMoistureLevel",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "setMoistureLevel",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "getCurrentCrop",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "plantCrop",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "removeCrop",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "FarmCell",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "plantCrop",
+          "callee": "isAvailable",
+          "lineNumber": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 13,
+        "functionCount": 12,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/FarmGrid.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 97,
+      "nonEmptyLines": 80,
+      "functions": [
+        {
+          "name": "FarmGrid",
+          "startLine": 14,
+          "endLine": 24,
+          "params": [
+            "rows",
+            "cols"
+          ]
+        },
+        {
+          "name": "getCell",
+          "startLine": 26,
+          "endLine": 31,
+          "params": [
+            "row",
+            "col"
+          ]
+        },
+        {
+          "name": "advanceDay",
+          "startLine": 37,
+          "endLine": 83,
+          "params": []
+        },
+        {
+          "name": "getCurrentWeather",
+          "startLine": 85,
+          "endLine": 87,
+          "params": []
+        },
+        {
+          "name": "getRows",
+          "startLine": 89,
+          "endLine": 91,
+          "params": []
+        },
+        {
+          "name": "getCols",
+          "startLine": 93,
+          "endLine": 95,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "FarmGrid",
+          "startLine": 3,
+          "endLine": 96,
+          "methods": [
+            "FarmGrid",
+            "getCell",
+            "advanceDay",
+            "getCurrentWeather",
+            "getRows",
+            "getCols"
+          ],
+          "properties": [
+            "rows",
+            "cols",
+            "cells",
+            "currentWeather",
+            "random",
+            "daysSinceLastPests",
+            "pestSpawnThreshold"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FarmGrid",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "getCell",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "advanceDay",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "getCurrentWeather",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "getRows",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "getCols",
+          "line": 93,
+          "isDefault": false
+        },
+        {
+          "name": "FarmGrid",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FarmGrid",
+          "callee": "new FarmCell",
+          "lineNumber": 21
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "random.nextDouble",
+          "lineNumber": 39
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "new Rainy",
+          "lineNumber": 40
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "new HeatWave",
+          "lineNumber": 41
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "new Sunny",
+          "lineNumber": 42
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "random.nextInt",
+          "lineNumber": 49
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "random.nextInt",
+          "lineNumber": 53
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "currentWeather.apply",
+          "lineNumber": 60
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "cell.hasPests",
+          "lineNumber": 67
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "random.nextDouble",
+          "lineNumber": 67
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "cell.setPests",
+          "lineNumber": 68
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "cell.getCurrentCrop",
+          "lineNumber": 74
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "crop.consumeResources",
+          "lineNumber": 76
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "cell.hasPests",
+          "lineNumber": 77
+        },
+        {
+          "caller": "advanceDay",
+          "callee": "crop.grow",
+          "lineNumber": 78
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/GrowthStage.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/HeatWave.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "apply",
+          "startLine": 4,
+          "endLine": 7,
+          "params": [
+            "cell"
+          ]
+        },
+        {
+          "name": "getName",
+          "startLine": 9,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "HeatWave",
+          "startLine": 3,
+          "endLine": 13,
+          "methods": [
+            "apply",
+            "getName"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "apply",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "getName",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "HeatWave",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "apply",
+          "callee": "cell.setMoistureLevel",
+          "lineNumber": 6
+        },
+        {
+          "caller": "apply",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Rainy.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "apply",
+          "startLine": 4,
+          "endLine": 7,
+          "params": [
+            "cell"
+          ]
+        },
+        {
+          "name": "getName",
+          "startLine": 9,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Rainy",
+          "startLine": 3,
+          "endLine": 13,
+          "methods": [
+            "apply",
+            "getName"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "apply",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "getName",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "Rainy",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "apply",
+          "callee": "cell.setMoistureLevel",
+          "lineNumber": 6
+        },
+        {
+          "caller": "apply",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Sunny.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "apply",
+          "startLine": 4,
+          "endLine": 7,
+          "params": [
+            "cell"
+          ]
+        },
+        {
+          "name": "getName",
+          "startLine": 9,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "Sunny",
+          "startLine": 3,
+          "endLine": 13,
+          "methods": [
+            "apply",
+            "getName"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "apply",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "getName",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "Sunny",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "apply",
+          "callee": "cell.setMoistureLevel",
+          "lineNumber": 6
+        },
+        {
+          "caller": "apply",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/TestSimulation.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 62,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 4,
+          "endLine": 71,
+          "params": [
+            "args"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TestSimulation",
+          "startLine": 3,
+          "endLine": 72,
+          "methods": [
+            "main"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "TestSimulation",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 5
+        },
+        {
+          "caller": "main",
+          "callee": "new FarmGrid",
+          "lineNumber": 7
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 11
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCell",
+          "lineNumber": 12
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.plantCrop",
+          "lineNumber": 13
+        },
+        {
+          "caller": "main",
+          "callee": "new Wheat",
+          "lineNumber": 13
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 15
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCell",
+          "lineNumber": 17
+        },
+        {
+          "caller": "main",
+          "callee": "cell2.plantCrop",
+          "lineNumber": 18
+        },
+        {
+          "caller": "main",
+          "callee": "new Tomato",
+          "lineNumber": 18
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 20
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 23
+        },
+        {
+          "caller": "main",
+          "callee": "grid.advanceDay",
+          "lineNumber": 25
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCurrentWeather().getName",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCurrentWeather",
+          "lineNumber": 26
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 27
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getMoistureLevel",
+          "lineNumber": 27
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "cell2.getMoistureLevel",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 32
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 33
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop().getStage",
+          "lineNumber": 33
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop",
+          "lineNumber": 33
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 34
+        },
+        {
+          "caller": "main",
+          "callee": "cell2.getCurrentCrop().getStage",
+          "lineNumber": 34
+        },
+        {
+          "caller": "main",
+          "callee": "cell2.getCurrentCrop",
+          "lineNumber": 34
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 37
+        },
+        {
+          "caller": "main",
+          "callee": "grid.advanceDay",
+          "lineNumber": 40
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCell(r, c).hasPests",
+          "lineNumber": 43
+        },
+        {
+          "caller": "main",
+          "callee": "grid.getCell",
+          "lineNumber": 43
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 44
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 55
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.waterCell",
+          "lineNumber": 58
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.clearPests",
+          "lineNumber": 59
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop().grow",
+          "lineNumber": 60
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop",
+          "lineNumber": 60
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop().getStage",
+          "lineNumber": 61
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop",
+          "lineNumber": 61
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop().getStage",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop",
+          "lineNumber": 64
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop().harvest",
+          "lineNumber": 65
+        },
+        {
+          "caller": "main",
+          "callee": "cell1.getCurrentCrop",
+          "lineNumber": 65
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 67
+        },
+        {
+          "caller": "main",
+          "callee": "System.out.println",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Tomato.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 34,
+      "functions": [
+        {
+          "name": "Tomato",
+          "startLine": 5,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "grow",
+          "startLine": 9,
+          "endLine": 21,
+          "params": []
+        },
+        {
+          "name": "consumeResources",
+          "startLine": 23,
+          "endLine": 41,
+          "params": [
+            "cell",
+            "weather"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Tomato",
+          "startLine": 3,
+          "endLine": 42,
+          "methods": [
+            "Tomato",
+            "grow",
+            "consumeResources"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Tomato",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "grow",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "consumeResources",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "Tomato",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "grow",
+          "callee": "checkSurvival",
+          "lineNumber": 20
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 33
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.setMoistureLevel",
+          "lineNumber": 34
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Weather.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 5,
+      "classes": [
+        {
+          "name": "Weather",
+          "startLine": 3,
+          "endLine": 6,
+          "methods": [
+            "apply",
+            "getName"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Weather",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/simulation/Wheat.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "Wheat",
+          "startLine": 5,
+          "endLine": 7,
+          "params": []
+        },
+        {
+          "name": "grow",
+          "startLine": 9,
+          "endLine": 21,
+          "params": []
+        },
+        {
+          "name": "consumeResources",
+          "startLine": 23,
+          "endLine": 38,
+          "params": [
+            "cell",
+            "weather"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Wheat",
+          "startLine": 3,
+          "endLine": 39,
+          "methods": [
+            "Wheat",
+            "grow",
+            "consumeResources"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Wheat",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "grow",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "consumeResources",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "Wheat",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "grow",
+          "callee": "checkSurvival",
+          "lineNumber": 20
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 30
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.setMoistureLevel",
+          "lineNumber": 31
+        },
+        {
+          "caller": "consumeResources",
+          "callee": "cell.getMoistureLevel",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/main/java/com/cousersoft/game/StateHandler.java",
+      "language": "java",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "enterState",
+          "startLine": 9,
+          "endLine": 10,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "exitState",
+          "startLine": 12,
+          "endLine": 13,
+          "params": [
+            "lastState"
+          ]
+        },
+        {
+          "name": "getState",
+          "startLine": 15,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "setState",
+          "startLine": 19,
+          "endLine": 22,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "StateHandler",
+          "startLine": 3,
+          "endLine": 23,
+          "methods": [
+            "enterState",
+            "exitState",
+            "getState",
+            "setState"
+          ],
+          "properties": [
+            "currentState",
+            "lastState"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getState",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "setState",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "StateHandler",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "tileset.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "untitled.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

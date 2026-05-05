@@ -31,7 +31,7 @@ public class GameUpdater implements StateUpdater {
         if (inputManager.isJustPressed(ctx.keyboard.tab, "tabCycle")) {
             if (ctx.selectedTool == Tool.SEED_SHOP) {
                 ctx.seedIndex = (ctx.seedIndex + 1) % SEED_COUNT;
-                ctx.message = "Selected: " + ctx.seedNames[ctx.seedIndex];
+                ctx.message = "Selected: " + ctx.cropCatalog[ctx.seedIndex].name;
             }
         }
 
@@ -181,7 +181,7 @@ public class GameUpdater implements StateUpdater {
             }
             case SEED_SHOP -> {
                 if (ctx.grid.getTileType(gx, gy) == 'S' && cell.getCurrentCrop() == null) {
-                    int cost = ctx.seedCosts[ctx.seedIndex];
+                    int cost = ctx.cropCatalog[ctx.seedIndex].cost;
                     if (ctx.balance >= cost) {
                         Crop newCrop = switch (ctx.seedIndex) {
                             case 0 -> new Rice();
@@ -198,7 +198,7 @@ public class GameUpdater implements StateUpdater {
                         };
                         cell.plantCrop(newCrop);
                         ctx.balance -= cost;
-                        ctx.message = "Planted " + ctx.seedNames[ctx.seedIndex] + "! -$" + cost;
+                        ctx.message = "Planted " + ctx.cropCatalog[ctx.seedIndex].name + "! -$" + cost;
                     } else {
                         ctx.message = "Not enough money!";
                     }
