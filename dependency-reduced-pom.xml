@@ -15,7 +15,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <mainClass>com.cousersoft.game.Game</mainClass>
+          <mainClass>com.cousersoft.game.GameLauncher</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -30,7 +30,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.cousersoft.game.Game</mainClass>
+                  <mainClass>com.cousersoft.game.GameLauncher</mainClass>
                 </transformer>
               </transformers>
             </configuration>

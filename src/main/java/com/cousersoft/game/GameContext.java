@@ -5,12 +5,10 @@ import com.cousersoft.game.graphics.text.BitmapFont;
 import com.cousersoft.game.input.Keyboard;
 import com.cousersoft.game.input.Mouse;
 import com.cousersoft.game.input.Tool;
-import com.cousersoft.game.simulation.CropData;
-import com.cousersoft.game.simulation.FarmGrid;
+import com.cousersoft.game.model.CropData;
+import com.cousersoft.game.model.FarmGrid;
 
-import static com.cousersoft.game.GameConstants.STARTING_BALANCE;
-import static com.cousersoft.game.GameConstants.STARTING_DAY;
-import static com.cousersoft.game.GameConstants.DEFAULT_SCALE;
+import static com.cousersoft.game.GameConstants.*;
 
 /**
  * Lightweight data object holding references to all shared subsystems and mutable game state.
@@ -35,7 +33,7 @@ public class GameContext {
     public Tool selectedTool = Tool.NONE;
     public String message = "Welcome to Smart Farm!";
 
-    // Animation/Weather State
+    // Animation / Weather State
     public int tickCounter = 0;
 
     // Shop & Crop State
@@ -43,10 +41,11 @@ public class GameContext {
     public int seedIndex = 0;
     public CropData[] cropCatalog;
 
+    /** Called by GameLauncher when the window needs to be resized (scale changed). */
+    public Runnable scaleChangedCallback;
+
     // UI state
     public boolean showQuitConfirm = false;
-
-
 
     public void reset() {
         day = STARTING_DAY;
@@ -55,7 +54,7 @@ public class GameContext {
         selectedY = -1;
         selectedTool = Tool.NONE;
         message = "Welcome to Smart Farm!";
-        grid = new FarmGrid(com.cousersoft.game.GameConstants.GRID_ROWS, com.cousersoft.game.GameConstants.GRID_COLS);
+        grid = new FarmGrid(GRID_ROWS, GRID_COLS);
         showQuitConfirm = false;
     }
 }
