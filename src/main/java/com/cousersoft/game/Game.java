@@ -1,216 +1,188 @@
 package com.cousersoft.game;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import javax.swing.*;
 
-import com.cousersoft.game.graphics.text.BitmapFont;
+import com.cousersoft.game.controller.GameController;
+import com.cousersoft.game.controller.HelpController;
+import com.cousersoft.game.controller.MenuController;
+import com.cousersoft.game.controller.ShopController;
+import com.cousersoft.game.controller.StateUpdater;
 import com.cousersoft.game.graphics.Screen;
-import com.cousersoft.game.graphics.Sprite;
-import com.cousersoft.game.input.Mouse;
+import com.cousersoft.game.graphics.text.BitmapFont;
+import com.cousersoft.game.input.InputManager;
 import com.cousersoft.game.input.Keyboard;
-import com.cousersoft.game.simulation.*;
+import com.cousersoft.game.input.Mouse;
 import com.cousersoft.game.input.Tool;
+import com.cousersoft.game.model.CropData;
+import com.cousersoft.game.model.FarmGrid;
+import com.cousersoft.game.view.GameRenderer;
+import com.cousersoft.game.view.HelpRenderer;
+import com.cousersoft.game.view.MenuRenderer;
+import com.cousersoft.game.view.ShopRenderer;
+import com.cousersoft.game.view.StateRenderer;
+
 import static com.cousersoft.game.GameConstants.*;
 
-import java.awt.Graphics;
-
+/**
+ * Core game loop and AWT canvas.
+ * P3 FIX: {@code main()} has been moved to {@link GameLauncher}.
+ *          This class now focuses exclusively on the game loop (start/stop/run/update/render).
+ */
 public class Game extends Canvas implements Runnable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static int width = SCREEN_WIDTH;
-	public static int height = SCREEN_HEIGHT;
-	public GameContext ctx;
-	public com.cousersoft.game.input.InputManager inputManager;
-	private Thread thread;
-	private JFrame frame;
-	private boolean running = false;
+    public GameContext ctx;
+    public InputManager inputManager;
 
-	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+    private Thread thread;
+    private boolean running = false;
 
-	public int numUpdates = 0;
-	public int numFrames = 0;
+    private final BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT, BufferedImage.TYPE_INT_RGB);
+    private final int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	// Debounce flags
-	private boolean tabTriggered = false;
-	private boolean mouseClicked = false;
-	private boolean spaceTriggered = false;
-	private boolean scaleKeyTriggered = false;
-	private boolean arrowTriggered = false;
-	private boolean enterTriggered = false;
-	private boolean escapeTriggered = false;
-	private boolean weatherKeyTriggered = false;
-	private boolean pKeyTriggered = false;
+    public int numUpdates = 0;
+    public int numFrames = 0;
 
-	public Game() {
-		ctx = new GameContext();
-		inputManager = new com.cousersoft.game.input.InputManager();
+    // ── Controllers ──────────────────────────────────────────────────────────
+    private final StateUpdater menuController = new MenuController();
+    private final StateUpdater helpController  = new HelpController();
+    private final StateUpdater gameController  = new GameController();
+    private final StateUpdater shopController  = new ShopController();
 
-		Dimension size = new Dimension(width * ctx.scale, height * ctx.scale);
-		this.setPreferredSize(size);
-		frame = new JFrame();
-		ctx.screen = new Screen(width, height);
-		ctx.handler = new StateHandler();
-		ctx.handler.setState(GameState.MENU);
+    // ── Renderers ────────────────────────────────────────────────────────────
+    private final StateRenderer menuRenderer = new MenuRenderer();
+    private final StateRenderer helpRenderer  = new HelpRenderer();
+    private final StateRenderer gameRenderer  = new GameRenderer();
+    private final StateRenderer shopRenderer  = new ShopRenderer();
 
-		ctx.mouse = new Mouse();
-		addMouseListener(ctx.mouse);
-		addMouseMotionListener(ctx.mouse);
+    // ── Init ─────────────────────────────────────────────────────────────────
 
-		ctx.keyboard = new Keyboard();
-		addKeyListener(ctx.keyboard);
-		setFocusTraversalKeysEnabled(false);
+    public Game() {
+        ctx = new GameContext();
+        inputManager = new InputManager();
 
-		ctx.grid = new FarmGrid(GRID_ROWS, GRID_COLS);
+        Dimension size = new Dimension(SCREEN_WIDTH * ctx.scale, SCREEN_HEIGHT * ctx.scale);
+        setPreferredSize(size);
 
-		ctx.guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
-		ctx.cropCatalog = CropData.getAllCrops();
-	}
+        ctx.screen = new Screen(SCREEN_WIDTH, SCREEN_HEIGHT);
+        ctx.handler = new StateHandler();
+        ctx.handler.setState(GameState.MENU);
 
-	private void resetGame() {
-		ctx.day = STARTING_DAY;
-		ctx.balance = STARTING_BALANCE;
-		ctx.selectedX = -1;
-		ctx.selectedY = -1;
-		ctx.selectedTool = Tool.NONE;
-		ctx.message = "Welcome to Smart Farm!";
-		ctx.grid = new FarmGrid(GRID_ROWS, GRID_COLS);
-		ctx.showQuitConfirm = false;
-	}
+        ctx.mouse = new Mouse();
+        addMouseListener(ctx.mouse);
+        addMouseMotionListener(ctx.mouse);
 
-	public synchronized void start() {
-		running = true;
-		thread = new Thread(this, "Display");
-		thread.start();
-	}
+        ctx.keyboard = new Keyboard();
+        addKeyListener(ctx.keyboard);
+        setFocusTraversalKeysEnabled(false);
 
-	public synchronized void stop() {
-		running = false;
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+        ctx.grid = new FarmGrid(GRID_ROWS, GRID_COLS);
+        ctx.guiFont = new BitmapFont("/font maps/monogram-bitmap.json");
+        ctx.cropCatalog = CropData.getAllCrops();
+    }
 
-	public void run() {
-		long lastTime = System.nanoTime();
-		long timer = System.currentTimeMillis();
-		final double ns = 1000000000.0 / 60.0;
-		double delta = 0;
-		int frames = 0;
-		int updates = 0;
-		requestFocus();
+    // ── Lifecycle ────────────────────────────────────────────────────────────
 
-		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			while (delta >= 1) {
-				update();
-				updates++;
-				delta--;
-			}
+    public synchronized void start() {
+        running = true;
+        thread = new Thread(this, "Display");
+        thread.start();
+    }
 
-			render();
-			frames++;
+    public synchronized void stop() {
+        running = false;
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				numFrames = frames;
-				numUpdates = updates;
-				updates = 0;
-				frames = 0;
-			}
-		}
-	}
+    // ── Game Loop ────────────────────────────────────────────────────────────
 
+    @Override
+    public void run() {
+        long lastTime = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        final double ns = 1_000_000_000.0 / 60.0;
+        double delta = 0;
+        int frames = 0;
+        int updates = 0;
+        requestFocus();
 
-	private com.cousersoft.game.state.StateUpdater menuUpdater = new com.cousersoft.game.state.MenuUpdater();
-	private com.cousersoft.game.state.StateUpdater helpUpdater = new com.cousersoft.game.state.HelpUpdater();
-	private com.cousersoft.game.state.StateUpdater gameUpdater = new com.cousersoft.game.state.GameUpdater();
-	private com.cousersoft.game.state.StateUpdater shopUpdater = new com.cousersoft.game.state.ShopUpdater();
-	private com.cousersoft.game.render.StateRenderer menuRenderer = new com.cousersoft.game.render.MenuRenderer();
-	private com.cousersoft.game.render.StateRenderer helpRenderer = new com.cousersoft.game.render.HelpRenderer();
-	private com.cousersoft.game.render.StateRenderer gameRenderer = new com.cousersoft.game.render.GameRenderer();
-	private com.cousersoft.game.render.StateRenderer shopRenderer = new com.cousersoft.game.render.ShopRenderer();
+        while (running) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while (delta >= 1) {
+                update();
+                updates++;
+                delta--;
+            }
+            render();
+            frames++;
 
-	public void update() {
-		ctx.keyboard.update();
-		ctx.tickCounter++;
+            if (System.currentTimeMillis() - timer > 1000) {
+                timer += 1000;
+                numFrames = frames;
+                numUpdates = updates;
+                updates = 0;
+                frames = 0;
+            }
+        }
+    }
 
-		GameState state = ctx.handler.getState();
+    // ── Update ───────────────────────────────────────────────────────────────
 
-		switch (state) {
-			case MENU -> menuUpdater.update(ctx, inputManager);
-			case HELP -> helpUpdater.update(ctx, inputManager);
-			case GAME -> gameUpdater.update(ctx, inputManager);
-			case SHOP -> shopUpdater.update(ctx, inputManager);
-		}
+    public void update() {
+        ctx.keyboard.update();
+        ctx.tickCounter++;
 
-		if (ctx.scaleChanged) {
-			ctx.scaleChanged = false;
-			Dimension size = new Dimension(width * ctx.scale, height * ctx.scale);
-			this.setPreferredSize(size);
-			this.setMinimumSize(size);
-			this.setMaximumSize(size);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-		}
-	}
+        switch (ctx.handler.getState()) {
+            case MENU -> menuController.update(ctx, inputManager);
+            case HELP -> helpController.update(ctx, inputManager);
+            case GAME -> gameController.update(ctx, inputManager);
+            case SHOP -> shopController.update(ctx, inputManager);
+        }
 
-	// ==================== RENDERING ====================
+        if (ctx.scaleChanged) {
+            ctx.scaleChanged = false;
+            if (ctx.scaleChangedCallback != null) {
+                ctx.scaleChangedCallback.run();
+            }
+        }
+    }
 
-	public void render() {
-		BufferStrategy bs = getBufferStrategy();
-		if (bs == null) {
-			createBufferStrategy(3);
-			return;
-		}
+    // ── Render ───────────────────────────────────────────────────────────────
 
-		ctx.screen.clear();
+    public void render() {
+        BufferStrategy bs = getBufferStrategy();
+        if (bs == null) {
+            createBufferStrategy(3);
+            return;
+        }
 
-		GameState state = ctx.handler.getState();
-		switch (state) {
-			case MENU -> menuRenderer.render(ctx);
-			case HELP -> helpRenderer.render(ctx);
-			case GAME -> gameRenderer.render(ctx);
-			case SHOP -> shopRenderer.render(ctx);
-		}
+        ctx.screen.clear();
 
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = ctx.screen.pixels[i];
-		}
+        switch (ctx.handler.getState()) {
+            case MENU -> menuRenderer.render(ctx);
+            case HELP -> helpRenderer.render(ctx);
+            case GAME -> gameRenderer.render(ctx);
+            case SHOP -> shopRenderer.render(ctx);
+        }
 
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.dispose();
-		bs.show();
-	}
+        for (int i = 0; i < pixels.length; i++) {
+            pixels[i] = ctx.screen.pixels[i];
+        }
 
-	// renderShop extracted
-
-	// renderMenu and renderHelp extracted
-
-	// renderGameScreen and rendering helpers extracted
-
-	public static void main(String args[]) {
-		Game game = new Game();
-		game.frame.setResizable(false);
-		game.frame.add(game);
-		game.frame.setTitle("Smart Farm Simulator");
-		game.frame.pack();
-		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.frame.setLocationRelativeTo(null);
-		game.frame.setVisible(true);
-
-		game.start();
-	}
+        Graphics g = bs.getDrawGraphics();
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+        g.dispose();
+        bs.show();
+    }
 }
-
-

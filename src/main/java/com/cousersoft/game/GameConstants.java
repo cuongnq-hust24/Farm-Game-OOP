@@ -30,6 +30,8 @@ public final class GameConstants {
     // ==================== SHOP ====================
     public static final int CROPS_PER_PAGE = 3;
     public static final int SHOP_BOARD_X = 46;
+    public static final int SHOP_BOARD_W = 308; // Width of each wooden board entry
+    public static final int SHOP_BOARD_H = 48;  // Height of each wooden board entry
     public static final int[] SHOP_BOARD_YS = {45, 98, 151};
     public static final int SHOP_TITLE_X = 155;
     public static final int SHOP_TITLE_Y = 10;
