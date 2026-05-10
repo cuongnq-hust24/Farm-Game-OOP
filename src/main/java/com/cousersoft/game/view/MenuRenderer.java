@@ -7,7 +7,7 @@ import static com.cousersoft.game.GameConstants.*;
 
 /**
  * VIEW — Renders the main menu screen.
- * P1 FIX: No Game.width reference; uses SCREEN_WIDTH/SCREEN_HEIGHT constants.
+ * Shows a CONTINUE button when the player has an active game session.
  */
 public class MenuRenderer implements StateRenderer {
 
@@ -19,11 +19,17 @@ public class MenuRenderer implements StateRenderer {
         ctx.screen.renderSprite(46, 15, Sprite.woodenBoard, false);
         ctx.guiFont.render(ctx.screen, "SMART FARM SIMULATOR", 80, 27, COLOR_WHITE, 2, true, false);
 
-        renderMenuButton(ctx, 155, 70, "START GAME");
-        renderMenuButton(ctx, 155, 105, "HELP");
-        renderMenuButton(ctx, 155, 140, "QUIT");
-
-        ctx.guiFont.render(ctx.screen, "PRESS ENTER TO START", 140, 175, COLOR_WHITE, 1, true, false);
+        if (ctx.hasActiveGame) {
+            renderMenuButton(ctx, 155, 70,  "CONTINUE");
+            renderMenuButton(ctx, 155, 100, "NEW GAME");
+            renderMenuButton(ctx, 155, 130, "HELP");
+            renderMenuButton(ctx, 155, 160, "QUIT");
+        } else {
+            renderMenuButton(ctx, 155, 70,  "START GAME");
+            renderMenuButton(ctx, 155, 105, "HELP");
+            renderMenuButton(ctx, 155, 140, "QUIT");
+            ctx.guiFont.render(ctx.screen, "PRESS ENTER TO START", 140, 175, COLOR_WHITE, 1, true, false);
+        }
 
         if (ctx.showQuitConfirm) {
             ctx.screen.fillRect(100, 85, 200, 40, COLOR_OVERLAY_BLACK);

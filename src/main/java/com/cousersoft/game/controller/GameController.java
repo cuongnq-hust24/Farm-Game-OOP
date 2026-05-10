@@ -145,10 +145,10 @@ public class GameController implements StateUpdater {
         int wx = 370;
         int[] wys = {50, 82, 114, 146};
         if (mx >= wx && mx <= wx + 26) {
-            if      (my >= wys[0] && my <= wys[0] + 28) { ctx.grid.setWeather(new Sunny()); return; }
-            else if (my >= wys[1] && my <= wys[1] + 28) { ctx.grid.setWeather(new Rainy()); return; }
-            else if (my >= wys[2] && my <= wys[2] + 28) { ctx.grid.setWeather(new HeatWave()); return; }
-            else if (my >= wys[3] && my <= wys[3] + 28) { ctx.grid.setWeather(new Snowy()); return; }
+            if      (my >= wys[0] && my <= wys[0] + 28) { ctx.grid.setWeather(new Sunny());    ctx.message = "Weather: SUNNY"; return; }
+            else if (my >= wys[1] && my <= wys[1] + 28) { ctx.grid.setWeather(new Rainy());    ctx.message = "Weather: RAINY"; return; }
+            else if (my >= wys[2] && my <= wys[2] + 28) { ctx.grid.setWeather(new HeatWave()); ctx.message = "Weather: HEAT WAVE"; return; }
+            else if (my >= wys[3] && my <= wys[3] + 28) { ctx.grid.setWeather(new Snowy());    ctx.message = "Weather: SNOWY"; return; }
         }
 
         // Grid cell
@@ -200,9 +200,10 @@ public class GameController implements StateUpdater {
             case HARVEST -> {
                 Crop crop = cell.getCurrentCrop();
                 if (crop != null && crop.getStage() == GrowthStage.MATURE) {
-                    ctx.balance += crop.harvest();
+                    int value = crop.harvest();
+                    ctx.balance += value;
                     cell.removeCrop();
-                    ctx.message = "Harvested! +$" + crop.harvest();
+                    ctx.message = "Harvested! +$" + value;
                 } else if (crop != null && crop.getStage() == GrowthStage.DEAD) {
                     cell.removeCrop();
                     ctx.message = "Cleared dead crop.";

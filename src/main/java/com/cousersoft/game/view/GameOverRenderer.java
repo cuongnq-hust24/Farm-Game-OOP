@@ -5,6 +5,10 @@ import com.cousersoft.game.graphics.Sprite;
 
 import static com.cousersoft.game.GameConstants.*;
 
+/**
+ * VIEW — Renders the Game Over screen when the player runs out of money
+ * and has no living crops remaining on the grid.
+ */
 public class GameOverRenderer implements StateRenderer {
 
     @Override
@@ -12,9 +16,10 @@ public class GameOverRenderer implements StateRenderer {
         ctx.screen.renderSprite(0, 0, Sprite.bgBlur, false);
 
         // Draw "GAME OVER" board
-        ctx.screen.renderSprite(46, 60, Sprite.woodenBoard, false);
-        ctx.guiFont.render(ctx.screen, "GAME OVER", 165, 75, COLOR_WHITE, 1, true, false);
-        ctx.guiFont.render(ctx.screen, "YOUR FARM HAS GONE BANKRUPT", 100, 95, COLOR_WHITE, 1, true, false);
+        ctx.screen.renderSprite(46, 50, Sprite.woodenBoard, false);
+        ctx.guiFont.render(ctx.screen, "GAME OVER", 128, 60, COLOR_WHITE, 2, true, false);
+        ctx.guiFont.render(ctx.screen, "YOUR FARM HAS GONE BANKRUPT", 100, 85, COLOR_WHITE, 1, true, false);
+        ctx.guiFont.render(ctx.screen, "YOU SURVIVED " + ctx.day + " DAYS", 140, 95, COLOR_WHITE, 1, true, false);
 
         // Buttons
         renderButton(ctx, 155, 120, "PLAY AGAIN");

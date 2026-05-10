@@ -6,6 +6,10 @@ import com.cousersoft.game.input.InputManager;
 
 import static com.cousersoft.game.GameConstants.*;
 
+/**
+ * CONTROLLER — Handles input on the Game Over screen.
+ * Allows the player to restart the game or return to the main menu.
+ */
 public class GameOverController implements StateUpdater {
 
     @Override
@@ -19,6 +23,7 @@ public class GameOverController implements StateUpdater {
                     ctx.reset(); 
                     ctx.handler.setState(GameState.GAME); 
                 } else if (my >= 155 && my <= 155 + 27) { 
+                    ctx.hasActiveGame = false;
                     ctx.handler.setState(GameState.MENU); 
                 }
             }

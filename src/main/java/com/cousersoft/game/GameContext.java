@@ -46,6 +46,7 @@ public class GameContext {
 
     // UI state
     public boolean showQuitConfirm = false;
+    public boolean hasActiveGame = false;
 
     public void reset() {
         day = STARTING_DAY;
@@ -56,5 +57,8 @@ public class GameContext {
         message = "Welcome to Smart Farm!";
         grid = new FarmGrid(GRID_ROWS, GRID_COLS);
         showQuitConfirm = false;
+        shopPage = 0;
+        seedIndex = 0;
+        hasActiveGame = true;
     }
 }
