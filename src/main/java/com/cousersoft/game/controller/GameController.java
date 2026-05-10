@@ -4,13 +4,13 @@ import com.cousersoft.game.GameContext;
 import com.cousersoft.game.GameState;
 import com.cousersoft.game.input.InputManager;
 import com.cousersoft.game.input.Tool;
-import com.cousersoft.game.model.Crop;
 import com.cousersoft.game.model.FarmCell;
-import com.cousersoft.game.model.GrowthStage;
-import com.cousersoft.game.model.HeatWave;
-import com.cousersoft.game.model.Rainy;
-import com.cousersoft.game.model.Snowy;
-import com.cousersoft.game.model.Sunny;
+import com.cousersoft.game.model.crop.*;
+import com.cousersoft.game.model.weather.*;
+import com.cousersoft.game.model.weather.HeatWave;
+import com.cousersoft.game.model.weather.Rainy;
+import com.cousersoft.game.model.weather.Snowy;
+import com.cousersoft.game.model.weather.Sunny;
 
 import static com.cousersoft.game.GameConstants.*;
 
@@ -141,6 +141,16 @@ public class GameController implements StateUpdater {
             return;
         }
 
+        // Weather buttons
+        int wx = 370;
+        int[] wys = {50, 82, 114, 146};
+        if (mx >= wx && mx <= wx + 26) {
+            if      (my >= wys[0] && my <= wys[0] + 28) { ctx.grid.setWeather(new Sunny()); return; }
+            else if (my >= wys[1] && my <= wys[1] + 28) { ctx.grid.setWeather(new Rainy()); return; }
+            else if (my >= wys[2] && my <= wys[2] + 28) { ctx.grid.setWeather(new HeatWave()); return; }
+            else if (my >= wys[3] && my <= wys[3] + 28) { ctx.grid.setWeather(new Snowy()); return; }
+        }
+
         // Grid cell
         int gx = mx / TILE_SIZE;
         int gy = my / TILE_SIZE;
@@ -215,7 +225,9 @@ public class GameController implements StateUpdater {
                     }
                 }
             }
-            if (!hasActiveCrops) ctx.message = "GAME OVER: Out of funds!";
+            if (!hasActiveCrops) {
+                ctx.handler.setState(GameState.GAMEOVER);
+            }
         }
     }
 }

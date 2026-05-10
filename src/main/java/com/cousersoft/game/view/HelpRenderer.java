@@ -1,6 +1,7 @@
 package com.cousersoft.game.view;
 
 import com.cousersoft.game.GameContext;
+import com.cousersoft.game.graphics.Sprite;
 
 import static com.cousersoft.game.GameConstants.*;
 
@@ -12,13 +13,15 @@ public class HelpRenderer implements StateRenderer {
 
     @Override
     public void render(GameContext ctx) {
-        ctx.screen.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_MENU_BG);
+        ctx.screen.renderSprite(0, 0, Sprite.bgBlur, false);
+        ctx.screen.renderSprite(46, 35, Sprite.helpBoard, false);
 
-        ctx.guiFont.render(ctx.screen, "HOW TO PLAY", 165, 15, COLOR_WHITE, 1, true, false);
-        ctx.guiFont.render(ctx.screen, "-----------------------------------", 100, 25, COLOR_TEXT_GRAY, 1, true, false);
+        // Title board
+        ctx.screen.renderSprite(155, 5, Sprite.titleBoard, false);
+        ctx.guiFont.render(ctx.screen, "HELP", 188, 15, COLOR_WHITE, 1, true, false);
 
-        int y = 40;
-        int x = 30;
+        int y = 50;
+        int x = 60;
 
         ctx.guiFont.render(ctx.screen, "1. LEFT CLICK to use selected tool",        x, y,        COLOR_WHITE, 1, true, false);
         ctx.guiFont.render(ctx.screen, "2. 1-5 keys or click HUD to select tools",  x, y += 15,  COLOR_WHITE, 1, true, false);
@@ -30,8 +33,7 @@ public class HelpRenderer implements StateRenderer {
         ctx.guiFont.render(ctx.screen, "8. Plant needs water EVERY DAY",            x, y += 15,  COLOR_WHITE, 1, true, false);
 
         // Back Button
-        ctx.screen.fillRect(MENU_BTN_X, 190, MENU_BTN_W, MENU_BTN_H, COLOR_BTN_BLUE);
-        ctx.screen.renderOutline(MENU_BTN_X, 190, MENU_BTN_W, MENU_BTN_H, COLOR_OUTLINE_WHITE);
-        ctx.guiFont.render(ctx.screen, "BACK", MENU_BTN_X + 38, 192, COLOR_WHITE, 1, true, false);
+        ctx.screen.renderSprite(155, 190, Sprite.smallWoodenBoard, false);
+        ctx.guiFont.render(ctx.screen, "BACK", 188, 200, COLOR_WHITE, 1, true, false);
     }
 }

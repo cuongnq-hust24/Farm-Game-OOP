@@ -1,6 +1,9 @@
-package com.cousersoft.game.model;
+package com.cousersoft.game.model.crop;
 
 import com.cousersoft.game.graphics.Sprite;
+import com.cousersoft.game.model.FarmCell;
+import com.cousersoft.game.model.weather.HeatWave;
+import com.cousersoft.game.model.weather.Weather;
 
 public abstract class Crop {
     protected GrowthStage stage;

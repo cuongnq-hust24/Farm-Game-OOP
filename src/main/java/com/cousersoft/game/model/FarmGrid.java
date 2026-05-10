@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.cousersoft.game.model.crop.Crop;
+import com.cousersoft.game.model.weather.HeatWave;
+import com.cousersoft.game.model.weather.Rainy;
+import com.cousersoft.game.model.weather.Sunny;
+import com.cousersoft.game.model.weather.Weather;
+
 public class FarmGrid {
     private final int rows;
     private final int cols;

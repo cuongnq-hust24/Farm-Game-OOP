@@ -1,4 +1,5 @@
 package com.cousersoft.game.model;
+import com.cousersoft.game.model.crop.Crop;
 
 public class FarmCell {
     private int moistureLevel;

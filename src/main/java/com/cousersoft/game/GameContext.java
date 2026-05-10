@@ -5,7 +5,7 @@ import com.cousersoft.game.graphics.text.BitmapFont;
 import com.cousersoft.game.input.Keyboard;
 import com.cousersoft.game.input.Mouse;
 import com.cousersoft.game.input.Tool;
-import com.cousersoft.game.model.CropData;
+import com.cousersoft.game.model.crop.CropData;
 import com.cousersoft.game.model.FarmGrid;
 
 import static com.cousersoft.game.GameConstants.*;

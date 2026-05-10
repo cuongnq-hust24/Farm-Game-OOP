@@ -1,4 +1,4 @@
-package com.cousersoft.game.model;
+package com.cousersoft.game.model.crop;
 
 import com.cousersoft.game.graphics.Sprite;
 

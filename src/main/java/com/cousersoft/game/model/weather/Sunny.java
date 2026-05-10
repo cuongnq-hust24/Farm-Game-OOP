@@ -1,6 +1,7 @@
-package com.cousersoft.game.model;
+package com.cousersoft.game.model.weather;
 
 import com.cousersoft.game.graphics.Sprite;
+import com.cousersoft.game.model.FarmCell;
 
 public class Sunny implements Weather {
 

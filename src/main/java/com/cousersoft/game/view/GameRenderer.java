@@ -3,11 +3,11 @@ package com.cousersoft.game.view;
 import com.cousersoft.game.GameContext;
 import com.cousersoft.game.graphics.Sprite;
 import com.cousersoft.game.input.Tool;
-import com.cousersoft.game.model.Crop;
+import com.cousersoft.game.model.crop.Crop;
 import com.cousersoft.game.model.FarmCell;
-import com.cousersoft.game.model.Rainy;
-import com.cousersoft.game.model.Snowy;
-import com.cousersoft.game.model.Weather;
+import com.cousersoft.game.model.weather.Rainy;
+import com.cousersoft.game.model.weather.Snowy;
+import com.cousersoft.game.model.weather.Weather;
 
 import static com.cousersoft.game.GameConstants.*;
 
@@ -92,8 +92,8 @@ public class GameRenderer implements StateRenderer {
 
     private void renderHUD(GameContext ctx) {
         // P1 FIX: Use SCREEN_WIDTH instead of Game.width
-        ctx.guiFont.render(ctx.screen, "BALANCE: $" + ctx.balance, SCREEN_WIDTH - 120, 10, COLOR_WHITE, 1, true, false);
-        ctx.guiFont.render(ctx.screen, "DAY: " + ctx.day,          SCREEN_WIDTH - 120, 22, COLOR_WHITE, 1, true, false);
+        ctx.guiFont.render(ctx.screen, "BALANCE: $" + ctx.balance, SCREEN_WIDTH - 200, 2, COLOR_WHITE, 1, true, false);
+        ctx.guiFont.render(ctx.screen, "DAY: " + ctx.day,          SCREEN_WIDTH - 110, 2, COLOR_WHITE, 1, true, false);
 
         ctx.guiFont.render(ctx.screen, ctx.message, HUD_INFO_X, 10, COLOR_WHITE, 1, true, false);
         ctx.guiFont.render(ctx.screen, "ESC:MENU", SCREEN_WIDTH - 50, 2, COLOR_WHITE, 1, true, false);
@@ -129,6 +129,8 @@ public class GameRenderer implements StateRenderer {
         // Advance Day button
         ctx.screen.renderSprite(HUD_ADV_BTN_X, HUD_ADV_BTN_Y, Sprite.advDayBtn, false);
         ctx.guiFont.render(ctx.screen, "ADV DAY", HUD_ADV_BTN_X + 8, 200, COLOR_BOARD_TEXT, 1, false, false);
+
+        renderWeatherButtons(ctx);
     }
 
     private void renderToolIcon(GameContext ctx, int x, int y, Sprite s, Tool t, String label, int yOffset) {
@@ -137,5 +139,23 @@ public class GameRenderer implements StateRenderer {
         if (ctx.selectedTool == t) {
             ctx.screen.renderSprite(x, y, Sprite.select, false);
         }
+    }
+
+    private void renderWeatherButtons(GameContext ctx) {
+        int x = 370;
+        int[] ys = {50, 82, 114, 146};
+        Sprite[] icons = {Sprite.sunnyIcon, Sprite.rainIcon, Sprite.heatwaveIcon, Sprite.snowIcon};
+        
+        for (int i = 0; i < 4; i++) {
+            ctx.screen.renderSprite(x, ys[i], icons[i], false);
+        }
+        
+        Weather w = ctx.grid.getCurrentWeather();
+        int activeIndex = 0;
+        if (w instanceof Rainy) activeIndex = 1;
+        else if (w instanceof com.cousersoft.game.model.weather.HeatWave) activeIndex = 2;
+        else if (w instanceof Snowy) activeIndex = 3;
+        
+        ctx.screen.renderOutline(x, ys[activeIndex], 26, 28, COLOR_WHITE);
     }
 }

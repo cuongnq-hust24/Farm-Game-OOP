@@ -12,15 +12,17 @@ import com.cousersoft.game.controller.HelpController;
 import com.cousersoft.game.controller.MenuController;
 import com.cousersoft.game.controller.ShopController;
 import com.cousersoft.game.controller.StateUpdater;
+import com.cousersoft.game.controller.GameOverController;
 import com.cousersoft.game.graphics.Screen;
 import com.cousersoft.game.graphics.text.BitmapFont;
 import com.cousersoft.game.input.InputManager;
 import com.cousersoft.game.input.Keyboard;
 import com.cousersoft.game.input.Mouse;
 import com.cousersoft.game.input.Tool;
-import com.cousersoft.game.model.CropData;
+import com.cousersoft.game.model.crop.CropData;
 import com.cousersoft.game.model.FarmGrid;
 import com.cousersoft.game.view.GameRenderer;
+import com.cousersoft.game.view.GameOverRenderer;
 import com.cousersoft.game.view.HelpRenderer;
 import com.cousersoft.game.view.MenuRenderer;
 import com.cousersoft.game.view.ShopRenderer;
@@ -49,16 +51,18 @@ public class Game extends Canvas implements Runnable {
     public int numFrames = 0;
 
     // ── Controllers ──────────────────────────────────────────────────────────
-    private final StateUpdater menuController = new MenuController();
-    private final StateUpdater helpController  = new HelpController();
-    private final StateUpdater gameController  = new GameController();
-    private final StateUpdater shopController  = new ShopController();
+    private StateUpdater menuUpdater = new MenuController();
+    private StateUpdater helpUpdater = new HelpController();
+    private StateUpdater gameUpdater = new GameController();
+    private StateUpdater shopUpdater = new ShopController();
+    private StateUpdater gameOverUpdater = new GameOverController();
 
     // ── Renderers ────────────────────────────────────────────────────────────
-    private final StateRenderer menuRenderer = new MenuRenderer();
-    private final StateRenderer helpRenderer  = new HelpRenderer();
-    private final StateRenderer gameRenderer  = new GameRenderer();
-    private final StateRenderer shopRenderer  = new ShopRenderer();
+    private StateRenderer menuRenderer = new MenuRenderer();
+    private StateRenderer helpRenderer = new HelpRenderer();
+    private StateRenderer gameRenderer = new GameRenderer();
+    private StateRenderer shopRenderer = new ShopRenderer();
+    private StateRenderer gameOverRenderer = new GameOverRenderer();
 
     // ── Init ─────────────────────────────────────────────────────────────────
 
@@ -144,10 +148,11 @@ public class Game extends Canvas implements Runnable {
         ctx.tickCounter++;
 
         switch (ctx.handler.getState()) {
-            case MENU -> menuController.update(ctx, inputManager);
-            case HELP -> helpController.update(ctx, inputManager);
-            case GAME -> gameController.update(ctx, inputManager);
-            case SHOP -> shopController.update(ctx, inputManager);
+            case MENU -> menuUpdater.update(ctx, inputManager);
+            case HELP -> helpUpdater.update(ctx, inputManager);
+            case GAME -> gameUpdater.update(ctx, inputManager);
+            case SHOP -> shopUpdater.update(ctx, inputManager);
+            case GAMEOVER -> gameOverUpdater.update(ctx, inputManager);
         }
 
         if (ctx.scaleChanged) {
@@ -174,6 +179,7 @@ public class Game extends Canvas implements Runnable {
             case HELP -> helpRenderer.render(ctx);
             case GAME -> gameRenderer.render(ctx);
             case SHOP -> shopRenderer.render(ctx);
+            case GAMEOVER -> gameOverRenderer.render(ctx);
         }
 
         for (int i = 0; i < pixels.length; i++) {

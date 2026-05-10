@@ -1,6 +1,7 @@
 package com.cousersoft.game.view;
 
 import com.cousersoft.game.GameContext;
+import com.cousersoft.game.graphics.Sprite;
 
 import static com.cousersoft.game.GameConstants.*;
 
@@ -12,16 +13,17 @@ public class MenuRenderer implements StateRenderer {
 
     @Override
     public void render(GameContext ctx) {
-        ctx.screen.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, COLOR_MENU_BG);
+        ctx.screen.renderSprite(0, 0, Sprite.bgBlur, false);
 
-        ctx.guiFont.render(ctx.screen, "SMART FARM SIMULATOR", 140, 40, COLOR_WHITE, 1, true, false);
-        ctx.guiFont.render(ctx.screen, "CROP GROWTH AND RESOURCE MANAGEMENT", 100, 50, COLOR_SUBTITLE, 1, true, false);
+        // Title board
+        ctx.screen.renderSprite(46, 15, Sprite.woodenBoard, false);
+        ctx.guiFont.render(ctx.screen, "SMART FARM SIMULATOR", 80, 27, COLOR_WHITE, 2, true, false);
 
-        renderMenuButton(ctx, MENU_BTN_X, MENU_START_Y, MENU_BTN_W, MENU_BTN_H, "START GAME", COLOR_BTN_GREEN);
-        renderMenuButton(ctx, MENU_BTN_X, MENU_HELP_Y,  MENU_BTN_W, MENU_BTN_H, "HELP",       COLOR_BTN_BLUE);
-        renderMenuButton(ctx, MENU_BTN_X, MENU_QUIT_Y,  MENU_BTN_W, MENU_BTN_H, "QUIT",       COLOR_BTN_RED);
+        renderMenuButton(ctx, 155, 70, "START GAME");
+        renderMenuButton(ctx, 155, 105, "HELP");
+        renderMenuButton(ctx, 155, 140, "QUIT");
 
-        ctx.guiFont.render(ctx.screen, "PRESS ENTER TO START", 140, 170, COLOR_WHITE, 1, true, false);
+        ctx.guiFont.render(ctx.screen, "PRESS ENTER TO START", 140, 175, COLOR_WHITE, 1, true, false);
 
         if (ctx.showQuitConfirm) {
             ctx.screen.fillRect(100, 85, 200, 40, COLOR_OVERLAY_BLACK);
@@ -31,10 +33,9 @@ public class MenuRenderer implements StateRenderer {
         }
     }
 
-    private void renderMenuButton(GameContext ctx, int x, int y, int w, int h, String text, int color) {
-        ctx.screen.fillRect(x, y, w, h, color);
-        ctx.screen.renderOutline(x, y, w, h, COLOR_OUTLINE_WHITE);
-        int textX = x + (w - text.length() * 6) / 2;
-        ctx.guiFont.render(ctx.screen, text, textX, y + 2, COLOR_WHITE, 1, true, false);
+    private void renderMenuButton(GameContext ctx, int x, int y, String text) {
+        ctx.screen.renderSprite(x, y, Sprite.smallWoodenBoard, false);
+        int textX = x + (90 - text.length() * 6) / 2;
+        ctx.guiFont.render(ctx.screen, text, textX, y + 10, COLOR_WHITE, 1, true, false);
     }
 }

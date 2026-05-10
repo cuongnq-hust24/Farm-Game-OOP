@@ -8,5 +8,6 @@ public enum GameState {
     MENU,
     HELP,
     GAME,
-    SHOP
+    SHOP,
+    GAMEOVER
 }

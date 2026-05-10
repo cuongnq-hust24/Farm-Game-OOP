@@ -22,10 +22,10 @@ public class MenuController implements StateUpdater {
         }
 
         if (inputManager.isJustPressed(ctx.mouse.getButton() == 1, "mouseLeft")) {
-            if (mx >= MENU_BTN_X && mx <= MENU_BTN_X + MENU_BTN_W) {
-                if      (my >= MENU_START_Y && my <= MENU_START_Y + MENU_BTN_H) { ctx.reset(); ctx.handler.setState(GameState.GAME); }
-                else if (my >= MENU_HELP_Y  && my <= MENU_HELP_Y  + MENU_BTN_H) { ctx.handler.setState(GameState.HELP); }
-                else if (my >= MENU_QUIT_Y  && my <= MENU_QUIT_Y  + MENU_BTN_H) { ctx.showQuitConfirm = true; }
+            if (mx >= 155 && mx <= 155 + 90) {
+                if      (my >= 70 && my <= 70 + 27) { ctx.reset(); ctx.handler.setState(GameState.GAME); }
+                else if (my >= 105  && my <= 105  + 27) { ctx.handler.setState(GameState.HELP); }
+                else if (my >= 140  && my <= 140  + 27) { ctx.showQuitConfirm = true; }
             }
         }
 

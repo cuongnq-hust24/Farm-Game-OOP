@@ -188,6 +188,14 @@ public class Sprite {
 	public static Sprite nextPage = new Sprite(26, 28, 0, 0, SpriteSheet.nextPageSheet);
 	public static Sprite advDayBtn = new Sprite(52, 28, 0, 0, SpriteSheet.advDaySheet);
 	
+	// New UI Assets
+	public static Sprite sunnyIcon = new Sprite(26, 28, 0, 0, SpriteSheet.sunnyIconSheet);
+	public static Sprite rainIcon = new Sprite(26, 28, 0, 0, SpriteSheet.rainIconSheet);
+	public static Sprite snowIcon = new Sprite(26, 28, 0, 0, SpriteSheet.snowIconSheet);
+	public static Sprite heatwaveIcon = new Sprite(26, 28, 0, 0, SpriteSheet.heatwaveIconSheet);
+	public static Sprite helpBoard = new Sprite(308, 155, 0, 0, SpriteSheet.helpBoardSheet);
+	public static Sprite smallWoodenBoard = new Sprite(90, 27, 0, 0, SpriteSheet.smallWoodenBoardSheet);
+	
 	public static Sprite hoeAnimRight1 = new Sprite(32,0,0,SpriteSheet.animHoe);
 	public static Sprite hoeAnimRight2 = new Sprite(32,1,0,SpriteSheet.animHoe);
 	public static Sprite hoeAnimLeft1 = new Sprite(32,3,0,SpriteSheet.animHoe);

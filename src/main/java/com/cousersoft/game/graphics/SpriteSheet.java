@@ -32,6 +32,14 @@ public class SpriteSheet {
 	public static SpriteSheet nextPageSheet = new SpriteSheet("/textures/next_page.png", 26, 28);
 	public static SpriteSheet advDaySheet = new SpriteSheet("/textures/adv_day.png", 52, 28);
 	
+	// New UI Assets
+	public static SpriteSheet sunnyIconSheet = new SpriteSheet("/textures/sunny_icon.png", 26, 28);
+	public static SpriteSheet rainIconSheet = new SpriteSheet("/textures/rain_icon.png", 26, 28);
+	public static SpriteSheet snowIconSheet = new SpriteSheet("/textures/snow_icon.png", 26, 28);
+	public static SpriteSheet heatwaveIconSheet = new SpriteSheet("/textures/heatwave_icon.png", 26, 28);
+	public static SpriteSheet helpBoardSheet = new SpriteSheet("/textures/help_board.png", 308, 155);
+	public static SpriteSheet smallWoodenBoardSheet = new SpriteSheet("/textures/small_wooden_board.png", 90, 27);
+	
 	private Sprite[] sprites;
 	
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {

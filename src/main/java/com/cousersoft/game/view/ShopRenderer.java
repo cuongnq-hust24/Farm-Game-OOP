@@ -2,7 +2,7 @@ package com.cousersoft.game.view;
 
 import com.cousersoft.game.GameContext;
 import com.cousersoft.game.graphics.Sprite;
-import com.cousersoft.game.model.CropData;
+import com.cousersoft.game.model.crop.CropData;
 
 import static com.cousersoft.game.GameConstants.*;
 
